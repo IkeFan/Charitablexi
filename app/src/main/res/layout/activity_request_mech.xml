@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".model.volunteer.ui.activity.RequestMechActivity">
+
+    <include layout="@layout/frame_toolbar"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:hint="填写"
+        app:name="义工组织名称"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="上传"
+        app:maxPic="1"
+        app:name="logo"
+        app:type="upload"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="义工组织介绍"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="邮箱"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="电话"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="密码"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_white_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="提交审核"
+        android:textColor="@android:color/holo_green_dark"/>
+</LinearLayout>

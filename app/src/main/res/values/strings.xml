@@ -1,0 +1,24 @@
+<resources xmlns:android="http://schemas.android.com/tools">
+    <string name="app_name">慈善喜</string>
+    <string name="title_project">项目</string>
+    <string name="title_volunteer">义工</string>
+    <string name="title_commun">交流圈</string>
+    <string name="title_personal">我的</string>
+    <string name="project_project_info">项目详情</string>
+    <string name="donate_count">已捐人次</string>
+    <string name="love_count">已有爱心</string>
+    <string name="love_progress">爱心进度</string>
+    <string name="volunteer_count">已有义工</string>
+    <string name="project_introduce">项目介绍</string>
+    <string name="support_info">资助方详情</string>
+
+    <string name="facebook_app_id">234238483822959</string>
+    <string name="fb_login_protocol_scheme">fb234238483822959</string>
+    <string name="_1_app_font_color_b61e17_font2">1.在转账时请在备注中写入您在慈善易APP上的</string>
+    <string name="_1_app_font_color_b61e17_font">注册用户名和要资助的项目名称。</string>
+    <string name="_2_font_color_b61e17_font">2.转账完成，平台方查收后将在该项目捐赠方处显示您的用户名。</string>
+    <string name="_2_font_color_b61e17_font2">如转账时未填写注册用户名，将显示您的账户实名。</string>
+    <string name="_1_1_nbsp_nbsp_quot_quot_1_2_nbsp_nbsp_1_3_nbsp_nbsp">一、总则 \n1.1    用户应当同意本协议的条款并按照页面上的提示完成全部的注册程序。用户在进行程序过程中点击\"同意\"按钮即表示用户与数据堂达成协议，完全接受本协议项下的全部条款。 \n1.2    用户注册成功后，数据堂将给予每个用户一个用户账号和相应的密码，该用户账号和密码由用户负责保管；用户应当对以其用户账号进行的所有活动和时间负法律责任。 \n1.3  用户可以使用数据堂各个频道单项服务，当用户使用数据堂各单项服务时，用户的使用行为视为其对该单项服务的服务网条款以及数据堂在该单项服务中发出的各类公告的同意。</string>
+    <string name="title_activity_thank_give_love">ThankGiveLoveActivity</string>
+
+</resources>

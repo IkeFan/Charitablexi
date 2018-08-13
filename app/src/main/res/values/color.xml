@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f66d33</color>
+    <color name="colorPrimaryDark">#cf5927</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
+    <color name="bg">#f4f4f4</color>
+    <color name="black">#141414</color>
+    <color name="hint">#9f9f9f</color>
+    <color name="gauze">#67333333</color>
+    <color name="divide">#bebebe</color>
+    <color name="progress_bg">#DBC9C9</color>
+    <color name="divide2">#E9EEF8</color>
+    <color name="stroke_color">#d6d6d6</color>
+    <color name="gray">#ece3e3</color>
+    <color name="popup_bg">#7bbebebe</color>
+    <color name="ash">#a5a5a5</color>
+    <color name="blue">#58a0fe</color>
+    <color name="red">#f34c4c</color>
+    <color name="green">#49f53d</color>
+</resources>

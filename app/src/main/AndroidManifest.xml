@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.mmy.charitablexi"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="bmdehs6pbr2ds"/>
+
+        <activity
+            android:name=".model.login.ui.activity.SplashActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".model.project.ui.activity.ProjectInfoActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.ProgressInfoActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.PublishActivity">
+        </activity>
+        <activity
+            android:name=".model.login.ui.activity.LoginActivity"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity android:name=".model.login.ui.activity.RegisterActivity">
+        </activity>
+        <activity android:name=".model.login.ui.activity.RegisterCompleteActivity">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.RequestMechActivity">
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.EditActivity">
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.OrgInfoActivity">
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.PublishRecruitActivity">
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.RequestVolunteerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.PersonalInfoActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.ModifyInfoActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.MessageActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.PublishProjectActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.EditProjectActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.CommonProjectActivity">
+        </activity>
+
+        <service android:name=".setpcount.StepService"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/myTransparent">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="${WEIXIN_APPKEY}"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".model.project.ui.activity.RequestSupportActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.SendEmailActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.ThankActivity">
+        </activity>
+        <activity
+            android:name=".model.project.ui.activity.VolunteerListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.VIEW"/> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+
+
+            <!-- <data -->
+            <!-- android:host="com.mmy.charitablexi" -->
+            <!-- android:pathPrefix="/conversation" -->
+            <!-- android:scheme="rong"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".model.project.ui.activity.ThankGiveLoveActivity"
+            android:label="@string/title_activity_thank_give_love"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".model.project.ui.activity.MassMsgActivity">
+        </activity>
+        <activity
+            android:name=".model.personal.ui.activity.ConversationListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity
+            android:name=".model.personal.ui.activity.PrivateMsgActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data
+                    android:host="com.mmy.charitablexi"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".model.volunteer.ui.activity.RecruitInfoActivity">
+        </activity>
+        <activity android:name=".model.commun.ui.activity.PublishArticleActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.SearchSupportActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.ChoiceSupportActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.PhotoUploadActivity"/>
+        <activity android:name=".model.personal.ui.activity.ChoiceTypeActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.ChoiceAdvActivity"/>
+        <activity android:name=".model.personal.ui.activity.AddAdvActivity"/>
+        <activity android:name=".model.personal.ui.activity.ChoiceAgreActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.AddAgreActivity">
+        </activity>
+        <activity android:name=".model.login.ui.activity.ForgetActivity">
+        </activity>
+        <activity android:name=".model.login.ui.activity.Forget2Activity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.UserManagerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.AgreementManagerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.MyFollowActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.PartakeActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.FollowInfoActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.LoveAnswerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.QuestionEditActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.QuestionManagerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.ReaderManagerActivity"/>
+        <activity android:name=".model.personal.ui.activity.AboutActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.AboutModifyActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.AboutEditActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.AboutGeneraManagerActivity">
+        </activity>
+        <activity android:name=".model.personal.ui.activity.TeamEditActivity">
+        </activity>
+    </application>
+
+</manifest>

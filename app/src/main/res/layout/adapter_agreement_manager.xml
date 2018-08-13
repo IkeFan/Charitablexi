@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mmy.charitablexi.widget.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             android:layout_marginBottom="0.5dp"
+                                             android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/v_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="协议"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center"
+            android:id="@+id/v_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/ash"
+            android:text="修改"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center"
+            android:id="@+id/v_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:text="删除"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</com.mmy.charitablexi.widget.SwipeItemLayout>

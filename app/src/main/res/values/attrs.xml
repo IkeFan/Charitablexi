@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyEditView">
+        <attr name="name" format="string"/>
+        <attr name="hint" format="string"/>
+        <attr name="enable" format="boolean"/>
+        <attr name="maxPic" format="string"/>
+        <attr name="isShowDivide" format="boolean"/>
+        <attr name="type" format="enum">
+            <enum name="text" value="1"/>
+            <enum name="upload" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

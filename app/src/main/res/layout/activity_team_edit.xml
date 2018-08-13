@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".model.personal.ui.activity.TeamEditActivity">
+
+    <include layout="@layout/frame_toolbar"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:type="upload"
+        app:name="图片"
+        app:hint="选择图片"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="名称"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="简介"/>
+
+    <TextView
+        android:id="@+id/v_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="完成"
+        android:textColor="@color/colorPrimary"/>
+</LinearLayout>

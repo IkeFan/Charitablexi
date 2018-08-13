@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray"
+    tools:context=".model.volunteer.ui.activity.PublishRecruitActivity">
+
+    <include layout="@layout/frame_toolbar"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:hint="填写"
+        app:name="招聘工作名称"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="上传"
+        app:name="图片"
+        app:type="upload"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="招聘工作名称"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="招聘人数"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="工作类型"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="工作地点"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="工作时间"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="工作内容"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="联系方式"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:isShowDivide="false"
+        app:name="Email"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_white_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="发起"
+        android:textColor="@android:color/holo_green_dark"/>
+</LinearLayout>

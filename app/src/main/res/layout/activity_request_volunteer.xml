@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".model.volunteer.ui.activity.RequestVolunteerActivity">
+    <include layout="@layout/frame_toolbar"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:hint="填写"
+        app:name="姓名"/>
+
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:id="@+id/v_email"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="邮箱"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        android:id="@+id/v_phone"
+        app:name="电话"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="填写"
+        app:name="性别"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/v_age"
+        app:hint="填写"
+        app:name="年龄"/>
+
+
+    <TextView
+        android:id="@+id/v_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_white_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="提交申请"
+        android:textColor="@android:color/holo_green_dark"/>
+</LinearLayout>

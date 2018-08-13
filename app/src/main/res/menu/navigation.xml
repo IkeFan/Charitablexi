@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_project"
+        android:icon="@mipmap/ic_menu_1"
+        android:title="@string/title_project"/>
+
+    <item
+        android:id="@+id/navigation_volunteer"
+        android:icon="@mipmap/ic_menu_2"
+        android:title="@string/title_volunteer"/>
+
+    <item
+        android:id="@+id/navigation_commun"
+        android:icon="@mipmap/ic_menu_3"
+        android:title="@string/title_commun"/>
+    <item
+        android:id="@+id/navigation_personal"
+        android:icon="@mipmap/ic_menu_4"
+        android:title="@string/title_personal"/>
+
+</menu>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".model.personal.ui.activity.EditProjectActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/frame_toolbar"/>
+
+        <LinearLayout
+            android:id="@+id/v_1_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="发起人"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="name"
+                android:textColor="@color/hint"/>
+        </LinearLayout>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_pro_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目名称"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_pro_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目类型"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_pro_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目简介"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_pro_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目图片"
+            app:type="upload"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_love"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="筹集爱心"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_volun_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="所需义工"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_zid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目资助方"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_zxid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="项目执行方"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="执行地"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="筹集截止时间"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="执行方协议"/>
+
+        <com.mmy.charitablexi.widget.MyEditView
+            android:id="@+id/v_2_adv"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:name="广告位"/>
+
+        <Button
+            android:id="@+id/v_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/white"
+            android:text="提交审核"
+            android:textColor="@android:color/holo_green_dark"/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
