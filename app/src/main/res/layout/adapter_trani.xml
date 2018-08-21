@@ -7,18 +7,21 @@
               android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/class_imv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"/>
 
     <TextView
+        android:id="@+id/class_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="课程名称"/>
 
     <TextView
+        android:id="@+id/class_free"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

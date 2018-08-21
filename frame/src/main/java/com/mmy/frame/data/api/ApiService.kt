@@ -116,12 +116,27 @@ interface ApiService {
     //新增协议
     @FormUrlEncoded
     @POST("Project/xieyiAdd")
-    fun addAgre(@Field("title") title: String, @Field("content") content: String): Observable<IBean>
+    fun addAgre(@Field("uid") uid: Int, @Field("title") title: String, @Field("content") content: String): Observable<IBean>
 
+    //编辑协议
+    @FormUrlEncoded
+    @POST("Project/xieyiAdd")
+    fun addAgre(@Field("uid") uid: Int, @Field("id") id: Int, @Field("title") title: String, @Field("content") content: String): Observable<IBean>
+
+    //删除协议
+    @FormUrlEncoded
+    @POST("Project/delXiey")
+    fun delAgre(@Field("uid") uid: Int, @Field("id") id: Int): Observable<IBean>
     //获取项目列表
+
     @FormUrlEncoded
     @POST("Project/index")
     fun getProList(@Field("status") status: Int): Observable<ProListBean>
+
+    //获取user项目列表
+    @FormUrlEncoded
+    @POST("Project/index")
+    fun getProList(@Field("uid") uid: Int, @Field("status") status: Int): Observable<ProListBean>
 
     //送爱心
     @FormUrlEncoded
@@ -154,6 +169,16 @@ interface ApiService {
             @Field("xmid") xmid: Int? = null,
             @Field("rid") rid: Int? = null,
             @Field("code") code: String? = null): Observable<IBean>
+
+    //机构列表
+    @FormUrlEncoded
+    @POST("Volunteer/orgList")
+    fun getOrglist(@Field("uid") uid: Int): Observable<OrganizationBean>
+
+    //义工列表
+    @FormUrlEncoded
+    @POST("Volunteer/VorList")
+    fun getVorList(@Field("uid") uid: Int): Observable<VolunteersBean>
 
     //我的
     @FormUrlEncoded
@@ -197,21 +222,50 @@ interface ApiService {
     //修改获取团队概况
     @FormUrlEncoded
     @POST("User/teamInfo")
-    fun getTeamList(@Field("id") id:Int): Observable<TeamInfoBean>
+    fun getTeamList(@Field("id") id: Int): Observable<TeamInfoBean>
 
     //新增、修改团队概括
     @Multipart
     @POST("User/editTeam")
-    fun editTeam(@Part list: List<MultipartBody.Part>):Observable<IBean>
+    fun editTeam(@Part list: List<MultipartBody.Part>): Observable<IBean>
 
     //删除团队成员
     @FormUrlEncoded
     @POST("User/delTeam")
-    fun delTeam(@Field("id") id:Int):Observable<IBean>
+    fun delTeam(@Field("id") id: Int): Observable<IBean>
 
     //修改关于我们
     @Multipart
     @POST("User/editAbout")
-    fun editAbout(@Part list: List<MultipartBody.Part>):Observable<IBean>
+    fun editAbout(@Part list: List<MultipartBody.Part>): Observable<IBean>
 
+    //公开课列表
+    @FormUrlEncoded
+    @POST("Circle/classList")
+    fun getClassList(@Field("type") type: Int): Observable<ClassBean>
+
+    //公开课列表
+    @Multipart
+    @POST("Circle/addClass")
+    fun addOrEdClass(@Part list: List<MultipartBody.Part>): Observable<IBean>
+
+    //个人中心
+    @FormUrlEncoded
+    @POST("Circle/cardsPersonal")
+    fun getCardsPersonal(@Field("uid") uid: Int): Observable<PersonalCenterBean>
+
+    //帖子列表"互动"
+    @FormUrlEncoded
+    @POST("Circle/cardsList")
+    fun getCardList(@Field("type") type: Int): Observable<InteractBean>
+    //修改/发布贴子
+
+    @Multipart
+    @POST("Circle/addCards")
+    fun addOrEditCard(@Part list: List<MultipartBody.Part>): Observable<IBean>
+
+    //参加义工列表
+    @FormUrlEncoded
+    @POST("Api/User/VoList")
+    fun getMyVoList(@Field("uid") uid: Int): Observable<CommonProjectBean>
 }

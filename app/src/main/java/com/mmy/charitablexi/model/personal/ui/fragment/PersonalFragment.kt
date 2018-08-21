@@ -1,9 +1,11 @@
 package com.mmy.charitablexi.model.personal.ui.fragment
 
 import android.view.View
+import com.blankj.utilcode.util.SPUtils
 import com.bumptech.glide.Glide
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.model.login.ui.activity.LoginActivity
 import com.mmy.charitablexi.model.personal.component.DaggerPersonalComponent
 import com.mmy.charitablexi.model.personal.module.PersonalModule
 import com.mmy.charitablexi.model.personal.presenter.PersonalPresenter
@@ -66,13 +68,14 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
 
     override fun initData() {
         mIPresenter.getInfo()
+        v_name.text = App.instance.userInfo.name
     }
 
     override fun initEvent() {
         super.initEvent()
         arrayOf(v_personal_info, v_message, v_publish, v_collection, v_donation, v_join,
                 v_user_manager, v_view_agreement, v_agreement_manager, v_follow, v_follow_user,
-                v_partake,v_tiku_manager,v_about,v_about_modify).setViewListener(this)
+                v_partake,v_tiku_manager,v_about,v_about_modify,v_login_out).setViewListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -93,6 +96,12 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
             v_reader_manager->openActivity(ReaderManagerActivity::class.java)
             v_about->openActivity(AboutActivity::class.java)
             v_about_modify->openActivity(AboutModifyActivity::class.java)
+            v_login_out->{
+//                SPUtils.getInstance().remove("phone")
+                SPUtils.getInstance().remove("pwd")
+                openActivity(LoginActivity::class.java)
+                getAc().finish()
+            }
         }
     }
 }

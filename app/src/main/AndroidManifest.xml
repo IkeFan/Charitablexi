@@ -190,6 +190,8 @@
         </activity>
         <activity android:name=".model.commun.ui.activity.PublishArticleActivity">
         </activity>
+        <activity android:name=".model.commun.ui.activity.ClassInfoActivity">
+        </activity>
         <activity android:name=".model.personal.ui.activity.SearchSupportActivity">
         </activity>
         <activity android:name=".model.personal.ui.activity.ChoiceSupportActivity">
@@ -233,6 +235,8 @@
         <activity android:name=".model.personal.ui.activity.AboutGeneraManagerActivity">
         </activity>
         <activity android:name=".model.personal.ui.activity.TeamEditActivity">
+        </activity>
+        <activity android:name=".model.commun.ui.activity.PublicCardActivity">
         </activity>
     </application>
 

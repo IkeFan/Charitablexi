@@ -11,6 +11,36 @@
     <string name="volunteer_count">已有义工</string>
     <string name="project_introduce">项目介绍</string>
     <string name="support_info">资助方详情</string>
+    <string name="view_my_protocol">查看我的协议</string>
+    <string name="manage_protocol">管理协议</string>
+    <string name="add_protocol">新增协议</string>
+    <string name="edit">编辑</string>
+    <string name="fix">修改</string>
+    <string name="delete">删除</string>
+    <string name="approve">同意</string>
+    <string name="disapprove">拒绝</string>
+    <string name="free">免费</string>
+    <string name="need_pay">付费</string>
+    <string name="finish">完成</string>
+
+    <string name="class_publish">专业知识发布</string>
+    <string name="edit_class">编辑课程信息</string>
+    <string name="publish">发布</string>
+    <string name="public_card">发布帖子</string>
+    <string name="edit_card">修改帖子</string>
+    <string name="content">内容</string>
+    <string name="upload_pic">照片上传</string>
+    <string name="employ_help">招工与求助</string>
+    <string name="latest_topic">最新话题</string>
+    <string name="hot_topic">精华话题</string>
+    <string name="type">类型</string>
+    <string name="title_in30">标题(30字以内)</string>
+    <string name="about_volunteer">关于公益同行</string>
+    <string name="theory_of_charity">慈善理论</string>
+    <string name="execute_charity">慈善执行</string>
+    <string name="other">其他</string>
+    <string name="speaker">主讲</string>
+    <string name="record_time">录制时间</string>
 
     <string name="facebook_app_id">234238483822959</string>
     <string name="fb_login_protocol_scheme">fb234238483822959</string>

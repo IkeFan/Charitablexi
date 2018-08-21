@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/ash"
-            android:text="修改"
+            android:text="@string/edit"
             android:textColor="@color/white"/>
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/red"
-            android:text="删除"
+            android:text="@string/delete"
             android:textColor="@color/white"/>
     </LinearLayout>
 </com.mmy.charitablexi.widget.SwipeItemLayout>

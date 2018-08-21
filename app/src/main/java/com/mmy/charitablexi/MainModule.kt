@@ -1,6 +1,7 @@
 package com.mmy.charitablexi
 
 import com.mmy.frame.base.annotation.ActivityScope
+import com.mmy.frame.base.mvp.IView
 import dagger.Module
 import dagger.Provides
 
@@ -16,6 +17,6 @@ import dagger.Provides
  */
 @ActivityScope
 @Module
-class MainModule(val mainView: MainView) {
+class MainModule(val mainView: IView) {
     @Provides fun provideView() = mainView
 }

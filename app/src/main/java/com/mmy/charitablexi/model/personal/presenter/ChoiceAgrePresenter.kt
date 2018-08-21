@@ -30,7 +30,7 @@ class ChoiceAgrePresenter @Inject constructor() :IPresenter<ChoiceAgreView>() {
 
     fun addAgre(data: AddAgreActivity.BusAddAgre) {
         mM.request {
-            call = mApi.addAgre(data.title,data.content)
+            call = mApi.addAgre(mApp.userInfo.id!!,data.title,data.content)
             _success = {
                 if (it is IBean){
                     it.info.showToast(mFrameApp)

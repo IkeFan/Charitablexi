@@ -1,6 +1,6 @@
 package com.mmy.charitablexi.model.personal.module
 
-import com.mmy.frame.base.mvp.IView
+import com.mmy.charitablexi.model.personal.view.ProjectListView
 import dagger.Module
 import dagger.Provides
 
@@ -15,6 +15,6 @@ import dagger.Provides
  *             version: zsr, 2017-09-23
  */
 @Module
-class PublishProjectModule(val iView: IView) {
+class PublishProjectModule(val iView: ProjectListView) {
     @Provides fun provideView() = iView
 }

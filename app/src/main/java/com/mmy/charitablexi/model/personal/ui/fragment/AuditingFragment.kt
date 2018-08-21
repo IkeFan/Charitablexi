@@ -2,10 +2,10 @@ package com.mmy.charitablexi.model.personal.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.model.personal.presenter.AuditingPresenter
 import com.mmy.charitablexi.model.personal.ui.adapter.AuditingAdapter
 import com.mmy.charitablexi.utils.VRData
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseFragment
 import kotlinx.android.synthetic.main.view_recyclerview.*
 
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.view_recyclerview.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class AuditingFragment:BaseFragment<IPresenter<*>>() {
+class AuditingFragment:BaseFragment<AuditingPresenter>() {
     override fun requestSuccess(any: Any) {
     }
 

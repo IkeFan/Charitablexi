@@ -120,7 +120,7 @@
                     android:id="@+id/v_collection_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"/>
+                    android:text="1"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -144,7 +144,7 @@
                     android:id="@+id/v_collection_user_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"/>
+                    android:text="2"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
                     android:id="@+id/v_partake_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"/>
+                    android:text="10"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -281,7 +281,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="3"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -308,7 +308,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="1"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -362,7 +362,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="10"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -389,7 +389,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="10"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -416,7 +416,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="20"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -442,7 +442,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ic_jiantou"
-                android:text="0"
+                android:text="10"
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -549,6 +549,16 @@
                 android:textColor="@color/hint"
                 android:textSize="12sp"/>
         </LinearLayout>
+        <Button
+            android:id="@+id/v_login_out"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_login_bg"
+            android:text="退出登录"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 </ScrollView>

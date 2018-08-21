@@ -3,6 +3,7 @@ package com.mmy.charitablexi.model.commun.ui.fragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.View
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.commun.ui.window.CommunPopup
@@ -42,6 +43,8 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
         v_tabs.setupWithViewPager(v_pager)
         v_pager.adapter = CommunAdapter(tabStr, tabFragment, childFragmentManager)
         popup = CommunPopup(getAc())
+        popup.showDel(false)
+        popup.showEdit(false)
     }
 
     override fun initData() {
@@ -50,17 +53,38 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
     override fun initEvent() {
         arrayOf(v_add).setViewListener(this)
         popup.onPopClick = {
-            when (it.id) {
-                R.id.v_publish -> {
-                }
-                R.id.v_edit -> {
-                }
-                R.id.v_del -> {
-                }
-                R.id.v_share -> {
+            var click:OnPopMenuClick = tabFragment[v_pager.currentItem] as OnPopMenuClick
+            click.onMenuSelected(it)
+            popup.dismiss()
+        }
+        v_pager.addOnPageChangeListener( object :ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                when(position){
+                    0->{
+                        popup.showDel(false)
+                        popup.showEdit(false)
+                    }
+                    1->{
+                        popup.showDel(false)
+                        popup.showEdit(false)
+                    }
+                    2->{
+                        popup.showDel(true)
+                        popup.showEdit(true)
+                    }
                 }
             }
-        }
+
+        })
+
     }
 
     override fun onClick(v: View) {
@@ -72,14 +96,19 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
             }
         }
     }
-
-    class CommunAdapter(val tabStr: Array<String>, val tabFragment: Array<BaseFragment<IPresenter<*>>>, fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
-        override fun getItem(position: Int): Fragment = tabFragment[position]
+    class CommunAdapter(val tabStr: Array<String>, val tabFragment: Array<Any>, fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+        override fun getItem(position: Int): Fragment {
+            return tabFragment[position] as BaseFragment<*>
+        }
 
         override fun getCount(): Int = tabStr.size
 
         override fun getPageTitle(position: Int): CharSequence {
             return tabStr[position]
         }
+    }
+
+    interface OnPopMenuClick{
+        fun onMenuSelected(v: View)
     }
 }

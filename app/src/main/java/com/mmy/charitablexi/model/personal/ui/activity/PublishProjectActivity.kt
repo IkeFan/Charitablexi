@@ -12,10 +12,12 @@ import com.mmy.charitablexi.model.personal.component.DaggerPublishProjectCompone
 import com.mmy.charitablexi.model.personal.module.PublishProjectModule
 import com.mmy.charitablexi.model.personal.presenter.PublishProjectPresenter
 import com.mmy.charitablexi.model.personal.ui.adapter.PublishStubAdapter
-import com.mmy.charitablexi.utils.VRData
+import com.mmy.charitablexi.model.personal.view.ProjectListView
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
+import com.mmy.frame.data.bean.ProListBean
 import kotlinx.android.synthetic.main.activity_publish_project.*
+
 /**
 * @file       PublishProjectActivity.kt
 * @brief      发起项目
@@ -26,7 +28,15 @@ import kotlinx.android.synthetic.main.activity_publish_project.*
 * @par History:
 *             version: zsr, 2017-09-23
 */
-class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnClickListener {
+class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnClickListener, ProjectListView {
+    override fun requestResult(proType: Int, data: List<ProListBean.DataBean>) {
+        if(proType == 3){
+            adapters[0].setNewData(data)
+        }else if(proType == 1){
+            adapters[1].setNewData(data)
+        }
+
+    }
 
     override fun requestSuccess(data: Any) {
     }
@@ -65,7 +75,7 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
         }
     }
 
-    class PublishPagerAdapter(val actionBar: Activity, val tabStr: Array<String>,val adapters: Array<PublishStubAdapter>) : PagerAdapter(){
+    inner class PublishPagerAdapter(val actionBar: Activity, val tabStr: Array<String>,val adapters: Array<PublishStubAdapter>) : PagerAdapter(){
 
         override fun isViewFromObject(view: View, o: Any): Boolean = view == o
 
@@ -76,7 +86,12 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
             container.addView(recyclerView)
             recyclerView.layoutManager = LinearLayoutManager(actionBar)
             recyclerView.adapter = adapters[position]
-            adapters[position].setNewData(VRData.getIntData(10))
+            if(position == 0){
+                mIPresenter.getPassPro()
+            }else{
+                mIPresenter.getUnPassPro()
+            }
+
             return recyclerView
         }
 

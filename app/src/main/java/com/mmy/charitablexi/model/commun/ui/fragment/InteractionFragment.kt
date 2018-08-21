@@ -1,12 +1,16 @@
 package com.mmy.charitablexi.model.commun.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.model.commun.component.DaggerInteractComponent
+import com.mmy.charitablexi.model.commun.module.InteractModule
+import com.mmy.charitablexi.model.commun.presenter.InteractPresenter
+import com.mmy.charitablexi.model.commun.ui.activity.PublicCardActivity
 import com.mmy.charitablexi.model.commun.ui.adapter.IrrigationAdapter
-import com.mmy.charitablexi.utils.VRData
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseFragment
+import com.mmy.frame.data.bean.InteractBean
 import kotlinx.android.synthetic.main.fragment_irrigation.*
 
 /**
@@ -19,13 +23,37 @@ import kotlinx.android.synthetic.main.fragment_irrigation.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class InteractionFragment :BaseFragment<IPresenter<*>>(){
+class InteractionFragment :BaseFragment<InteractPresenter>(), CommunFragment.OnPopMenuClick {
+    override fun onMenuSelected(v: View) {
+        when (v.id) {
+            R.id.v_publish -> {
+                openActivity(PublicCardActivity::class.java)
+            }
+            R.id.v_edit -> {
+
+            }
+            R.id.v_del -> {
+
+            }
+            R.id.v_share -> {
+
+            }
+        }
+    }
+
     override fun requestSuccess(any: Any) {
+        if(any is InteractBean)
+            mAdapter.setNewData(any.data)
     }
 
     val mAdapter = IrrigationAdapter(R.layout.adapter_irrigation)
 
     override fun setupDagger(appComponent: AppComponent) {
+        DaggerInteractComponent.builder()
+                .appComponent(appComponent)
+                .interactModule(InteractModule(this))
+                .build()
+                .inject(this)
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_irrigation
@@ -36,6 +64,6 @@ class InteractionFragment :BaseFragment<IPresenter<*>>(){
     }
 
     override fun initData() {
-        mAdapter.setNewData(VRData.getIntData(10))
+        mIPresenter.getList(3)
     }
 }

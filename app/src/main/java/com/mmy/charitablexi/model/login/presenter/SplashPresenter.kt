@@ -25,6 +25,7 @@ class SplashPresenter @Inject constructor() : IPresenter<IView>() {
         val pwd = SPUtils.getInstance().getString("pwd", "")
         if (phone.isEmpty() || pwd.isEmpty()) {
             mV.openActivity(LoginActivity::class.java)
+            mV.finishView()
             return
         }
         mM.request {
@@ -46,6 +47,7 @@ class SplashPresenter @Inject constructor() : IPresenter<IView>() {
                         "登录已过期，请重新登录".showToast(mFrameApp)
                         mV.openActivity(LoginActivity::class.java)
                     }
+                    mV.finishView()
                 }
             }
         }

@@ -6,6 +6,7 @@ import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
 import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.adapter.BaseViewHolder
+import com.mmy.frame.data.bean.VolunteersBean
 
 /**
  * @file       VolunteerListAdapter.kt
@@ -17,14 +18,14 @@ import com.mmy.frame.adapter.BaseViewHolder
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerListAdapter(id: Int) : BaseQuickAdapter<Int, BaseViewHolder>(id){
+class VolunteerListAdapter(id: Int) : BaseQuickAdapter<VolunteersBean.Volunteer, BaseViewHolder>(id){
 
 
     var isSelectALL = false
     val level= App.instance.userInfo.userLevel
 
 
-    override fun convert(helper: BaseViewHolder?, item: Int?) {
+    override fun convert(helper: BaseViewHolder?, item: VolunteersBean.Volunteer?) {
         //判断用户身份
         when (level) {
             0 -> {
@@ -51,6 +52,13 @@ class VolunteerListAdapter(id: Int) : BaseQuickAdapter<Int, BaseViewHolder>(id){
             val checkBox = helper.getView<CheckBox>(R.id.v_cb)
             checkBox?.isChecked = !checkBox?.isChecked!!
         }
+        var sex = "男"
+        if(item?.sex!=1){
+            sex = "女"
+        }
+        helper?.setText(R.id.v_name, item?.name)
+        helper?.setText(R.id.v_age_em, "年龄："+item?.age+" 邮箱 "+item?.email)
+        helper?.setText(R.id.v_sex_phone, "性别："+sex+" 电话 "+item?.mobile)
     }
 
     //全选

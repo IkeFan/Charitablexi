@@ -17,9 +17,12 @@ import javax.inject.Inject
 class RaisingPresenter @Inject constructor() :IPresenter<IView>() {
     fun getList(){
         mM.request {
-            call = mApi.getProList(3)
+            call = mApi.getProList( 3)
             _success = {
                 mV.requestSuccess(it)
+            }
+            _fail ={
+
             }
         }
     }

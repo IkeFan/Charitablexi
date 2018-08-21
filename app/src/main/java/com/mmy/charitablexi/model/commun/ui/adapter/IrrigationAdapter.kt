@@ -2,6 +2,7 @@ package com.mmy.charitablexi.model.commun.ui.adapter
 
 import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.adapter.BaseViewHolder
+import com.mmy.frame.data.bean.InteractBean
 
 /**
  * @file       IrrigationAdapter.kt
@@ -13,7 +14,7 @@ import com.mmy.frame.adapter.BaseViewHolder
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class IrrigationAdapter(id:Int):BaseQuickAdapter<Int,BaseViewHolder>(id) {
-    override fun convert(helper: BaseViewHolder?, item: Int?) {
+class IrrigationAdapter(id:Int):BaseQuickAdapter<InteractBean.Interact,BaseViewHolder>(id) {
+    override fun convert(helper: BaseViewHolder?, item: InteractBean.Interact?) {
     }
 }

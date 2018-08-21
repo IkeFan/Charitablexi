@@ -1,6 +1,7 @@
 package com.mmy.charitablexi
 
 import com.mmy.frame.base.mvp.IPresenter
+import com.mmy.frame.base.mvp.IView
 import com.mmy.frame.data.api.ApiService
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ import javax.inject.Inject
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class MainPresenter @Inject constructor(val apiService: ApiService) : IPresenter<MainView>() {
+class MainPresenter @Inject constructor(val apiService: ApiService) : IPresenter<IView>() {
 
     fun test() {
         mM.request {

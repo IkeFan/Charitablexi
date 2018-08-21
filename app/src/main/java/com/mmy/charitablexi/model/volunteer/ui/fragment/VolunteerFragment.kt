@@ -10,18 +10,22 @@ import android.view.animation.RotateAnimation
 import android.widget.LinearLayout
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.model.personal.ui.activity.PublishProjectActivity
 import com.mmy.charitablexi.model.project.ui.adapter.VolunteerListAdapter
+import com.mmy.charitablexi.model.volunteer.component.DaggerVolunteerListComponent
+import com.mmy.charitablexi.model.volunteer.module.VolunteerListModule
+import com.mmy.charitablexi.model.volunteer.presenter.VolunteerListPresenter
 import com.mmy.charitablexi.model.volunteer.ui.activity.OrgInfoActivity
 import com.mmy.charitablexi.model.volunteer.ui.activity.RequestMechActivity
 import com.mmy.charitablexi.model.volunteer.ui.adapter.VolunteerAdapter
 import com.mmy.charitablexi.model.volunteer.ui.window.VolunteerMenuPopup
-import com.mmy.charitablexi.utils.VRData
 import com.mmy.charitablexi.widget.SwipeItemLayout
 import com.mmy.frame.AppComponent
 import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.adapter.BaseViewHolder
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseFragment
+import com.mmy.frame.data.bean.OrganizationBean
+import com.mmy.frame.data.bean.VolunteersBean
 import io.rong.imkit.RongIM
 import io.rong.imkit.fragment.ConversationFragment
 import io.rong.imlib.RongIMClient
@@ -38,8 +42,14 @@ import kotlinx.android.synthetic.main.fragment_volunteer.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
+class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
     override fun requestSuccess(data: Any) {
+        if( data is OrganizationBean){
+            mAdapter.setNewData(data.data)
+            mIPresenter.getVorlist(App.instance.userInfo.id!!)
+        }else if( data is VolunteersBean){
+            mPersonalAdapter.setNewData(data.data)
+        }
     }
 
     val mPersonalAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
@@ -48,6 +58,11 @@ class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, B
     var isOpenConver = false
 
     override fun setupDagger(appComponent: AppComponent) {
+        DaggerVolunteerListComponent.builder()
+                .volunteerListModule(VolunteerListModule(this))
+                .appComponent(appComponent)
+                .build()
+                .inject(this)
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_volunteer
@@ -61,8 +76,8 @@ class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, B
     }
 
     override fun initData() {
-        mPersonalAdapter.setNewData(VRData.getIntData(20))
-        mAdapter.setNewData(VRData.getIntData(20))
+//        mPersonalAdapter.setNewData(VRData.getIntData(20))
+//        mAdapter.setNewData(VRData.getIntData(20))
         //加入聊天室，使用项目的id作为聊天室的id
         val roomID = 1_000_000.toString()
         RongIM.connect(App.instance.userInfo.rongToken, object : RongIMClient.ConnectCallback() {
@@ -85,6 +100,9 @@ class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, B
             override fun onTokenIncorrect() {
             }
         })
+        mAdapter.isSelectALL = v_select_all_cb.isChecked
+        mPersonalAdapter.isSelectALL = v_select_all_cb.isChecked
+        mIPresenter.getOrgList(App.instance.userInfo.id!!)
     }
 
     override fun initEvent() {
@@ -96,7 +114,7 @@ class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, B
         mPersonalAdapter.click = { view, position ->
             //更新ui
             v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-            mPersonalAdapter.notifyItemRemoved(position)
+            mPersonalAdapter.remove(position)
         }
         v_tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -117,8 +135,17 @@ class VolunteerFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener, B
                     v_view_search.visibility = View.GONE
                     v_list.adapter = mPersonalAdapter
                 }
+                v_list.invalidate()
+                view?.invalidate()
             }
         })
+        mWindow.lisenter={
+            when(it.id){
+                R.id.v_menu1->{
+                    openActivity(PublishProjectActivity::class.java)
+                }
+            }
+        }
     }
 
     override fun onClick(p0: View?) {

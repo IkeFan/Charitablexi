@@ -1,8 +1,11 @@
 package com.mmy.charitablexi.model.project.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.project.component.DaggerRaisingComponent
 import com.mmy.charitablexi.model.project.module.RaisingModule
@@ -28,19 +31,19 @@ import kotlinx.android.synthetic.main.fragment_raising.*
  */
 class RaisingFragment : BaseFragment<RaisingPresenter>(), BaseQuickAdapter.OnItemClickListener {
     override fun requestSuccess(data: Any) {
-        if (data is ProListBean){
+        if (data is ProListBean) {
             mAdapter.setNewData(data.data)
         }
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, baseViewHolder: BaseViewHolder?, position: Int) {
         val intent = Intent(activity!!, ProjectInfoActivity::class.java)
-        intent.putExtra("sBean",ProjectInfoActivity.Type.Raising)
-        intent.putExtra("id",(adapter?.getItem(position) as ProListBean.DataBean).id)
+        intent.putExtra("sBean", ProjectInfoActivity.Type.Raising)
+        intent.putExtra("id", (adapter?.getItem(position) as ProListBean.DataBean).id)
         activity?.startActivity(intent)
     }
 
-    val mAdapter = ProjectAdapter(R.layout.adapter_project,true)
+    val mAdapter = ProjectAdapter(R.layout.adapter_project, true)
 
     override fun setupDagger(appComponent: AppComponent) {
         DaggerRaisingComponent.builder()
@@ -63,5 +66,13 @@ class RaisingFragment : BaseFragment<RaisingPresenter>(), BaseQuickAdapter.OnIte
     override fun initEvent() {
         super.initEvent()
         mAdapter.onItemClickListener = this
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

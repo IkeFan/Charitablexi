@@ -3,9 +3,9 @@ package com.mmy.charitablexi.model.personal.ui.fragment
 import android.net.Uri
 import android.support.v4.app.Fragment
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.model.personal.presenter.LetterPresenter
 import com.mmy.charitablexi.model.personal.ui.adapter.ConversationListAdapterEx
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseFragment
 import io.rong.imkit.RongContext
 import io.rong.imkit.fragment.ConversationListFragment
@@ -21,7 +21,7 @@ import io.rong.imlib.model.Conversation
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class LatterFragment : BaseFragment<IPresenter<*>>() {
+class LatterFragment : BaseFragment<LetterPresenter>() {
     override fun requestSuccess(any: Any) {
     }
 

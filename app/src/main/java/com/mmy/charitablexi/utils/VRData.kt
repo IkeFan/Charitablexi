@@ -13,7 +13,7 @@ package com.mmy.charitablexi.utils
 object VRData {
     fun getIntData(count:Int): ArrayList<Int> {
         val list = ArrayList<Int>()
-        (count downTo 0).forEach { list.add(it) }
+        (0 .. count).forEach { list.add(it) }
         return list
     }
 }

@@ -10,11 +10,13 @@ import android.widget.LinearLayout
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.project.ui.adapter.VolunteerListAdapter
-import com.mmy.charitablexi.utils.VRData
+import com.mmy.charitablexi.model.volunteer.component.DaggerVolunteerListComponent
+import com.mmy.charitablexi.model.volunteer.module.VolunteerListModule
+import com.mmy.charitablexi.model.volunteer.presenter.VolunteerListPresenter
 import com.mmy.charitablexi.widget.SwipeItemLayout
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseActivity
+import com.mmy.frame.data.bean.VolunteersBean
 import io.rong.imkit.RongIM
 import io.rong.imkit.fragment.ConversationFragment
 import io.rong.imlib.RongIMClient
@@ -32,14 +34,22 @@ import kotlinx.android.synthetic.main.activity_volunteer_list.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerListActivity : BaseActivity<IPresenter<*>>(), View.OnClickListener {
+class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnClickListener {
     override fun requestSuccess(data: Any) {
+        if(data is VolunteersBean){
+            mAdapter.setNewData(data.data)
+        }
     }
 
     val mAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
     var isOpenConver = false
 
     override fun setupDagger(appComponent: AppComponent) {
+        DaggerVolunteerListComponent.builder()
+                .appComponent(appComponent)
+                .volunteerListModule(VolunteerListModule(this))
+                .build()
+                .inject(this)
     }
 
     override fun initView() {
@@ -57,7 +67,7 @@ class VolunteerListActivity : BaseActivity<IPresenter<*>>(), View.OnClickListene
         setToolbar("义工列表", true, rigthTitle, R.color.colorPrimary, this)
         v_list.layoutManager = LinearLayoutManager(this)
         v_list.adapter = mAdapter
-        mAdapter.setNewData(VRData.getIntData(20))
+        mIPresenter.getVorlist(App.instance.userInfo.id!!)
     }
 
     override fun initData() {
@@ -92,7 +102,7 @@ class VolunteerListActivity : BaseActivity<IPresenter<*>>(), View.OnClickListene
         mAdapter.click = { view, position ->
             //更新ui
             v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-            mAdapter.notifyItemRemoved(position)
+            mAdapter.remove(position)
         }
         arrayOf(v_select_all, v_open).setViewListener(this)
 

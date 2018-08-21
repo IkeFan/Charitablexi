@@ -31,10 +31,10 @@ import javax.inject.Inject
     open fun getAc() = activity!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        setupDagger((activity?.application as FrameApp).appComponent)
+        rootView = LayoutInflater.from(activity).inflate(getLayoutId(), null, false)
         if (registerBus())
             mFramApp.mBus.register(this)
-            setupDagger((activity?.application as FrameApp).appComponent)
-         rootView = LayoutInflater.from(activity).inflate(getLayoutId(), null, false)
         return rootView
     }
 

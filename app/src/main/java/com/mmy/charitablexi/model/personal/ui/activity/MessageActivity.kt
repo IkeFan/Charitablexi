@@ -1,7 +1,7 @@
 package com.mmy.charitablexi.model.personal.ui.activity
 
 import com.mmy.charitablexi.R
-import com.mmy.charitablexi.model.commun.ui.fragment.CommunFragment
+import com.mmy.charitablexi.base.CommonAdapter
 import com.mmy.charitablexi.model.personal.ui.fragment.AuditingFragment
 import com.mmy.charitablexi.model.personal.ui.fragment.LatterFragment
 import com.mmy.frame.AppComponent
@@ -32,7 +32,7 @@ class MessageActivity : BaseActivity<IPresenter<*>>() {
         setToolbar("消息")
         tabStr.forEach { v_tabs.addTab(v_tabs.newTab().setText(it)) }
         v_tabs.setupWithViewPager(v_pager)
-        v_pager.adapter = CommunFragment.CommunAdapter(tabStr,tabFragment,supportFragmentManager)
+        v_pager.adapter = CommonAdapter(tabStr,tabFragment,supportFragmentManager)
     }
 
     override fun initData() {

@@ -1,6 +1,6 @@
 package com.mmy.charitablexi.model.login.presenter
 
-import com.mmy.charitablexi.model.login.ui.activity.LoginActivity
+import com.mmy.charitablexi.MainActivity
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
 import com.mmy.frame.data.bean.RegisterBean
@@ -24,7 +24,7 @@ class RegisterCompletePresenter @Inject constructor() :IPresenter<IView>() {
                 if (it is RegisterBean){
                     it.info.showToast(mFrameApp)
                     if (it.status==1)
-                        mV.openActivity(LoginActivity::class.java)
+                        mV.openActivity(MainActivity::class.java)
                 }
             }
         }

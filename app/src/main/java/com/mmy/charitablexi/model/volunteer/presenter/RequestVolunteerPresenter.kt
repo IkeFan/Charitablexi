@@ -16,12 +16,12 @@ import javax.inject.Inject
  */
 class RequestVolunteerPresenter @Inject constructor() : IPresenter<IView>() {
     fun submit(id: String, v_email: String?, v_phone: String?, v_age: String, sex: Int) {
-//        mM.request {
-//            call = mApi.requestVolunteer(v_email, sex, v_age.toInt(), xmid = id.toInt())
-//            _success = {
-//                mV.requestSuccess(it)
-//            }
-//        }
+        mM.request {
+            call = mApi.requestVolunteer(v_email, sex, v_age.toInt(), xmid = id.toInt())
+            _success = {
+                mV.requestSuccess(it)
+            }
+        }
     }
 
 

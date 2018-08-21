@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:context=".model.commun.ui.activity.PublishArticleActivity">
+
+    <include layout="@layout/frame_toolbar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/title_in30"/>
+
+    <EditText
+        android:id="@+id/v_edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:hint="关于“公益同行”"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/type"/>
+    <RadioGroup
+        android:id="@+id/v_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rb_employ"
+            android:text="@string/employ_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+          />
+        <RadioButton
+            android:id="@+id/rb_latest"
+            android:text="@string/latest_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <RadioButton
+            android:id="@+id/rb_hot"
+            android:text="@string/hot_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/upload_pic"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/white"
+        android:id="@+id/v_list"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/content"/>
+
+    <EditText
+        android:id="@+id/v_edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="left"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/v_publish"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/publish"
+        android:textColor="@color/colorPrimary"/>
+</LinearLayout>

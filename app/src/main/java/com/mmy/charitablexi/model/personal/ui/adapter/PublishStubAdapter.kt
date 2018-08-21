@@ -2,6 +2,7 @@ package com.mmy.charitablexi.model.personal.ui.adapter
 
 import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.adapter.BaseViewHolder
+import com.mmy.frame.data.bean.ProListBean
 
 /**
  * @file       PublishStubAdapter.kt
@@ -13,7 +14,7 @@ import com.mmy.frame.adapter.BaseViewHolder
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class PublishStubAdapter(idRes: Int):BaseQuickAdapter<Int,BaseViewHolder>(idRes) {
-    override fun convert(helper: BaseViewHolder?, item: Int?) {
+class PublishStubAdapter(idRes: Int):BaseQuickAdapter<ProListBean.DataBean,BaseViewHolder>(idRes) {
+    override fun convert(helper: BaseViewHolder?, item: ProListBean.DataBean?) {
     }
 }

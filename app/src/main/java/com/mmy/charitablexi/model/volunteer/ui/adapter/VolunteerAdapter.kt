@@ -5,6 +5,7 @@ import android.widget.CheckBox
 import com.mmy.charitablexi.R
 import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.adapter.BaseViewHolder
+import com.mmy.frame.data.bean.OrganizationBean
 
 /**
  * @file       VolunteerAdapter.kt
@@ -16,9 +17,9 @@ import com.mmy.frame.adapter.BaseViewHolder
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerAdapter(val id:Int):BaseQuickAdapter<Int,BaseViewHolder>(id) {
+class VolunteerAdapter(val id:Int):BaseQuickAdapter<OrganizationBean.Organization,BaseViewHolder>(id) {
     var isSelectALL = false
-    override fun convert(helper: BaseViewHolder?, item: Int?) {
+    override fun convert(helper: BaseViewHolder?, item: OrganizationBean.Organization?) {
         //删除事件
         helper?.getView<View>(R.id.v_del)?.setOnClickListener {
             click(it,helper.adapterPosition)

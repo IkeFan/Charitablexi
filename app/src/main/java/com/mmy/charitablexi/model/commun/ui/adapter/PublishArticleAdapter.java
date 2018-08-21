@@ -5,10 +5,13 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.mmy.charitablexi.R;
 import com.mmy.frame.base.adapter.BaseRecyclerViewAdapter;
 import com.mmy.frame.data.bean.PhotoBean;
+import com.mmy.frame.utils.Config;
 
 import java.util.LinkedList;
 
@@ -46,7 +49,16 @@ public class PublishArticleAdapter extends BaseRecyclerViewAdapter {
             holder.clearTVBG(R.id.icon);
             return;
         }
-        holder.setBitmap2IV(R.id.icon, BitmapFactory.decodeFile(mData.get(i).getPath()));
+
+        if(mData.get(i).getPath().startsWith("/Uploads")){
+            Glide.with(mContext).load(Config.HOST +mData.get(i).getPath())
+                    .error(R.mipmap.ic_def)
+                    .placeholder(R.mipmap.ic_def)
+                    .into((ImageView) holder.findView(R.id.icon));
+        }
+        else{
+            holder.setBitmap2IV(R.id.icon, BitmapFactory.decodeFile(mData.get(i).getPath()));
+        }
         deleteView.setVisibility(View.VISIBLE);
         deleteView.setOnClickListener(v -> {
             int position = holder.getAdapterPosition();

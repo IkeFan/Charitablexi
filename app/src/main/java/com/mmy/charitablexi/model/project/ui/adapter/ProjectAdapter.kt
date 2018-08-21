@@ -4,6 +4,7 @@ import com.mmy.charitablexi.R
 import com.mmy.charitablexi.base.BaseListAdapter
 import com.mmy.frame.adapter.BaseViewHolder
 import com.mmy.frame.data.bean.ProListBean
+import com.mmy.frame.utils.Config
 
 /**
  * @file       ProjectAdapter.kt
@@ -21,13 +22,13 @@ class ProjectAdapter(itemLayoutID: Int, val isGoneCount: Boolean) : BaseListAdap
         helper.setGone(R.id.count, isGoneCount)
         helper.setText(R.id.v_donate_count, item.yjrc.toString())
         helper.setText(R.id.v_love_count, "${item.yyax ?: "0"}K")
-        helper.setText(R.id.v_love_progress, "${item.axjd * 100}%")
+        helper.setText(R.id.v_love_progress, "${item.axjd.toFloat() * 100}%")
         helper.setText(R.id.v_volun_count, item.ygs.toString())
         helper.setText(R.id.v_title, item.title)
         helper.setText(R.id.v_content, item.description)
         helper.setText(R.id.v_address, item.addr)
         helper.setText(R.id.v_type, item.xmlx)
-        helper.setSplitImg(R.id.v_icon, item.img)
+        helper.setSplitImg(R.id.v_icon, Config.HOST+item.img)
     }
 
 

@@ -3,6 +3,7 @@ package com.mmy.charitablexi.model.login.ui.activity
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import com.blankj.utilcode.util.SPUtils
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -51,9 +52,12 @@ class LoginActivity : BaseActivity<LoginPresenter>(), View.OnClickListener {
     }
 
     override fun initView() {
+
     }
 
     override fun initData() {
+        val phone = SPUtils.getInstance().getString("phone", "")
+        v_phone.setText(phone)
     }
 
     override fun initEvent() {

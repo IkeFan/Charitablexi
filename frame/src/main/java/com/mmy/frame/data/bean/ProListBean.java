@@ -37,7 +37,7 @@ public class ProListBean extends IBean implements Serializable{
         public String lovesum;
         public String yjrc;
         public String yyax;
-        public double axjd;
+        public String axjd;
         public String ygs;
         public String xmlx;
     }

@@ -1,5 +1,6 @@
 package com.mmy.frame.data.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class AgreListBean extends IBean {
 
     public List<DataBean> data;
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 2
          * title : 协议2

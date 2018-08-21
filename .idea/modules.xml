@@ -3,9 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CharitableXi.iml" filepath="$PROJECT_DIR$/CharitableXi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Charitablexi.iml" filepath="$PROJECT_DIR$/Charitablexi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RongCloud/RongCloud.iml" filepath="$PROJECT_DIR$/RongCloud/RongCloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/RongCloud/RongCloud.iml" filepath="$PROJECT_DIR$/RongCloud/RongCloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/SweetAlertLibrary/SweetAlertLibrary.iml" filepath="$PROJECT_DIR$/SweetAlertLibrary/SweetAlertLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SweetAlertLibrary/SweetAlertLibrary.iml" filepath="$PROJECT_DIR$/SweetAlertLibrary/SweetAlertLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frame/frame.iml" filepath="$PROJECT_DIR$/frame/frame.iml" />
       <module fileurl="file://$PROJECT_DIR$/frame/frame.iml" filepath="$PROJECT_DIR$/frame/frame.iml" />
     </modules>
   </component>

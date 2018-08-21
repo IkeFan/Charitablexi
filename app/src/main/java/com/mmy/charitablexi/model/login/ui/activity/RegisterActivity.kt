@@ -84,6 +84,6 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterView, View.O
     }
 
     override fun openNext() {
-        openActivity(RegisterCompleteActivity::class.java,"phone=${v_phone.text.toString().trim()}")
+        openActivity(RegisterCompleteActivity::class.java,"phone=${v_phone.text.toString().trim()}, pwd=${v_pwd.text.toString().trim()}")
     }
 }

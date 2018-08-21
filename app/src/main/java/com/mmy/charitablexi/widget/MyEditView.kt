@@ -134,9 +134,11 @@ class MyEditView(context: Context, attributes: AttributeSet) : FrameLayout(conte
 
     //如果type == 2那么必须要在activity的onActivityResult里调用该方法
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        popup?.onActivityResult(requestCode, resultCode, data!!, {
-            onReceiver(DataBean(tag, "", it))
-        })
+        if(data!=null){
+            popup?.onActivityResult(requestCode, resultCode, data!!, {
+                onReceiver(DataBean(tag, "", it))
+            })
+        }
     }
 
     class DataBean constructor(var tag: String = "", var text: String = "", var uploadUris: ArrayList<PhotoBean> = arrayListOf())

@@ -15,21 +15,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="标题(30字以内)"/>
+        android:text="@string/title_in30"/>
 
     <EditText
+        android:id="@+id/v_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="10dp"
         android:textSize="14sp"
-        android:hint="关于“公益同行”"/>
+        android:hint="@string/about_volunteer"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="照片上传"/>
+        android:text="@string/speaker"/>
+
+    <EditText
+        android:id="@+id/v_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:hint="name"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_2_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="@string/record_time"/>
+
+    <RadioGroup
+        android:id="@+id/v_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rb_theory"
+            android:text="@string/theory_of_charity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/rb_execute"
+            android:text="@string/execute_charity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <RadioButton
+            android:id="@+id/rb_other"
+            android:text="@string/other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/upload_pic"/>
 
     <android.support.v7.widget.RecyclerView
         android:background="@color/white"
@@ -41,9 +94,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="内容"/>
+        android:text="@string/content"/>
 
     <EditText
+        android:id="@+id/v_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -53,12 +107,13 @@
         android:padding="10dp"/>
 
     <TextView
+        android:id="@+id/v_publish"
         android:elevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
         android:padding="10dp"
-        android:text="发布"
+        android:text="@string/publish"
         android:textColor="@color/colorPrimary"/>
 </LinearLayout>

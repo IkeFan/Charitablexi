@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.mmy.charitablexi.R
 import com.mmy.frame.base.view.BasePopup
-
 /**
  * @file       CommunPopup.kt
  * @brief      描述
@@ -28,4 +27,28 @@ class CommunPopup( context: Context):BasePopup(context) {
     var onPopClick:(View)->Unit = {}
 
     override fun getLayoutId(): Int = R.layout.popup_commun
+
+    fun showPublish( show: Boolean){
+        var visible = View.VISIBLE
+        if(!show){
+            visible = View.GONE
+        }
+       mRootView.findViewById<View>(R.id.v_publish).visibility = visible
+    }
+
+    fun showEdit(show: Boolean){
+        var visible = View.VISIBLE
+        if(!show){
+            visible = View.GONE
+        }
+        mRootView.findViewById<View>(R.id.v_edit).visibility = visible
+    }
+
+    fun showDel(show: Boolean){
+        var visible = View.VISIBLE
+        if(!show){
+            visible = View.GONE
+        }
+        mRootView.findViewById<View>(R.id.v_del).visibility = visible
+    }
 }

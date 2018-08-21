@@ -59,7 +59,7 @@ class RegisterCompleteActivity : BaseActivity<RegisterCompletePresenter>(), View
                     return
                 }
 
-//                mIPresenter.register(intent.getStringExtra("phone"), v_pwd.text.toString().trim(), v_nickname.text.toString().trim())
+                mIPresenter.register(intent.getStringExtra("phone"), intent.getStringExtra("pwd"), v_nickname.text.toString().trim())
             }
             v_head -> {
                 mPopup.showSelectPicPopup(this, 1)

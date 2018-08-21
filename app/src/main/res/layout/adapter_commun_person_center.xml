@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mmy.charitablexi.widget.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             android:layout_marginTop="1dp"
+                                             android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/v_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_vol_icon"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/v_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户名称"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/v_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/v_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="title"
+                    android:textColor="@color/hint"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="content"
+                    android:textColor="@color/hint"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/v_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/fix">
+        </TextView>
+        <CheckBox
+            android:id="@+id/v_cb"
+            android:visibility="gone"
+            android:clickable="false"
+            android:button="@drawable/check_vol"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/v_del"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:text="删除"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+</com.mmy.charitablexi.widget.SwipeItemLayout>

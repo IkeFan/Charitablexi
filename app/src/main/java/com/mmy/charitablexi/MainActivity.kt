@@ -13,12 +13,12 @@ import com.mmy.frame.data.bean.UserInfo
 import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<MainPresenter>(), MainView {
+class MainActivity : BaseActivity<MainPresenter>() {
     override fun requestSuccess(any: Any) {
 
     }
 
-    val mFragmentTags = arrayOf("project", "volunteer", "commun","personal")
+    val mFragmentTags = arrayOf("project", "volunteer", "commun", "personal")
     val mFragments = arrayOf(ProjectFragment(), VolunteerFragment(), CommunFragment(), PersonalFragment())
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -30,9 +30,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     override fun initView() {
         BottomNavigationViewHelper.disableShiftMode(navigation)
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fl_content, mFragments[0], mFragmentTags[0])
-                .commit()
+        if (supportFragmentManager.findFragmentByTag(mFragmentTags[0])==null){
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fl_content, mFragments[0], mFragmentTags[0])
+                    .commit()
+        }
     }
 
     override fun initData() {
@@ -90,7 +92,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     override fun registerBus(): Boolean = true
 
     @Subscribe
-    fun onUserEvent(userEvent: UserInfo.UserEvent){
+    fun onUserEvent(userEvent: UserInfo.UserEvent) {
         when (userEvent.action) {
             "login" -> {
                 //打开登录界面
