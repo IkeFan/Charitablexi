@@ -48,6 +48,8 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
             v_scxm.text = data.data.scxm
             v_yjxm.text = data.data.yjxm
             v_cjyg.text = data.data.ygxm
+            v_yhgl.text = data.data.users_counts.toString()
+            v_xygl.text = data.data.xy_counts.toString()
 //            v_xygl.text = data.data.
 //            v_wdxy.text = data.data.
 //            v_yhgl.text = data.data.
@@ -80,8 +82,8 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
 
     override fun onClick(p0: View?) {
         when (p0) {
-            v_follow -> openActivity(MyFollowActivity::class.java, "title=关注")
-            v_follow_user -> openActivity(MyFollowActivity::class.java, "title=关注者")
+            v_follow -> openActivity(MyFollowActivity::class.java, "title="+getString(R.string.follow))
+            v_follow_user -> openActivity(MyFollowActivity::class.java, "title="+getString(R.string.follower))
             v_partake -> openActivity(PartakeActivity::class.java)
             v_personal_info -> openActivity(PersonalInfoActivity::class.java)
             v_message -> openActivity(MessageActivity::class.java)

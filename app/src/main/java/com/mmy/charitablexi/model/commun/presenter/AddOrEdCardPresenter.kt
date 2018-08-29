@@ -1,5 +1,6 @@
 package com.mmy.charitablexi.model.commun.presenter
 
+import com.blankj.utilcode.util.ToastUtils
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
 import com.mmy.frame.data.bean.IBean
@@ -29,9 +30,7 @@ class AddOrEdCardPresenter @Inject constructor():IPresenter<IView>(){
                 mV.hidLoading()
             }
             _fail = {
-                if(it is IBean){
-                    it.info.showToast(mApp)
-                }
+                ToastUtils.showShort(it.message)
                 mV.hidLoading()
             }
         }

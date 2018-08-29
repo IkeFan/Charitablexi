@@ -5,6 +5,7 @@ import com.mmy.charitablexi.model.project.presenter.ThankGiveLovePresenter
 import com.mmy.charitablexi.widget.HeartLayout
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
+import kotlinx.android.synthetic.main.activity_thank_give_love.*
 
 /**
  * @file       ThankGiveLoveActivity.kt
@@ -32,6 +33,7 @@ class ThankGiveLoveActivity : BaseActivity<ThankGiveLovePresenter>() {
             handler.postDelayed({
                 heartLayout.addFavor()
             }, 100L*i)
+        v_love_value.text = stars.toString()+getString(R.string.love_value)
     }
 
     override fun initData() {

@@ -93,12 +93,7 @@ class PersonalCenterFragment : BaseFragment<PersonalCenterPresenter>(), CommunFr
 
     override fun onResume() {
         super.onResume()
-        if(mAdapter.editMode){
-            v_select_all.visibility = View.VISIBLE
-        }else{
-            v_select_all.visibility = View.GONE
-        }
-        v_select_all_cb.isChecked = mAdapter.isSelectALL
+        asyAdapterStatus()
     }
 
     fun asyAdapterStatus(){
@@ -114,11 +109,12 @@ class PersonalCenterFragment : BaseFragment<PersonalCenterPresenter>(), CommunFr
 
     @Subscribe
     fun onCardChange(bean: EvBusItemBean<PersonalCenterBean.PersonalCenter>){
-        if(bean.positon!=-1){
-            mAdapter.remove(bean.positon)
-            mAdapter.addData(bean.positon, bean.model)
-        }else{
-            mIPresenter.getList(mFramApp.userInfo.id!!)
-        }
+//        if(bean.positon!=-1){
+//            mAdapter.remove(bean.positon)
+//            mAdapter.addData(bean.positon, bean.model)
+//        }else{
+//            mIPresenter.getList(mFramApp.userInfo.id!!)
+//        }
+        mIPresenter.getList(mFramApp.userInfo.id!!)
     }
 }

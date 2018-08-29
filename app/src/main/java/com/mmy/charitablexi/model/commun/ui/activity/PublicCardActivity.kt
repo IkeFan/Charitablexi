@@ -65,7 +65,7 @@ class PublicCardActivity : BaseActivity<AddOrEdCardPresenter>(), BaseRecyclerVie
         if (bean == null) {
             bean = PersonalCenterBean.PersonalCenter()
         }
-        mFrameApp?.mBus?.post(EvBusItemBean(mPosition!!, mCard!!))
+        mFrameApp?.mBus?.post(EvBusItemBean(mPosition!!, bean))
         finish()
     }
 

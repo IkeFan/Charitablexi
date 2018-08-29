@@ -33,10 +33,9 @@ interface ApiService {
 //fun searchWeater(@Query("cityId") cityId:String):Call<ResponseBody>
 
     //注册
-    @Headers("needUserId:false")
-    @FormUrlEncoded
+    @Multipart
     @POST(Config.REGISTER)
-    fun register(@Field("mobile") mobile: String, @Field("password") pwd: String, @Field("conpassword") pwd2: String, @Field("name") name: String): Observable<RegisterBean>
+    fun register(@Part list: List<MultipartBody.Part>): Observable<RegisterBean>
 
     //发送验证码
     @Headers("needUserId:false")
@@ -127,8 +126,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("Project/delXiey")
     fun delAgre(@Field("uid") uid: Int, @Field("id") id: Int): Observable<IBean>
-    //获取项目列表
 
+    //获取项目列表
     @FormUrlEncoded
     @POST("Project/index")
     fun getProList(@Field("status") status: Int): Observable<ProListBean>
@@ -141,17 +140,27 @@ interface ApiService {
     //送爱心
     @FormUrlEncoded
     @POST("Project/donateLove")
-    fun sendLove(@Field("xmid") xmid: Int, @Field("value") value: Int): Observable<IBean>
+    fun sendLove(@Field("uid")uid:Int, @Field("xmid") xmid: Int, @Field("value") value: Int): Observable<IBean>
 
     //项目详情
     @FormUrlEncoded
     @POST("Project/detail")
     fun getProInfo(@Field("xmid") xmid: Int): Observable<ProInfoBean>
 
+    //资助方详情
+    @FormUrlEncoded
+    @POST("Project/zhfDetail")
+    fun getSupportDetail(@Field("uid") uid: Int, @Field("zid") zid: Int): Observable<SponsorDetailBean>
+
     //收藏项目
     @FormUrlEncoded
     @POST("Project/collects")
     fun collectPro(@Field("xmid") xmid: Int, @Field("status") status: Int): Observable<IBean>
+
+    //执行进度列表
+    @FormUrlEncoded
+    @POST("Project/processList")
+    fun getProgressList(@Field("uid") uid: Int, @Field("xmid") xmid: Int): Observable<ProjectProgressBean>
 
     //评论
     @FormUrlEncoded
@@ -264,8 +273,22 @@ interface ApiService {
     @POST("Circle/addCards")
     fun addOrEditCard(@Part list: List<MultipartBody.Part>): Observable<IBean>
 
-    //参加义工列表
+    @FormUrlEncoded
+    @POST("Circle/cardsDetail")
+    fun getCardDetail(@Field("cid") cid: Int): Observable<CardetailBean>
+
+    //参加义工项目列表
     @FormUrlEncoded
     @POST("Api/User/VoList")
     fun getMyVoList(@Field("uid") uid: Int): Observable<CommonProjectBean>
+
+    //参加的义工组织
+    @FormUrlEncoded
+    @POST("Api/User/joinOrg")
+    fun getJoinVolOrg(@Field("uid") uid: Int): Observable<VolunteerOrgnBean>
+
+    //参加的义工招聘
+    @FormUrlEncoded
+    @POST("User/joinZp")
+    fun getJoinZp(@Field("uid") uid: Int): Observable<VolunteerZpBean>
 }

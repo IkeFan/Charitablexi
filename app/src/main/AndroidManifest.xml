@@ -190,7 +190,7 @@
         </activity>
         <activity android:name=".model.commun.ui.activity.PublishArticleActivity">
         </activity>
-        <activity android:name=".model.commun.ui.activity.ClassInfoActivity">
+        <activity android:name=".model.commun.ui.activity.CardDetailActivity">
         </activity>
         <activity android:name=".model.personal.ui.activity.SearchSupportActivity">
         </activity>
@@ -237,6 +237,17 @@
         <activity android:name=".model.personal.ui.activity.TeamEditActivity">
         </activity>
         <activity android:name=".model.commun.ui.activity.PublicCardActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.SponsorActivity">
+        </activity>
+        <activity android:name=".model.project.ui.activity.CommonActivity">
+        </activity>
+        <activity
+            android:name=".model.project.ui.activity.SendLoveActivity"
+            android:label="@string/title_activity_send_love"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".model.project.ui.activity.AdvDetailActivity">
         </activity>
     </application>
 

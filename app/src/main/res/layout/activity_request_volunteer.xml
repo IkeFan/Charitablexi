@@ -45,7 +45,22 @@
         android:id="@+id/v_age"
         app:hint="填写"
         app:name="年龄"/>
-
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agreed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="@string/volunteer_protocol"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/v_submit"
@@ -57,4 +72,5 @@
         android:padding="10dp"
         android:text="提交申请"
         android:textColor="@android:color/holo_green_dark"/>
+
 </LinearLayout>

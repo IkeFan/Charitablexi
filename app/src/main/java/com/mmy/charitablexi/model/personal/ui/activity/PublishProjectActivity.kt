@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_publish_project.*
 class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnClickListener, ProjectListView {
     override fun requestResult(proType: Int, data: List<ProListBean.DataBean>) {
         if(proType == 3){
-            adapters[0].setNewData(data)
+            mIPresenter.getUnPassPro()
         }else if(proType == 1){
             adapters[1].setNewData(data)
         }
@@ -42,9 +42,9 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
     }
 
     override fun initData() {
+        mIPresenter.getPassPro()
     }
 
-    val tabStr = arrayOf("审核通过","审核未通过")
     var mAdapter:PublishPagerAdapter? = null
     val adapters = arrayOf(PublishStubAdapter(R.layout.adapter_publish),PublishStubAdapter(R.layout.adapter_publish))
 
@@ -56,7 +56,8 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
     }
 
     override fun initView() {
-        setToolbar("发起项目",true,"发起",getResColor(R.color.colorPrimaryDark),this)
+       val  tabStr = arrayOf(getString(R.string.passed),getString(R.string.un_passed))
+        setToolbar(getString(R.string.publish_project),true,getString(R.string.publish),getResColor(R.color.colorPrimaryDark),this)
         tabStr.forEach { v_tabs.addTab(v_tabs.newTab().setText(it)) }
         v_tabs.setupWithViewPager(v_pager)
         mAdapter = PublishPagerAdapter(this,tabStr,adapters)
@@ -68,14 +69,14 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.toolbar_right -> {
-                openActivity(EditProjectActivity::class.java,"type=plate")
+                openActivity(EditProjectActivity::class.java)
             }
             else -> {
             }
         }
     }
 
-    inner class PublishPagerAdapter(val actionBar: Activity, val tabStr: Array<String>,val adapters: Array<PublishStubAdapter>) : PagerAdapter(){
+    class PublishPagerAdapter(val actionBar: Activity, val tabStr: Array<String>,val adapters: Array<PublishStubAdapter>) : PagerAdapter(){
 
         override fun isViewFromObject(view: View, o: Any): Boolean = view == o
 
@@ -86,12 +87,6 @@ class PublishProjectActivity : BaseActivity<PublishProjectPresenter>(),View.OnCl
             container.addView(recyclerView)
             recyclerView.layoutManager = LinearLayoutManager(actionBar)
             recyclerView.adapter = adapters[position]
-            if(position == 0){
-                mIPresenter.getPassPro()
-            }else{
-                mIPresenter.getUnPassPro()
-            }
-
             return recyclerView
         }
 

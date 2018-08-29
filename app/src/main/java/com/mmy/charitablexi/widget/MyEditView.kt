@@ -139,6 +139,9 @@ class MyEditView(context: Context, attributes: AttributeSet) : FrameLayout(conte
                 onReceiver(DataBean(tag, "", it))
             })
         }
+        else{
+            FrameApp.frameInstance.mBus.unregister(this)
+        }
     }
 
     class DataBean constructor(var tag: String = "", var text: String = "", var uploadUris: ArrayList<PhotoBean> = arrayListOf())

@@ -23,6 +23,7 @@ android {
             keyPassword 'lucas19911226'
             storeFile file('./mmy_keystore.jks')
             storePassword 'lucas19911226'
+            v2SigningEnabled false
         }
         debug {
             keyAlias 'mmy'
@@ -39,6 +40,7 @@ android {
                 obfuscate false
                 optimizeCode false
                 proguardFile 'proguard-rules.pro'
+                signingConfig signingConfigs.release
             }
         }
     }

@@ -27,7 +27,10 @@ import kotlinx.android.synthetic.main.activity_request_volunteer.*
  *             version: zsr, 2017-09-23
  */
 class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View.OnClickListener {
+    var xmId:Int? = null
     override fun requestSuccess(data: Any) {
+        openActivity(ThankActivity::class.java)
+        finish()
     }
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -39,7 +42,9 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
 
     override fun initView() {
         setToolbar("申请义工")
-        v_name.setHintName(App.instance.userInfo.name!!)
+        if(!App.instance.userInfo.name.isNullOrEmpty()){
+            v_name.setHintName(App.instance.userInfo.name!!)
+        }
         if (!App.instance.userInfo.mobile.isNullOrEmpty()) {
             v_phone.enable(false)
             v_phone.setHintName(App.instance.userInfo.mobile!!)
@@ -52,6 +57,7 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
     }
 
     override fun initData() {
+        xmId = intent.getStringExtra("id").toInt()
     }
 
     var sex = -1
@@ -108,12 +114,13 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
                 if (!App.instance.userInfo.mobile.isNullOrEmpty())
                     phone = v_phone.hintStr
                 val data = VolunteerData(email ?: (phone ?: null), sex, v_age.hintStr.toInt(), intent.getStringExtra("id").toInt())
-                if (App.instance.userInfo.email.isNullOrEmpty())
-                    openActivity(SendEmailActivity::class.java, "title=邮箱", data)
-                else if (App.instance.userInfo.mobile.isNullOrEmpty())
-                    openActivity(SendEmailActivity::class.java, "title=手机", data)
+                if (!App.instance.userInfo.email.isNullOrEmpty())
+                    openActivity(SendEmailActivity::class.java, "title=邮箱,mobile="+App.instance.userInfo.email, data)
+                else if (!App.instance.userInfo.mobile.isNullOrEmpty())
+                    openActivity(SendEmailActivity::class.java, "title=手机, mobile="+App.instance.userInfo.mobile, data)
                 else
-                    openActivity(ThankActivity::class.java)
+                    mIPresenter.submit(mFrameApp?.userInfo?.id.toString(), App.instance.userInfo.email, App.instance.userInfo.mobile
+                    ,v_age.hintStr, sex)
             }
             else -> {
             }

@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_send_email.*
 class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListener {
     lateinit var title: String
     override fun requestSuccess(any: Any) {
+
     }
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -41,6 +42,9 @@ class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListen
 
     override fun initData() {
         arrayOf(v_send, v_submit).setViewListener(this)
+        if(intent.hasExtra("mobile")){
+            v_et.setText(intent.getStringExtra("moblie"))
+        }
     }
 
     override fun initEvent() {

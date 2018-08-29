@@ -21,13 +21,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="发起项目"
+                android:text="@string/publish_project"
                 android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
+                android:id="@+id/v_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="查看详情 >"
+                android:text="@string/see_detail"
                 android:textColor="@color/colorPrimaryDark"/>
         </LinearLayout>
 
@@ -84,29 +85,34 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/v_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="深入农村教育"/>
 
                 <TextView
+                    android:id="@+id/v_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="深入农村教育"/>
 
                 <TextView
+                    android:id="@+id/v_support"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="美国银行"/>
 
                 <TextView
+                    android:id="@+id/v_execute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="用户去"/>
 
                 <TextView
+                    android:id="@+id/v_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

@@ -22,7 +22,7 @@ class ProCommentAdapter(id:Int):BaseListAdapter<ProInfoBean.DataBean.CommentsBea
     val format = SimpleDateFormat("MM-dd")
 
     override fun convert(helper: BaseViewHolder, item: ProInfoBean.DataBean.CommentsBean) {
-        helper.setSplitImg(R.id.v_icon,item.avatar,true)
+        if(item.avatar!=null) helper.setSplitImg(R.id.v_icon,item.avatar,true)
         helper.setText(R.id.v_name,item.name)
         helper.setText(R.id.v_content,item.content)
         helper.setText(R.id.v_time,format.format(Date(item.addtime.toLong()*1_000)))

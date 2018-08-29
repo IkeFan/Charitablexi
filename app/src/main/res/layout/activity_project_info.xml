@@ -43,6 +43,7 @@
                             android:layout_height="150dp">
 
                             <ImageView
+                                android:id="@+id/v_img"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
@@ -410,6 +411,7 @@
                             android:background="@color/divide"/>
 
                         <TextView
+                            android:id="@+id/v_notice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -437,8 +439,10 @@
                             android:layout_height="wrap_content"/>
 
                         <RelativeLayout
+                            android:id="@+id/v_be_sponsor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp">
 
                             <View
@@ -472,11 +476,12 @@
                     style="@style/card_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="5dp"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 
                     <LinearLayout
+                        android:id="@+id/v_exe_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -484,6 +489,7 @@
                         android:padding="15dp">
 
                         <ImageView
+                            android:id="@+id/v_exe_img"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:src="@mipmap/ic_pro_logo"/>
@@ -496,12 +502,14 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/v_exe_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="横县乡村发展协会"
                                 android:textSize="14sp"/>
 
                             <TextView
+                                android:id="@+id/v_exe_content"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="实施以人为本的乡村扶贫工作"
@@ -512,7 +520,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableRight="@mipmap/ic_jiantou_right"
-                            android:text="@string/support_info"
+                            android:text="@string/executor_info"
                             android:textColor="@color/colorPrimary"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -550,59 +558,66 @@
                     android:background="@color/divide2"/>
 
                 <LinearLayout
+                    android:id="@+id/v_ad_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_orig_dp3"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:text="AD"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/v_ad_title"
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:ellipsize="end"
-                        android:maxLength="10"
-                        android:text="标题：关于慈善资金的..."
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+                        android:background="@color/white"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="5dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="right"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_orig_dp3"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:text="AD"
+                            android:textColor="@color/white"/>
 
-                    <TextView
-                        android:id="@+id/v_ad_content"
+                        <TextView
+                            android:id="@+id/v_ad_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:ellipsize="end"
+                            android:maxLength="10"
+                            android:text="标题：关于慈善资金的..."
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingExtra="5dp"
-                        android:text="慈善基金，是指具有一定组织性的个人、企业。无偿为弱势群体筹集资金的组织，根据性质不同，慈善基金分为两种形式：公募，企业的慈善基金会形式属于后者，即基金会没有向社会筹集捐款的权利."
-                        android:textSize="12sp"/>
+                        android:background="@color/white"
+                        android:gravity="right"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
-                    <TextView
-                        android:id="@+id/v_ad_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="查看详情"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="12sp"/>
+                        <TextView
+                            android:id="@+id/v_ad_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="5dp"
+                            android:text="慈善基金，是指具有一定组织性的个人、企业。无偿为弱势群体筹集资金的组织，根据性质不同，慈善基金分为两种形式：公募，企业的慈善基金会形式属于后者，即基金会没有向社会筹集捐款的权利."
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/v_ad_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看详情"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <View
@@ -631,7 +646,7 @@
                         android:background="@drawable/shape_primarycolor"
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
-                        android:text="122条"
+                        android:text="0条"
                         android:textColor="@color/white"
                         android:textSize="10sp"/>
                 </LinearLayout>
@@ -705,6 +720,17 @@
                 android:text="我要捐爱心"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/v_finish"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finish_already"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:background="@color/red"/>
         </LinearLayout>
 
         <LinearLayout

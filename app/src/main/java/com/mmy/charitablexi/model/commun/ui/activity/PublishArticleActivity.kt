@@ -10,6 +10,7 @@ import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.base.BaseIViewModule
 import com.mmy.charitablexi.base.DaggerBaseComponent
+import com.mmy.charitablexi.bean.EvBusItemBean
 import com.mmy.charitablexi.model.commun.presenter.AddOrEdClassPresenter
 import com.mmy.charitablexi.model.commun.ui.adapter.PublishArticleAdapter
 import com.mmy.charitablexi.widget.MyEditView
@@ -40,12 +41,13 @@ import java.util.*
 class PublishArticleActivity : BaseActivity<AddOrEdClassPresenter>(), BaseRecyclerViewAdapter.OnItemClickListener, View.OnClickListener {
     var mArticle: ClassBean.DataBean? = null
     override fun requestSuccess(any: Any) {
+        mFrameApp?.mBus?.post(EvBusItemBean(-1, ClassBean.DataBean()))
         finish()
     }
 
     override fun onItemClick(view: View?, position: Int) {
-        if (position == mAdapter.itemCount - 1 && mAdapter.itemCount < 3)
-            mPicHelper.getPicFormAlbum(this, 3 - mAdapter.itemCount)
+        if (position == mAdapter.itemCount - 1 && mAdapter.itemCount < 4)
+            mPicHelper.getPicFormAlbum(this, 4 - mAdapter.itemCount)
     }
 
     lateinit var mAdapter: PublishArticleAdapter
@@ -98,16 +100,18 @@ class PublishArticleActivity : BaseActivity<AddOrEdClassPresenter>(), BaseRecycl
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        mPicHelper.onActivityResult(requestCode, resultCode, data, {
-            mAdapter.setData(LinkedList(it))
-        })
+        if(data!=null){
+            mPicHelper.onActivityResult(requestCode, resultCode, data, {
+                mAdapter.setData(LinkedList(it))
+            })
+        }
     }
 
     //显示日期选择器
     private fun showPickerDate(@IdRes id: Int) {
         val text = findViewById<MyEditView>(id)
         val pickerView = TimePickerView.Builder(this, TimePickerView.OnTimeSelectListener { date, v ->
-            val format = SimpleDateFormat("yyyy年 MM月 dd日")
+            val format = SimpleDateFormat(getString(R.string.date_format))
             val dateStr = format.format(date)
             text.setHintName(dateStr)
         }).setType(booleanArrayOf(true, true, true, false, false, false)).build()

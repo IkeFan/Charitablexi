@@ -1,5 +1,6 @@
 package com.mmy.charitablexi.model.personal.presenter
 
+import com.blankj.utilcode.util.ToastUtils
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
 import com.mmy.frame.data.bean.IBean
@@ -18,14 +19,20 @@ import javax.inject.Inject
  */
 class AddAdvPresenter @Inject constructor() : IPresenter<IView>() {
     fun submit(parts: MutableList<MultipartBody.Part>) {
+        mV.showLoading()
         mM.request {
             call = mApi.addAdv(parts)
             _success = {
+                mV.hidLoading()
                 if (it is IBean) {
                     it.info.showToast(mFrameApp)
                     if (it.status == 1)
                         finishActivity()
                 }
+            }
+            _fail = {
+                mV.hidLoading()
+                ToastUtils.showShort(it.message)
             }
         }
     }

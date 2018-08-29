@@ -3,6 +3,7 @@ package com.mmy.charitablexi.model.personal.ui.activity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
+import com.blankj.utilcode.util.KeyboardUtils
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.personal.component.DaggerSearchSupportComponent
@@ -65,6 +66,7 @@ class SearchSupportActivity : BaseActivity<SearchSupportPresenter>(), View.OnCli
                     return
                 }
                 mIPresenter.search(name)
+                KeyboardUtils.hideSoftInput(this)
             }
             v_confirm -> {
                 if (item == null) {

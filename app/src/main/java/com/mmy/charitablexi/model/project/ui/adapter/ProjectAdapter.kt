@@ -1,5 +1,6 @@
 package com.mmy.charitablexi.model.project.ui.adapter
 
+import com.bumptech.glide.Glide
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.base.BaseListAdapter
 import com.mmy.frame.adapter.BaseViewHolder
@@ -28,7 +29,14 @@ class ProjectAdapter(itemLayoutID: Int, val isGoneCount: Boolean) : BaseListAdap
         helper.setText(R.id.v_content, item.description)
         helper.setText(R.id.v_address, item.addr)
         helper.setText(R.id.v_type, item.xmlx)
-        helper.setSplitImg(R.id.v_icon, Config.HOST+item.img)
+        if(!item.img.isEmpty()){
+            Glide.with(mContext)
+                    .load(Config.HOST+item.img)
+                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(helper?.getView(R.id.v_icon))
+//            helper.setSplitImg(R.id.v_icon, Config.HOST+item.img)
+        }
     }
 
 

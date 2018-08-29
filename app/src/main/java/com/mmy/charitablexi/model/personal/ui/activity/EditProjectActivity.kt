@@ -17,7 +17,7 @@ import com.mmy.frame.base.view.BaseActivity
 import com.mmy.frame.data.bean.AdvListBean
 import com.mmy.frame.data.bean.AgreListBean
 import com.mmy.frame.data.bean.ChoiceTypeBean
-import com.mmy.frame.utils.CommonUtil
+import com.mmy.frame.data.bean.ProInfoBean
 import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.activity_edit_project.*
 import okhttp3.MediaType
@@ -38,7 +38,16 @@ import java.util.*
  *             version: zsr, 2017-09-23
  */
 class EditProjectActivity : BaseActivity<EditProjectPresenter>(), View.OnClickListener {
+    var mProjectInfo:ProInfoBean.DataBean? = null
+
     override fun requestSuccess(data: Any) {
+        if(data is ChoiceTypeBean){
+            data.data.forEach{
+                if(it.id.toInt() == mProjectInfo?.typeid?.toInt()){
+                   v_2_pro_type.setHintName(it?.name!!)
+                }
+            }
+        }
     }
 
     var type = "user"
@@ -59,27 +68,54 @@ class EditProjectActivity : BaseActivity<EditProjectPresenter>(), View.OnClickLi
     }
 
     override fun initView() {
-        setToolbar("发起项目")
-        type = intent.getStringExtra("type")
-        when (type) {
-            "user" -> {
+        if(intent.hasExtra("sBean")){
+            mProjectInfo = intent.getSerializableExtra("sBean") as ProInfoBean.DataBean?
+            setToolbar(getString(R.string.fix))
+        }else{
+            setToolbar(getString(R.string.publish_project))
+        }
+        when (mFrameApp?.userInfo?.userLevel    ) {
+            0 -> {
                 //普通用户
                 arrayOf(v_2_agreement, v_2_love, v_2_pro_img, v_2_pro_type, v_2_time, v_2_volun_count, v_2_adv).forEach {
                     it.visibility = View.GONE
                 }
                 v_1_1.visibility = View.VISIBLE
             }
-            "plate" -> {
+            1 -> {
                 //平台
                 arrayOf(v_2_agreement, v_2_love, v_2_pro_img, v_2_pro_type, v_2_time, v_2_volun_count, v_2_adv).forEach {
                     it.visibility = View.VISIBLE
                 }
                 v_1_1.visibility = View.GONE
             }
+            else->{
+                //普通用户
+                arrayOf(v_2_agreement, v_2_love, v_2_pro_img, v_2_pro_type, v_2_time, v_2_volun_count, v_2_adv).forEach {
+                    it.visibility = View.GONE
+                }
+                v_1_1.visibility = View.VISIBLE
+            }
         }
     }
 
     override fun initData() {
+        if(mProjectInfo!=null){
+            v_pro_name.setHintName(mProjectInfo?.name!!)
+            v_pro_info.setHintName(mProjectInfo?.description!!)
+            v_2_love.setHintName(mProjectInfo?.lovesum!!.toString())
+            v_2_volun_count.setHintName(mProjectInfo?.volunteers!!)
+            v_address.setHintName(mProjectInfo?.addr!!)
+
+            val format = SimpleDateFormat(getString(R.string.date_format))
+            var calendar = Calendar.getInstance()
+            v_2_time.setHintName(format.format(calendar.time))
+
+            if(mProjectInfo?.adinfo!=null){
+                v_2_adv.setHintName(mProjectInfo?.adinfo?.title!!)
+            }
+            mIPresenter.getTypeList()
+        }
     }
 
     override fun initEvent() {
@@ -151,18 +187,17 @@ class EditProjectActivity : BaseActivity<EditProjectPresenter>(), View.OnClickLi
                         return@submit
                     }
                 }
-                if (imgPaths == null) {
+                if (imgPaths == null && mProjectInfo==null) {
                     "请选择项目图片".showToast(mFrameApp)
                     return
                 }
-                val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(imgPaths))
-                val parts = MultipartBody.Builder()
+
+                val builder = MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
                         .addFormDataPart("uid", App.instance.userInfo.id!!.toString())
                         .addFormDataPart("name", v_pro_name.hintStr)
                         .addFormDataPart("typeid", typeid)
                         .addFormDataPart("description", v_pro_info.hintStr)
-                        .addFormDataPart("img", CommonUtil.getFileName(imgPaths), body)
                         .addFormDataPart("lovesum", v_2_love.hintStr)
                         .addFormDataPart("volunteers", v_2_volun_count.hintStr)
                         .addFormDataPart("zid", Gson().toJson(zuIds))
@@ -171,8 +206,14 @@ class EditProjectActivity : BaseActivity<EditProjectPresenter>(), View.OnClickLi
                         .addFormDataPart("advsid", advid)
                         .addFormDataPart("xyid", agreid)
                         .addFormDataPart("addr", v_address.hintStr)
-                        .build().parts()
-                mIPresenter.subimt(parts)
+
+                imgPaths?.split(",")?.forEach {
+                    var file = File(it)
+                    val body = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                    builder.addFormDataPart("img", file.name, body)
+                }
+
+                mIPresenter.subimt(builder.build().parts())
             }
         }
 

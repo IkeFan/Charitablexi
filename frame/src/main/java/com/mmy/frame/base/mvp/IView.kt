@@ -13,7 +13,7 @@ import android.view.ViewGroup
 interface IView {
     fun showLoading()
     fun hidLoading()
-    fun requestSuccess(data: Any)
+    fun requestSuccess(any: Any)
 
     //打开一个activity
     //打开一个activity并且传入参数 格式 ：key=value,key=value...

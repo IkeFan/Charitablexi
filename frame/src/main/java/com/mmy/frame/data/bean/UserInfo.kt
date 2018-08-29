@@ -19,7 +19,7 @@ class UserInfo {
         get() = if (field == null) 0 else field
     var token: String? = null
     var name: String? = null
-    var type: String? = null
+    var type: Int? = null
     var headerImg: String? = null
     var mobile: String? = null
     var email: String? = null

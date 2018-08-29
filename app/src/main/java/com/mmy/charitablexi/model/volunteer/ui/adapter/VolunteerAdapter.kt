@@ -31,6 +31,9 @@ class VolunteerAdapter(val id:Int):BaseQuickAdapter<OrganizationBean.Organizatio
             val checkBox = helper.getView<CheckBox>(R.id.v_cb)
             checkBox?.isChecked = !checkBox?.isChecked!!
         }
+        helper?.setText(R.id.v_members, item?.nums.toString()+mContext.getString(R.string.person))
+        helper?.setText(R.id.v_name, item?.name)
+        helper?.setText(R.id.v_num_description, item?.desc)
     }
 
     //全选

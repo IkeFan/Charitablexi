@@ -1,7 +1,9 @@
 package com.mmy.charitablexi.model.personal.presenter
 
+import com.blankj.utilcode.util.ToastUtils
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
+import com.mmy.frame.data.bean.IBean
 import javax.inject.Inject
 
 /**
@@ -14,8 +16,36 @@ import javax.inject.Inject
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class PartakePresenter @Inject constructor():IPresenter<IView>() {
-    fun getList(){
+class PartakePresenter @Inject constructor() : IPresenter<IView>() {
+    fun getJoinOrgList() {
+        mM.request {
+            call = mApi.getJoinVolOrg(mFrameApp.userInfo.id!!)
+            _success = {
+                if (it is IBean && it.status != 1) {
+                    it.info.showToast(mFrameApp)
+                } else {
+                    mV.requestSuccess(it)
+                }
+            }
+            _fail = {
+                ToastUtils.showShort(it.message)
+            }
+        }
+    }
 
+    fun getVolEmployList() {
+        mM.request {
+            call = mApi.getJoinZp(mFrameApp.userInfo.id!!)
+            _success = {
+                if (it is IBean && it.status != 1) {
+                    it.info.showToast(mFrameApp)
+                } else {
+                    mV.requestSuccess(it)
+                }
+            }
+            _fail = {
+                ToastUtils.showShort(it.message)
+            }
+        }
     }
 }

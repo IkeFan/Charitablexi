@@ -29,12 +29,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/v_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="深圳市慈善机构"
                 android:textColor="#000"/>
 
             <TextView
+                android:id="@+id/v_members"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -43,6 +45,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/v_num_description"
             android:lineSpacingExtra="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

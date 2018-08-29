@@ -11,6 +11,7 @@
     <string name="volunteer_count">Volunteer count</string>
     <string name="project_introduce">Project introduce</string>
     <string name="support_info">Supporter info</string>
+    <string name="executor_info">Executor info</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="approve">Approve</string>
@@ -18,8 +19,6 @@
     <string name="free">Free</string>
     <string name="need_pay">Pay</string>
 
-    <string name="facebook_app_id">234238483822959</string>
-    <string name="fb_login_protocol_scheme">fb234238483822959</string>
     <string name="_1_app_font_color_b61e17_font2">1.在转账时请在备注中写入您在慈善易APP上的</string>
     <string name="_1_app_font_color_b61e17_font">注册用户名和要资助的项目名称。</string>
     <string name="_2_font_color_b61e17_font">2.转账完成，平台方查收后将在该项目捐赠方处显示您的用户名。</string>

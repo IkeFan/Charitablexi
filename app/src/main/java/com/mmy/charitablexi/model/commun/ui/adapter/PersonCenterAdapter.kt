@@ -39,13 +39,10 @@ class PersonCenterAdapter(id: Int) : BaseQuickAdapter<PersonalCenterBean.Persona
                 .into(helper?.getView(R.id.v_avatar))
         helper?.setText(R.id.v_title, item?.title)
         helper?.setText(R.id.content, item?.content)
-        var visibility = View.INVISIBLE
-        if(editMode){
-            visibility = View.VISIBLE
-        }
-        helper?.getView<View>(R.id.v_cb)?.visibility = visibility
-        helper?.getView<View>(R.id.v_edit)?.visibility = visibility
-        helper?.getView<CheckBox>(R.id.v_cb)?.isChecked = isSelectALL
+
+        helper?.setVisible(R.id.v_cb, editMode)
+        helper?.setVisible(R.id.v_edit, editMode)
+        helper?.setChecked(R.id.v_cb,mDelCache.contains(item)||isSelectALL)
         helper?.getView<View>(R.id.main)?.setOnClickListener {
             val checkBox = helper.getView<CheckBox>(R.id.v_cb)
             checkBox?.isChecked = !checkBox?.isChecked!!
@@ -67,19 +64,26 @@ class PersonCenterAdapter(id: Int) : BaseQuickAdapter<PersonalCenterBean.Persona
 
     fun changeSelectAll(){
         isSelectALL = !isSelectALL
-        notifyDataSetChanged()
         if(isSelectALL){
             mDelCache.clear()
             mDelCache.addAll(mData)
         }else{
             mDelCache.clear()
         }
+        notifyDataSetChanged()
     }
 
     fun delSelected(){
-        mData.removeAll(mDelCache)
-        if(mData.isEmpty()){
+        if(isSelectALL){
+            mData.clear()
             resetStatus()
+        }else{
+            mData.removeAll(mDelCache)
+            if(mData.isEmpty()){
+                resetStatus()
+            }else{
+                mDelCache.clear()
+            }
         }
         notifyDataSetChanged()
     }
@@ -88,10 +92,14 @@ class PersonCenterAdapter(id: Int) : BaseQuickAdapter<PersonalCenterBean.Persona
         editMode = false
         isSelectALL = false
         mDelCache.clear()
+        notifyDataSetChanged()
     }
 
     fun changeEditMode(){
         editMode=!editMode
+        if(!editMode){
+            resetStatus()
+        }
         notifyDataSetChanged()
     }
 }

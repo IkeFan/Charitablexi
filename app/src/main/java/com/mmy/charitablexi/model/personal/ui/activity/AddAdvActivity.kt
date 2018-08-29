@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.commun.ui.adapter.PublishArticleAdapter
@@ -88,6 +89,7 @@ class AddAdvActivity : BaseActivity<AddAdvPresenter>(), BaseRecyclerViewAdapter.
             pic.forEach {
                 val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(it.path))
                 builder.addFormDataPart("imgs[${index++}]", CommonUtil.getFileName(it.path), body)
+                Log.e("xxxbc", "xxxbc:"+CommonUtil.getFileName(it.path))
             }
             mIPresenter.submit(builder.build().parts())
         }

@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.personal.ui.activity.PublishProjectActivity
+import com.mmy.charitablexi.model.project.ui.activity.MassMsgActivity
 import com.mmy.charitablexi.model.project.ui.adapter.VolunteerListAdapter
 import com.mmy.charitablexi.model.volunteer.component.DaggerVolunteerListComponent
 import com.mmy.charitablexi.model.volunteer.module.VolunteerListModule
@@ -44,10 +45,10 @@ import kotlinx.android.synthetic.main.fragment_volunteer.*
  */
 class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
     override fun requestSuccess(data: Any) {
-        if( data is OrganizationBean){
+        mPersonalAdapter.userType = mFramApp?.userInfo?.userLevel!!
+        if (data is OrganizationBean) {
             mAdapter.setNewData(data.data)
-            mIPresenter.getVorlist(App.instance.userInfo.id!!)
-        }else if( data is VolunteersBean){
+        } else if (data is VolunteersBean) {
             mPersonalAdapter.setNewData(data.data)
         }
     }
@@ -73,6 +74,10 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
         v_list.adapter = mAdapter
         v_tabs.addTab(v_tabs.newTab().setText("义工组织"))
         v_tabs.addTab(v_tabs.newTab().setText("个人义工列表"))
+        when (mFramApp.userInfo.userLevel) {
+            0 -> v_select_all.visibility = View.GONE
+            1 -> v_select_all.visibility = View.VISIBLE
+        }
     }
 
     override fun initData() {
@@ -103,15 +108,16 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
         mAdapter.isSelectALL = v_select_all_cb.isChecked
         mPersonalAdapter.isSelectALL = v_select_all_cb.isChecked
         mIPresenter.getOrgList(App.instance.userInfo.id!!)
+        mIPresenter.getVorlist(App.instance.userInfo.id!!)
     }
 
     override fun initEvent() {
         super.initEvent()
-        arrayOf(v_add, v_request, v_select_all, v_open).setViewListener(this)
+        arrayOf(v_add, v_request, v_select_all, v_open, v_send_msg).setViewListener(this)
         mPersonalAdapter.onItemClickListener = this
         mAdapter.onItemClickListener = this
         v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(getAc()))
-        mPersonalAdapter.click = { view, position ->
+        mPersonalAdapter.delete = { view, position ->
             //更新ui
             v_select_all_cb.isChecked = !v_select_all_cb.isChecked
             mPersonalAdapter.remove(position)
@@ -126,22 +132,21 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.position == 0) {
                     v_list.adapter = mAdapter
-                    v_add.visibility=View.VISIBLE
+                    v_add.visibility = View.VISIBLE
                     v_send_msg.visibility = View.GONE
                     v_view_search.visibility = View.VISIBLE
-                } else{
-                    v_add.visibility=View.GONE
+                } else {
+                    v_add.visibility = View.GONE
                     v_send_msg.visibility = View.VISIBLE
                     v_view_search.visibility = View.GONE
                     v_list.adapter = mPersonalAdapter
                 }
-                v_list.invalidate()
-                view?.invalidate()
+                v_list.adapter.notifyDataSetChanged()
             }
         })
-        mWindow.lisenter={
-            when(it.id){
-                R.id.v_menu1->{
+        mWindow.lisenter = {
+            when (it.id) {
+                R.id.v_menu1 -> {
                     openActivity(PublishProjectActivity::class.java)
                 }
             }
@@ -164,6 +169,9 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
             R.id.v_open -> {
                 //展开聊天
                 openConversation()
+            }
+            R.id.v_send_msg -> {
+                openActivity(MassMsgActivity::class.java)
             }
         }
     }

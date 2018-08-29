@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".model.project.ui.activity.CommonActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/frame_toolbar"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/v_list_comment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/v_send_content"
+        />
+    <LinearLayout
+        android:id="@+id/v_send_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/v_comment_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_comment"
+            android:hint="您想说点什么.."
+            android:padding="10dp"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/v_comment_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_orig_dp3"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:text="确认"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</RelativeLayout>

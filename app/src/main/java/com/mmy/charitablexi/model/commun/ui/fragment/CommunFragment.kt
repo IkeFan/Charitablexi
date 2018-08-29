@@ -43,8 +43,8 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
         v_tabs.setupWithViewPager(v_pager)
         v_pager.adapter = CommunAdapter(tabStr, tabFragment, childFragmentManager)
         popup = CommunPopup(getAc())
-        popup.showDel(false)
-        popup.showEdit(false)
+//        popup.showDel(false)
+//        popup.showEdit(false)
     }
 
     override fun initData() {
@@ -69,8 +69,8 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
             override fun onPageSelected(position: Int) {
                 when(position){
                     0->{
-                        popup.showDel(false)
-                        popup.showEdit(false)
+                        popup.showDel(true)
+                        popup.showEdit(true)
                     }
                     1->{
                         popup.showDel(false)

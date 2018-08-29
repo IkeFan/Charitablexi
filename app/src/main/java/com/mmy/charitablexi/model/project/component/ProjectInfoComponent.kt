@@ -1,7 +1,9 @@
 package com.mmy.charitablexi.model.project.component
 
 import com.mmy.charitablexi.model.project.module.ProjectInfoModuel
+import com.mmy.charitablexi.model.project.ui.activity.CommonActivity
 import com.mmy.charitablexi.model.project.ui.activity.ProjectInfoActivity
+import com.mmy.charitablexi.model.project.ui.activity.SendLoveActivity
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.annotation.ActivityScope
 import dagger.Component
@@ -20,4 +22,6 @@ import dagger.Component
 @Component(modules = arrayOf(ProjectInfoModuel::class),dependencies = arrayOf(AppComponent::class))
 interface ProjectInfoComponent {
     fun inject(ac:ProjectInfoActivity)
+    fun inject(commonActivity: CommonActivity)
+    fun inject(sendLoveActivity: SendLoveActivity)
 }

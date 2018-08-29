@@ -18,32 +18,34 @@ import com.mmy.frame.data.bean.VolunteersBean
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerListAdapter(id: Int) : BaseQuickAdapter<VolunteersBean.Volunteer, BaseViewHolder>(id){
+class VolunteerListAdapter(id: Int) : BaseQuickAdapter<VolunteersBean.Volunteer, BaseViewHolder>(id) {
 
-
+    var userType: Int = App.instance.userInfo.userLevel
     var isSelectALL = false
-    val level= App.instance.userInfo.userLevel
 
 
     override fun convert(helper: BaseViewHolder?, item: VolunteersBean.Volunteer?) {
         //判断用户身份
-        when (level) {
-            0 -> {
-                helper?.setGone(R.id.v_info, true)
-                helper?.setGone(R.id.v_cb, true)
-                helper?.setGone(R.id.v_del, true)
+        if (userType == 0) {
+            helper?.setGone(R.id.v_info, false)
+            helper?.setGone(R.id.v_cb, false)
+            helper?.setGone(R.id.v_del, false)
+        } else {
+            helper?.setGone(R.id.v_info, true)
+            helper?.setGone(R.id.v_cb, true)
+            helper?.setGone(R.id.v_del, true)
+            var sex = "男"
+            if (item?.sex != 1) {
+                sex = "女"
             }
-            1 -> {
-            }
-            2 -> {
-                helper?.setGone(R.id.v_info, false)
-                helper?.setGone(R.id.v_cb, false)
-                helper?.setGone(R.id.v_del, false)
-            }
+            helper?.setText(R.id.v_name, item?.name)
+            helper?.setText(R.id.v_age_em, "年龄：" + item?.age + " 邮箱 " + item?.email)
+            helper?.setText(R.id.v_sex_phone, "性别：" + sex + " 电话 " + item?.mobile)
         }
+
         //删除事件
         helper?.getView<View>(R.id.v_del)?.setOnClickListener {
-            click(it,helper.adapterPosition)
+            delete(it, helper.adapterPosition)
         }
         //全选
         helper?.getView<CheckBox>(R.id.v_cb)?.isChecked = isSelectALL
@@ -52,21 +54,14 @@ class VolunteerListAdapter(id: Int) : BaseQuickAdapter<VolunteersBean.Volunteer,
             val checkBox = helper.getView<CheckBox>(R.id.v_cb)
             checkBox?.isChecked = !checkBox?.isChecked!!
         }
-        var sex = "男"
-        if(item?.sex!=1){
-            sex = "女"
-        }
-        helper?.setText(R.id.v_name, item?.name)
-        helper?.setText(R.id.v_age_em, "年龄："+item?.age+" 邮箱 "+item?.email)
-        helper?.setText(R.id.v_sex_phone, "性别："+sex+" 电话 "+item?.mobile)
     }
 
     //全选
-    fun selectAll(){
+    fun selectAll() {
         isSelectALL = !isSelectALL
         notifyDataSetChanged()
     }
 
-    var click:(View, Int)->Unit={view, position ->  }
+    var delete: (View, Int) -> Unit = { view, position -> }
 
 }

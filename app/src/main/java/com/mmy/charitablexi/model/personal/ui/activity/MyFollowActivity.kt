@@ -24,11 +24,11 @@ import kotlinx.android.synthetic.main.activity_my_collection.*
  */
 class MyFollowActivity : BaseActivity<MyFollowPresenter>(), View.OnClickListener {
     val mAdapter = MyFollowAdapter(R.layout.adapter_my_collection)
-    lateinit var title:String
+    lateinit var title: String
 
     override fun requestSuccess(data: Any) {
-        if(data is FollowListBean)
-        mAdapter.setNewData(data.data)
+        if (data is FollowListBean)
+            mAdapter.setNewData(data.data)
     }
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -40,13 +40,21 @@ class MyFollowActivity : BaseActivity<MyFollowPresenter>(), View.OnClickListener
 
     override fun initView() {
         title = intent.getStringExtra("title")
-        setToolbar(title, rightRes = "添加", rightTextColor = getResColor(R.color.colorPrimary), rightClickListener = this)
+        if(title == getString(R.string.follow)){
+            setToolbar(title, rightRes = getString(R.string.add), rightTextColor = getResColor(R.color.colorPrimary), rightClickListener = this)
+        }else{
+            setToolbar(title)
+        }
         v_list.layoutManager = LinearLayoutManager(this)
         v_list.adapter = mAdapter
     }
 
     override fun initData() {
-        mIPresenter.getList(title)
+        when (title) {
+            getString(R.string.follow) -> mIPresenter.getList(mIPresenter.FOLLOW)
+            getString(R.string.follower) -> mIPresenter.getList(mIPresenter.FOLLOWER)
+            getString(R.string.join_ogn) -> mIPresenter.getList(mIPresenter.ORGANIZATION)
+        }
     }
 
     override fun initEvent() {

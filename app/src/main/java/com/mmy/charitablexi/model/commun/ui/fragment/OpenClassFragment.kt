@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.bean.EvBusItemBean
 import com.mmy.charitablexi.model.commun.component.DaggerPublicClassComponent
 import com.mmy.charitablexi.model.commun.module.PublicClassModule
 import com.mmy.charitablexi.model.commun.presenter.PublicClassPresenter
@@ -12,6 +13,7 @@ import com.mmy.charitablexi.model.commun.ui.adapter.TraniAdapter
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseFragment
 import com.mmy.frame.data.bean.ClassBean
+import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.fragment_trani.*
 
 /**
@@ -24,17 +26,34 @@ import kotlinx.android.synthetic.main.fragment_trani.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.OnPopMenuClick {
+class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.OnPopMenuClick, View.OnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.v_select_all -> {
+                v_select_all_cb.isChecked = !v_select_all_cb.isChecked
+                mAdapter.changeSelectAll()
+            }
+        }
+    }
+
     override fun onMenuSelected(v: View) {
         when (v.id) {
             R.id.v_publish -> {
                 openActivity(PublishArticleActivity::class.java, "title="+getString(R.string.class_publish))
             }
             R.id.v_edit -> {
-
+                if(v_select_all.visibility == View.VISIBLE) {
+                    v_select_all.visibility = View.GONE
+                    mAdapter.changeEdit()
+                }
+                else{
+                    v_select_all.visibility = View.VISIBLE
+                    mAdapter.changeEdit()
+                }
             }
             R.id.v_del -> {
-
+                mAdapter.delSelected()
+                asyAdapterStatus()
             }
             R.id.v_share -> {
 
@@ -61,9 +80,9 @@ class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.O
     override fun getLayoutId(): Int = R.layout.fragment_trani
 
     override fun initView() {
-        v_tabs.addTab(v_tabs.newTab().setText("慈善理论"))
-        v_tabs.addTab(v_tabs.newTab().setText("慈善执行"))
-        v_tabs.addTab(v_tabs.newTab().setText("其他"))
+        v_tabs.addTab(v_tabs.newTab().setText(getString(R.string.theory_of_charity)))
+        v_tabs.addTab(v_tabs.newTab().setText(getString(R.string.execute_charity)))
+        v_tabs.addTab(v_tabs.newTab().setText(getString(R.string.other)))
         v_list.layoutManager = GridLayoutManager(activity, 2)
         v_list.adapter = mAdapter
         v_tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -86,14 +105,38 @@ class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.O
         })
     }
 
+    override fun registerBus(): Boolean = true
+
     override fun initData() {
         mIPresenter.getList(1)
 //        mAdapter.setNewData(VRData.getIntData(10))
     }
 
     override fun initEvent() {
-        mAdapter.setOnItemClickListener { adapter, view, baseViewHolder, position ->
-            openActivity(PublishArticleActivity::class.java, "title = "+getString(R.string.edit_class)+",type = "+(v_tabs.selectedTabPosition+1),mAdapter.getItem(position))
+        arrayOf(v_select_all).setViewListener(this)
+        mAdapter.onEditArticle = {position, item ->
+            openActivity(PublishArticleActivity::class.java, "title = "+getString(R.string.edit_class)
+                    +",type = "+(v_tabs.selectedTabPosition+1),mAdapter.getItem(position))
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        asyAdapterStatus()
+    }
+
+    fun asyAdapterStatus(){
+        if(mAdapter.mEdit){
+            v_select_all.visibility = View.VISIBLE
+        }else{
+            v_select_all.visibility = View.GONE
+        }
+        v_select_all_cb.isChecked = mAdapter.isSelectAll
+    }
+
+    @Subscribe
+    fun onClassUpdate( data: EvBusItemBean<ClassBean.DataBean>){
+        mIPresenter.getList(1)
     }
 }

@@ -1,13 +1,15 @@
 package com.mmy.charitablexi.model.commun.ui.activity
 
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.base.BaseIViewModule
+import com.mmy.charitablexi.base.DaggerBaseComponent
+import com.mmy.charitablexi.model.commun.presenter.CardDetailPresenter
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseActivity
 import com.mmy.frame.data.bean.ClassBean
 
 /**
- * @file       ClassInfoActivity.ktivity.kt
+ * @file       CardDetailActivity.ktivity.kt
  * @brief      描述
  * @author     lucas
  * @date       2018/8/15 0015
@@ -16,10 +18,15 @@ import com.mmy.frame.data.bean.ClassBean
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class ClassInfoActivity : BaseActivity<IPresenter<*>>(){
+class CardDetailActivity : BaseActivity<CardDetailPresenter>(){
     var mClass: ClassBean.DataBean? = null
 
     override fun setupDagger(appComponent: AppComponent) {
+        DaggerBaseComponent.builder()
+                .appComponent(appComponent)
+                .baseIViewModule(BaseIViewModule(this))
+                .build()
+                .inject(this)
 
     }
 

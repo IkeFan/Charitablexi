@@ -3,15 +3,19 @@ package com.mmy.charitablexi.model.project.ui.activity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.base.BaseIViewModule
+import com.mmy.charitablexi.base.DaggerBaseComponent
+import com.mmy.charitablexi.model.project.presenter.ProgressPresenter
 import com.mmy.charitablexi.model.project.ui.adapter.ProgressInfoAdapter
-import com.mmy.charitablexi.utils.VRData
 import com.mmy.frame.AppComponent
-import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseActivity
+import com.mmy.frame.data.bean.ProjectProgressBean
 import kotlinx.android.synthetic.main.adapter_progress_info.*
 
-class ProgressInfoActivity : BaseActivity<IPresenter<*>>(), View.OnClickListener {
+class ProgressInfoActivity : BaseActivity<ProgressPresenter>(), View.OnClickListener {
     override fun requestSuccess(any: Any) {
+        if(any is ProjectProgressBean)
+            mAdapter.setNewData(any.data)
     }
 
     override fun onClick(p0: View?) {
@@ -26,16 +30,21 @@ class ProgressInfoActivity : BaseActivity<IPresenter<*>>(), View.OnClickListener
 
     val mAdapter = ProgressInfoAdapter(R.layout.adapter_progress_info)
     override fun setupDagger(appComponent: AppComponent) {
+        DaggerBaseComponent.builder()
+                .appComponent(appComponent)
+                .baseIViewModule(BaseIViewModule(this))
+                .build()
+                .inject(this)
     }
 
     override fun initView() {
-        setToolbar("项目进度",true,"发布",R.color.colorPrimaryDark,this)
+        setToolbar(getString(R.string.project_progress),true,getString(R.string.publish),R.color.colorPrimaryDark,this)
         rv_list.layoutManager = LinearLayoutManager(this)
         rv_list.adapter = mAdapter
     }
 
     override fun initData() {
-        mAdapter.setNewData(VRData.getIntData(10))
+        mIPresenter.getProgressList(intent.getStringExtra("id").toInt())
     }
 
     override fun getLayoutID(): Any = R.layout.activity_progress_info

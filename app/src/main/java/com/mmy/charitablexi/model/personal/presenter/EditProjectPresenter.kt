@@ -2,6 +2,7 @@ package com.mmy.charitablexi.model.personal.presenter
 
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
+import com.mmy.frame.data.bean.ChoiceTypeBean
 import com.mmy.frame.data.bean.IBean
 import okhttp3.MultipartBody
 import javax.inject.Inject
@@ -27,6 +28,16 @@ class EditProjectPresenter @Inject constructor():IPresenter<IView>() {
                     if (it.status==1)
                         finishActivity()
                 }
+            }
+        }
+    }
+
+    fun getTypeList() {
+        mM.request {
+            call = mApi.getTypeList()
+            _success = {
+                if (it is ChoiceTypeBean)
+                    mV.requestSuccess(it)
             }
         }
     }

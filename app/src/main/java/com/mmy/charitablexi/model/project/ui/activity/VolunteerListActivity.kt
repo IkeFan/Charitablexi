@@ -36,12 +36,14 @@ import kotlinx.android.synthetic.main.activity_volunteer_list.*
  */
 class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnClickListener {
     override fun requestSuccess(data: Any) {
-        if(data is VolunteersBean){
+        if (data is VolunteersBean) {
+            mAdapter.userType = mFrameApp?.userInfo?.userLevel!!
             mAdapter.setNewData(data.data)
         }
     }
 
     val mAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
+
     var isOpenConver = false
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -59,7 +61,7 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
             0 -> {
                 v_select_all.visibility = View.GONE
             }
-            1,2 -> {
+            1, 2 -> {
                 v_select_all.visibility = View.VISIBLE
                 rigthTitle = "发送消息"
             }
@@ -99,7 +101,7 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
 
     override fun initEvent() {
         v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(this))
-        mAdapter.click = { view, position ->
+        mAdapter.delete = { view, position ->
             //更新ui
             v_select_all_cb.isChecked = !v_select_all_cb.isChecked
             mAdapter.remove(position)
@@ -132,14 +134,14 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
         if (isOpenConver) weight = 6f
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, weight)
         v_cv.layoutParams = params
-        var from=0f
-        var to=0f
-        if (isOpenConver){
+        var from = 0f
+        var to = 0f
+        if (isOpenConver) {
             from = 0f
-            to =180f
-        }else{
+            to = 180f
+        } else {
             from = 180f
-            to =360f
+            to = 360f
         }
         //更新箭头
         val anim = RotateAnimation(from, to, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)

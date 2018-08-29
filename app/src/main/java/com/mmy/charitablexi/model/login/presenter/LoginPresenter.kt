@@ -1,6 +1,7 @@
 package com.mmy.charitablexi.model.login.presenter
 
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.MainActivity
 import com.mmy.frame.base.mvp.IPresenter
@@ -35,12 +36,17 @@ class LoginPresenter @Inject constructor():IPresenter<IView>() {
                         App.instance.userInfo.token = it.data.token
                         App.instance.userInfo.lovesum = it.data.lovesum
                         App.instance.userInfo.email = it.data.email
+                        App.instance.userInfo.type = it.data.type
+                        App.instance.userInfo.userLevel = it.data.level
                         //链接融云
                         App.instance.initRong()
                         mV.finishView()
                         mV.openActivity(MainActivity::class.java)
                     }
                 }
+            }
+            _fail = {
+                ToastUtils.showShort(it.message)
             }
         }
     }

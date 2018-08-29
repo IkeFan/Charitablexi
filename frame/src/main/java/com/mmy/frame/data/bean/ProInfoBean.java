@@ -11,7 +11,7 @@ import java.util.List;
  * @描述 TODO
  */
 
-public class ProInfoBean extends IBean implements Serializable{
+public class ProInfoBean extends IBean implements Serializable {
 
     /**
      * data : {"id":"1","uid":"1","zxid":"3","zid":",1,2,3,","importid":"3","typeid":"2","name":"公益项目1",
@@ -35,7 +35,7 @@ public class ProInfoBean extends IBean implements Serializable{
 
     public DataBean data;
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * id : 1
          * uid : 1
@@ -77,35 +77,36 @@ public class ProInfoBean extends IBean implements Serializable{
          * discusCounts : 3
          */
 
-        public String id;
-        public String             uid;
-        public String             zxid;
-        public String             zid;
-        public String             importid;
-        public String             typeid;
-        public String             name;
-        public String             img;
-        public String             addr;
-        public String             title;
-        public int             lovesum;
-        public String             volunteers;
-        public String             description;
-        public String             xyid;
-        public String             advsid;
+        public String     id;
+        public String     uid;
+        public String     zxid;
+        public String     zid;
+        public String     importid;
+        public String     typeid;
+        public String     name;
+        public String     img;
+        public String     addr;
+        public String     title;
+        public int        lovesum;
+        public String     volunteers;
+        public String     description;
+        public String     xyid;
+        public String     advsid;
         @SerializedName("status")
-        public String             statusX;
-        public String             addtime;
-        public String             endtime;
-        public int             nums;
-        public int             yjlove;
-        public String             nowyg;
-        public AdinfoBean         adinfo;
-        public String             discusCounts;
+        public String     statusX;
+        public String     addtime;
+        public String     endtime;
+        public int        nums;
+        public int        yjlove;
+        public String     nowyg;
+        public AdinfoBean adinfo;
+        public String     discusCounts;
+        public ZxfInfo    zxfinfo;
         public List<UsersBean>    users;
         public List<ZhfListBean>  zhfList;
         public List<CommentsBean> comments;
 
-        public static class AdinfoBean {
+        public static class AdinfoBean implements Serializable {
             /**
              * id : 2
              * title : 广告2
@@ -121,7 +122,7 @@ public class ProInfoBean extends IBean implements Serializable{
             public String addtime;
         }
 
-        public static class UsersBean {
+        public static class UsersBean implements Serializable {
             /**
              * id : 5
              * avatar : /Uploads/2018-05-21/5b02632067c44.jpg
@@ -131,7 +132,20 @@ public class ProInfoBean extends IBean implements Serializable{
             public String avatar;
         }
 
-        public static class ZhfListBean {
+        //        {
+        //            "id":"1",
+        //                "name":"wangLin",
+        //                "avatar":"/Uploads/2018-05-17/5afd701ade84e.jpg"
+        //        }
+
+        public static class ZxfInfo implements Serializable {
+            public int    id;
+            public String name;
+            public String avatar;
+        }
+
+
+        public static class ZhfListBean implements Serializable {
             /**
              * id : 1
              * name : wangLin
@@ -145,7 +159,7 @@ public class ProInfoBean extends IBean implements Serializable{
             public String material;
         }
 
-        public static class CommentsBean {
+        public static class CommentsBean implements Serializable {
             /**
              * addtime : 1526871867
              * content : 用户5回复用户1

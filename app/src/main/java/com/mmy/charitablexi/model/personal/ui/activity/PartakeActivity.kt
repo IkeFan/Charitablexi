@@ -34,15 +34,16 @@ class PartakeActivity : BaseActivity<PartakePresenter>() {
     }
 
     override fun initView() {
-        setToolbar("参与组织")
-        v_tabs.addTab(v_tabs.newTab().setText("参与的义工组织"))
-        v_tabs.addTab(v_tabs.newTab().setText("参与的义工招聘"))
+        setToolbar(getString(R.string.join_ogn))
+        v_tabs.addTab(v_tabs.newTab().setText(getString(R.string.volunteer_ogn_joined)))
+        v_tabs.addTab(v_tabs.newTab().setText(getString(R.string.volunteer_employ_joined)))
         v_list.layoutManager = LinearLayoutManager(this)
         v_list.adapter = mAdapter
         mAdapter.setNewData(VRData.getIntData(10))
     }
 
     override fun initData() {
+        mIPresenter.getJoinOrgList()
     }
 
     override fun getLayoutID(): Any = R.layout.activity_partake

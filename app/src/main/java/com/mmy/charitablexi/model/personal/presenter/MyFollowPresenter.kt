@@ -15,16 +15,17 @@ import javax.inject.Inject
  *             version: zsr, 2017-09-23
  */
 class MyFollowPresenter @Inject constructor() : IPresenter<IView>() {
-    fun getList(title: String) {
+    val FOLLOW =1
+    val FOLLOWER = 2
+    val ORGANIZATION =3
+
+    fun getList(type: Int) {
         val id = App.instance.userInfo.getIdCheckLogin()
         mM.request {
-            when (title) {
-                "关注" -> {
-                    call = mApi.getMyFollow(id = id)
-                }
-                "关注者" -> {
-                    call = mApi.getMyFollow(bid = id)
-                }
+             when (type) {
+                FOLLOW -> call = mApi.getMyFollow(id = id)
+                FOLLOWER ->  call =mApi.getMyFollow(bid = id)
+                ORGANIZATION-> call = mApi.getMyFollow(oid = id)
             }
             _success = {
                 mV.requestSuccess(it)

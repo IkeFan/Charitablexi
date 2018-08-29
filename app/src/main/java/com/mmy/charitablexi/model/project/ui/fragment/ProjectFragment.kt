@@ -42,7 +42,7 @@ class ProjectFragment : BaseFragment<IPresenter<*>>() {
             tab.setCustomView(R.layout.view_textview)
             var textView = tab.customView?.findViewById<TextView>(R.id.v_tv)
             textView?.text = it
-            textView?.textSize = UIUtil.dp2px(getAc(),6).toFloat()
+//            textView?.textSize = UIUtil.dp2px(getAc(),6).toFloat()
             tl_tabs.addTab(tab)
         }
     }

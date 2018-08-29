@@ -9,9 +9,10 @@ import com.mmy.charitablexi.model.commun.presenter.InteractPresenter
 import com.mmy.charitablexi.model.commun.ui.activity.PublicCardActivity
 import com.mmy.charitablexi.model.commun.ui.adapter.IrrigationAdapter
 import com.mmy.frame.AppComponent
+import com.mmy.frame.adapter.BaseQuickAdapter
 import com.mmy.frame.base.view.BaseFragment
 import com.mmy.frame.data.bean.InteractBean
-import kotlinx.android.synthetic.main.fragment_irrigation.*
+import kotlinx.android.synthetic.main.fragment_trani.*
 
 /**
  * @file       InteractionFragment.ktt
@@ -65,5 +66,13 @@ class InteractionFragment :BaseFragment<InteractPresenter>(), CommunFragment.OnP
 
     override fun initData() {
         mIPresenter.getList(3)
+    }
+
+    override fun initEvent() {
+        arrayOf(v_select_all).setViewListener(this)
+        mAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener {
+            adapter, view, baseViewHolder, position ->
+
+        }
     }
 }

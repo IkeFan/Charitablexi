@@ -10,6 +10,10 @@ import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
 import com.mmy.frame.helper.PicSelectHelper
 import kotlinx.android.synthetic.main.activity_question_edit.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 /**
  * @file       QuestionEditActivity
@@ -63,8 +67,18 @@ class QuestionEditActivity : BaseActivity<QuestionEditPresenter>(), View.OnClick
     private fun submit() {
         checkData(arrayOf(v_title, v_pic_count, v_a1, v_a2, v_a3, v_a4, v_analyze),
                 arrayOf("请输入题目", "请选择图片", "请输入答案A", "请输入答案B", "请输入答案C", "请输入答案D", "请输入答案解析"),
-                {
-                    mIPresenter.addQue()
+                {   var file = File(mSelectPic)
+                    var builder: MultipartBody.Builder = MultipartBody.Builder()
+                            .addFormDataPart("uid", mFrameApp?.userInfo?.id.toString())
+                            .addFormDataPart("title", v_title.text.toString())
+                            .addFormDataPart("opta", v_a1.text.toString())
+                            .addFormDataPart("optb", v_a2.text.toString())
+                            .addFormDataPart("optc", v_a3.text.toString())
+                            .addFormDataPart("optd", v_a4.text.toString())
+                            .addFormDataPart("analyze", v_analyze.text.toString())
+                            .addFormDataPart("img", file.getName(), RequestBody.create(MediaType.parse("image/*"), file))
+
+                    mIPresenter.addQue(builder.build().parts())
                 },
                 {
                     if (v_c1.isChecked || v_c2.isChecked || v_c3.isChecked || v_c4.isChecked)

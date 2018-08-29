@@ -9,6 +9,7 @@
               android:padding="10dp">
 
     <TextView
+        android:id="@+id/v_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -23,6 +24,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/v_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -30,6 +32,7 @@
             android:text="由爱公益平台成立一周年，支持1700名贫困生实现求学梦"/>
 
         <TextView
+            android:id="@+id/v_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -39,6 +42,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/v_img"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
