@@ -33,7 +33,7 @@ class MassMsgActivity : BaseActivity<IPresenter<*>>() {
     override fun requestSuccess(any: Any) {
     }
 
-    val ids = arrayOf(1, 2, 3, 4, 5)//群发的用户
+    var ids:List<Int>? = null
     //和一个不存在的用户单聊，目的：借用官方界面，再消息回调中群发消息
     val targetId = "-1"
 
@@ -72,7 +72,7 @@ class MassMsgActivity : BaseActivity<IPresenter<*>>() {
                 }
             }
             //群发消息
-            ids.forEach {
+            ids?.forEach {
                 message.targetId = it.toString()
                 message.conversationType = Conversation.ConversationType.PRIVATE
                 RongIM.getInstance().sendMessage(message, null, null, object : IRongCallback.ISendMessageCallback {
@@ -110,10 +110,11 @@ class MassMsgActivity : BaseActivity<IPresenter<*>>() {
     }
 
     override fun initView() {
-        setToolbar("【深入乡村教育】执行方", rightRes = R.drawable.ic_menu)
+        setToolbar(intent.getStringExtra("title"), rightRes = R.drawable.ic_menu)
     }
 
     override fun initData() {
+        ids = intent.getIntegerArrayListExtra("sBean")
         RongIM.connect(App.instance.userInfo.rongToken, object : RongIMClient.ConnectCallback() {
             override fun onSuccess(p0: String?) {
                 RongIM.getInstance().setSendMessageListener(mSendListener)

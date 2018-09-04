@@ -1,7 +1,9 @@
 package com.mmy.charitablexi.model.volunteer.presenter
 
+import com.blankj.utilcode.util.ToastUtils
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
+import com.mmy.frame.data.bean.IBean
 import javax.inject.Inject
 
 /**
@@ -15,11 +17,18 @@ import javax.inject.Inject
  *             version: zsr, 2017-09-23
  */
 class RequestVolunteerPresenter @Inject constructor() : IPresenter<IView>() {
-    fun submit(id: String, v_email: String?, v_phone: String?, v_age: String, sex: Int) {
+    fun submit(xmid: Int?=null, oid:Int?=null, v_email: String?, v_phone: String?, v_age: String, sex: Int, code:String) {
         mM.request {
-            call = mApi.requestVolunteer(v_email, sex, v_age.toInt(), xmid = id.toInt())
+            call = mApi.requestVolunteer(mFrameApp.userInfo.id!!, v_email, sex, v_age.toInt(), xmid = xmid, oid = oid, code = code)
             _success = {
-                mV.requestSuccess(it)
+                if(it is IBean && it.status ==1)
+                    mV.requestSuccess(it)
+                else if(it is IBean){
+                    it.info.showToast(mFrameApp)
+                }
+            }
+            _fail = {
+                ToastUtils.showShort(it.message)
             }
         }
     }

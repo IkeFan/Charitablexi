@@ -7,15 +7,40 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".model.project.ui.activity.PublishActivity">
+    tools:context=".model.project.ui.activity.PublishProgressActivity">
 
     <include layout="@layout/frame_toolbar"/>
+
+    <EditText
+        android:id="@+id/v_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:maxLength="30"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:hint="@string/title_in30"/>
+    <EditText
+        android:id="@+id/v_edit"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:hint="@string/input_content"
+        android:background="@drawable/shape_strok"
+        android:padding="10dp"/>
+
+    <com.mmy.charitablexi.widget.MyEditView
+        android:id="@+id/v_2_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="@string/chose_time"/>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="拍照上传活动照片"
+        android:text="拍照上传活动照片*"
         android:textSize="15sp"
         />
 
@@ -25,19 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="添加文字"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/shape_strok"
-        android:padding="10dp"/>
 
     <View
         android:layout_width="0dp"
@@ -50,6 +62,7 @@
         android:background="@color/hint"/>
 
     <TextView
+        android:id="@+id/v_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

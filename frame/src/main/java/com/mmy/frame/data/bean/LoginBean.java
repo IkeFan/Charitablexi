@@ -9,7 +9,7 @@ package com.mmy.frame.data.bean;
 public class LoginBean extends IBean {
 
     /**
-     * data : {"id":"3","name":"lucas","type":"0","mobile":"18825204205",
+     * mData : {"id":"3","name":"lucas","type":"0","mobile":"18825204205",
      * "password":"6854cc645509cc4cbffc5e6ffcaf96a2","email":"123@qq.com","sex":"2","age":"35","avatar":null,
      * "salt":"5ae02bf5d9c57","invite_code":"5xb1r","token":"4a383a9c390f457935b2dda35896e9f8","is_zhf":"0",
      * "material":null,"login_time":"1524640757","create_time":"1524640757","is_audit":"0"}

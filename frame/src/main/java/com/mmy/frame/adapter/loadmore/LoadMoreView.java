@@ -76,9 +76,9 @@ public abstract class LoadMoreView {
     }
 
     /**
-     * No more data is hidden
+     * No more mData is hidden
      *
-     * @return true for no more data hidden load more
+     * @return true for no more mData hidden load more
      */
     @Deprecated
     public boolean isLoadEndGone() {

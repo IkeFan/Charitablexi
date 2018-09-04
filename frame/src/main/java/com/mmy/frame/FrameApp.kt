@@ -3,6 +3,7 @@ package com.mmy.frame
 import android.app.Application
 import android.os.Handler
 import com.blankj.utilcode.util.Utils
+import com.google.gson.Gson
 import com.mmy.frame.data.api.ApiService
 import com.mmy.frame.data.api.module.ApiServiceModule
 import com.mmy.frame.data.bean.UserInfo
@@ -23,6 +24,7 @@ abstract class FrameApp : Application() {
     @Inject lateinit var cache: Cache
     @Inject lateinit var mBus: Bus
     @Inject lateinit var mApi: ApiService
+    @Inject lateinit var mGson: Gson
 
     var appComponent: AppComponent = DaggerAppComponent
             .builder()

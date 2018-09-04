@@ -27,6 +27,7 @@
                 android:background="@color/divide"/>
 
             <ImageView
+                android:id="@+id/v_logo"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_margin="15dp"
@@ -34,6 +35,7 @@
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
+                android:id="@+id/v_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -54,11 +56,12 @@
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/shape_point_blue"
                 android:drawablePadding="8dp"
-                android:text="工作地点"
+                android:text="@string/work_place"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_work_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -73,11 +76,12 @@
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/shape_point_blue"
                 android:drawablePadding="8dp"
-                android:text="工作时间"
+                android:text="@string/work_time"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_work_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -92,11 +96,12 @@
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/shape_point_blue"
                 android:drawablePadding="8dp"
-                android:text="其他"
+                android:text="@string/other"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -111,11 +116,12 @@
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/shape_point_blue"
                 android:drawablePadding="8dp"
-                android:text="报名截止时间"
+                android:text="@string/end_time"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -130,11 +136,12 @@
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/shape_point_blue"
                 android:drawablePadding="8dp"
-                android:text="联系电话"
+                android:text="@string/phone"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -154,6 +161,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/v_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
@@ -178,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="已有义工"/>
+                    android:text="@string/volunteer_count"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="0dp"
@@ -186,6 +194,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/v_need_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
@@ -203,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:text="工作内容"/>
+                android:text="@string/work_content"/>
 
             <View
                 android:layout_width="match_parent"
@@ -211,6 +220,7 @@
                 android:background="@color/divide"/>
 
             <TextView
+                android:id="@+id/v_work_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -218,7 +228,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="15dp"
                 android:lineSpacingExtra="5dp"
-                android:text="组织展开对社区群众性文艺团体的培育、指导、扶持工作，展开已公演为主、文艺宣传支援服务.."
+                android:text=""
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -252,7 +262,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
-            android:text="联系机构"
+            android:text="Contact"
             android:textColor="@color/white"
             android:textSize="16sp"/>
 
@@ -266,7 +276,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
-            android:text="立即报名"
+            android:text="Apply"
             android:textColor="@color/white"
             android:textSize="16sp"/>
     </LinearLayout>

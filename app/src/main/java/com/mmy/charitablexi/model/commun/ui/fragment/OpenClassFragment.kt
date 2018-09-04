@@ -26,35 +26,14 @@ import kotlinx.android.synthetic.main.fragment_trani.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.OnPopMenuClick, View.OnClickListener {
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.v_select_all -> {
-                v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-                mAdapter.changeSelectAll()
-            }
-        }
-    }
-
+class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.OnPopMenuClick{
+    var delPosition = -1
     override fun onMenuSelected(v: View) {
         when (v.id) {
             R.id.v_publish -> {
                 openActivity(PublishArticleActivity::class.java, "title="+getString(R.string.class_publish))
             }
-            R.id.v_edit -> {
-                if(v_select_all.visibility == View.VISIBLE) {
-                    v_select_all.visibility = View.GONE
-                    mAdapter.changeEdit()
-                }
-                else{
-                    v_select_all.visibility = View.VISIBLE
-                    mAdapter.changeEdit()
-                }
-            }
-            R.id.v_del -> {
-                mAdapter.delSelected()
-                asyAdapterStatus()
-            }
+
             R.id.v_share -> {
 
             }
@@ -63,7 +42,14 @@ class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.O
 
     override fun requestSuccess(data: Any) {
         if(data is ClassBean){
-            mAdapter.setNewData(data.data)
+            when(data.sub){
+                "del"->{
+                    if(delPosition!=-1)
+                        mAdapter.remove(delPosition)
+                    delPosition = -1
+                }
+                else ->{ mAdapter.setNewData(data.data) }
+            }
         }
     }
 
@@ -113,30 +99,24 @@ class OpenClassFragment : BaseFragment<PublicClassPresenter>(), CommunFragment.O
     }
 
     override fun initEvent() {
-        arrayOf(v_select_all).setViewListener(this)
         mAdapter.onEditArticle = {position, item ->
             openActivity(PublishArticleActivity::class.java, "title = "+getString(R.string.edit_class)
                     +",type = "+(v_tabs.selectedTabPosition+1),mAdapter.getItem(position))
         }
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        asyAdapterStatus()
-    }
-
-    fun asyAdapterStatus(){
-        if(mAdapter.mEdit){
-            v_select_all.visibility = View.VISIBLE
-        }else{
-            v_select_all.visibility = View.GONE
+        mAdapter.onDeleted = {position, item->
+            delPosition = position
+            mIPresenter.delClass(item.id!!)
         }
-        v_select_all_cb.isChecked = mAdapter.isSelectAll
+
+        mAdapter.onSelected = {_,item->
+            openActivity(PublishArticleActivity::class.java, "title = "+getString(R.string.edit_class)
+                    +",type = "+(v_tabs.selectedTabPosition+1),item)
+        }
     }
+
 
     @Subscribe
     fun onClassUpdate( data: EvBusItemBean<ClassBean.DataBean>){
-        mIPresenter.getList(1)
+        mIPresenter.getList(v_tabs.selectedTabPosition+1)
     }
 }

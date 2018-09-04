@@ -30,7 +30,7 @@ import java.util.List;
 public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<BaseRecyclerViewAdapter
         .BaseRecyclerViewHolder> {
 
-    private Context mContext;
+    protected Context mContext;
 
     public BaseRecyclerViewAdapter(Context context) {
         mContext = context;

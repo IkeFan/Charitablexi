@@ -10,6 +10,7 @@ import com.mmy.charitablexi.model.personal.component.DaggerPersonalComponent
 import com.mmy.charitablexi.model.personal.module.PersonalModule
 import com.mmy.charitablexi.model.personal.presenter.PersonalPresenter
 import com.mmy.charitablexi.model.personal.ui.activity.*
+import com.mmy.charitablexi.model.volunteer.ui.activity.RequestMechActivity
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseFragment
 import com.mmy.frame.data.bean.PersonalInfoBean
@@ -50,9 +51,9 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
             v_cjyg.text = data.data.ygxm
             v_yhgl.text = data.data.users_counts.toString()
             v_xygl.text = data.data.xy_counts.toString()
-//            v_xygl.text = data.data.
-//            v_wdxy.text = data.data.
-//            v_yhgl.text = data.data.
+//            v_xygl.text = mData.mData.
+//            v_wdxy.text = mData.mData.
+//            v_yhgl.text = mData.mData.
         }
     }
 
@@ -66,6 +67,11 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
     override fun getLayoutId(): Int = R.layout.fragment_personal
 
     override fun initView() {
+        when(mFramApp.userInfo.type){
+            0->{ v_be_org.visibility = View.VISIBLE}
+            1->{}
+            2->{}
+        }
     }
 
     override fun initData() {
@@ -77,7 +83,7 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
         super.initEvent()
         arrayOf(v_personal_info, v_message, v_publish, v_collection, v_donation, v_join,
                 v_user_manager, v_view_agreement, v_agreement_manager, v_follow, v_follow_user,
-                v_partake,v_tiku_manager,v_about,v_about_modify,v_login_out).setViewListener(this)
+                v_partake,v_tiku_manager,v_about,v_about_modify,v_login_out, v_be_org,v_volunteer_audit).setViewListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -103,6 +109,13 @@ class PersonalFragment : BaseFragment<PersonalPresenter>(), View.OnClickListener
                 SPUtils.getInstance().remove("pwd")
                 openActivity(LoginActivity::class.java)
                 getAc().finish()
+            }
+            v_be_org ->{
+                openActivity(RequestMechActivity::class.java)
+            }
+
+            v_volunteer_audit->{
+
             }
         }
     }

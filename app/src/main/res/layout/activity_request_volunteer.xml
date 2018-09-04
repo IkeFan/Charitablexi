@@ -43,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/v_age"
+        app:input_type="@integer/input_type_number"
         app:hint="填写"
         app:name="年龄"/>
     <LinearLayout

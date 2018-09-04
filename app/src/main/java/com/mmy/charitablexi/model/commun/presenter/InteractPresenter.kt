@@ -2,6 +2,7 @@ package com.mmy.charitablexi.model.commun.presenter
 
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
+import com.mmy.frame.data.bean.IBean
 import com.mmy.frame.data.bean.InteractBean
 import javax.inject.Inject
 
@@ -27,5 +28,26 @@ class InteractPresenter @Inject constructor ():IPresenter<IView>(){
             }
         }
 
+    }
+
+    fun delCar(cardId:Int){
+        mV.showLoading()
+        mM.request {
+            call = mApi.delCard(mFrameApp.userInfo.id!!, cardId)
+            _success = {
+                mV.hidLoading()
+                if(it is IBean){
+                    if(it.status ==1){
+                        mV.requestSuccess(it)
+                    }else{
+                        it.info.showToast(mFrameApp)
+                    }
+                }
+            }
+            _fail = {
+                mV.hidLoading()
+                it.message?.showToast(mFrameApp)
+            }
+        }
     }
 }

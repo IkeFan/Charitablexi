@@ -12,7 +12,7 @@ import java.util.List;
 public class AboutBean extends IBean implements Serializable{
 
     /**
-     * data : {"id":"1","name":"慈善喜","img":"/Uploads/2018-06-09/5b1b898c32187.jpg","desc":"Charity Easy
+     * mData : {"id":"1","name":"慈善喜","img":"/Uploads/2018-06-09/5b1b898c32187.jpg","desc":"Charity Easy
      * Introduction\nCharity Easy is a mobile public benefit social networking platform.\nOn this platform，users,
      * non-profit organizations, and enterprises can recruit volunteers, initiate, execute, and donate various kinds
      * of public benefit activities. Ordinary users donate &quot;love&quot;, little hearts that count as credits,

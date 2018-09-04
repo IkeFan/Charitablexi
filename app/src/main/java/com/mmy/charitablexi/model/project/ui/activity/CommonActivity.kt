@@ -16,8 +16,10 @@ import kotlinx.android.synthetic.main.activity_common.*
 import java.util.*
 
 class CommonActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, View.OnClickListener {
-
-    var mInfoBean: ProInfoBean.DataBean? = null
+    var  xmid:Int?= null
+    var cid:Int? = null
+    var classId:Int? = null
+    var mCommons: List<ProInfoBean.DataBean.CommentsBean>? = null
     val mCommentAdapter = ProCommentAdapter(R.layout.adapter_comment)
 
     override fun requestSuccess(any: Any) {
@@ -26,7 +28,7 @@ class CommonActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, Vi
         common.name = mFrameApp?.userInfo?.name
         common.content = v_comment_et.text.toString().trim()
         common.avatar = mFrameApp?.userInfo?.userBean?.avatar
-        mCommentAdapter.addData(common)
+        mCommentAdapter.addData(0,common)
         mFrameApp?.mBus?.post(common)
         v_comment_et.text.clear()
     }
@@ -41,12 +43,20 @@ class CommonActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, Vi
 
     override fun initData() {
         if (intent.hasExtra("sBean")) {
-            mInfoBean = intent.getSerializableExtra("sBean") as ProInfoBean.DataBean
-            mCommentAdapter.setNewData(mInfoBean?.comments)
-            mInfoBean?.comments?.forEach {
+            mCommons = intent.getSerializableExtra("sBean") as List<ProInfoBean.DataBean.CommentsBean>
+            mCommentAdapter.setNewData(mCommons)
+            mCommons?.forEach {
                 Log.e("xxxabc", "xxxabc:" + it.name)
-
             }
+        }
+        if(intent.hasExtra("xmid")){
+            xmid = intent.getStringExtra("xmid").toInt()
+        }
+        if(intent.hasExtra("cid")){
+            cid = intent.getStringExtra("cid")?.toInt()
+        }
+        if(intent.hasExtra("classId")){
+            classId = intent.getStringExtra("classId")?.toInt()
         }
     }
 
@@ -67,6 +77,6 @@ class CommonActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, Vi
             getString(R.string.input_content).showToast(mFrameApp)
             return
         }
-        mIPresenter.comment(mInfoBean?.id?.toInt()!!, v_comment_et.text.toString().trim())
+        mIPresenter.comment(xmid, cid, classId, v_comment_et.text.toString().trim())
     }
 }

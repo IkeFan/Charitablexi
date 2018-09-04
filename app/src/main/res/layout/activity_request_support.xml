@@ -64,12 +64,12 @@
                 android:layout_weight="1"
                 android:text="银行名称:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入银行名称."
+                android:hint="People's United Bank"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -86,12 +86,12 @@
                 android:layout_weight="1"
                 android:text="银行地址:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入银行地址."
+                android:hint="850 Main Street,Bridgeport,Ct 06604"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -108,13 +108,13 @@
                 android:layout_weight="1"
                 android:text="电话:"/>
 
-            <EditText
+            <TextView
                 android:inputType="phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入电话."
+                android:hint="+1 203 338 7001"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -131,12 +131,12 @@
                 android:layout_weight="1"
                 android:text="传真:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入传真."
+                android:hint=""
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -153,12 +153,12 @@
                 android:layout_weight="1"
                 android:text="账户名:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入账户名."
+                android:hint="Charity Town Inc"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -175,12 +175,12 @@
                 android:layout_weight="1"
                 android:text="账号:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
-                android:hint="请输入账号."
+                android:hint="6500754663"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -197,11 +197,12 @@
                 android:layout_weight="1"
                 android:text="Swift Code:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="@color/white"
+                android:text="PESBUS33"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -218,10 +219,11 @@
                 android:layout_weight="1"
                 android:text="Routing No:"/>
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:text="221172186"
                 android:background="@color/white"
                 android:textSize="13sp"/>
         </LinearLayout>

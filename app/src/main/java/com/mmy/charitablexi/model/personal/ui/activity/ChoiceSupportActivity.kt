@@ -81,7 +81,7 @@ class ChoiceSupportActivity : BaseActivity<ChoiceSupportPresenter>(), View.OnCli
     }
 
     override fun refreshList(data: MutableList<SupportListBean.DataBean>) {
-//        mCollectionAdapter.setNewData(data)
+//        mCollectionAdapter.setNewData(mData)
     }
 
     @Subscribe

@@ -3,13 +3,14 @@ package com.mmy.charitablexi.model.commun.ui.fragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.view.View
+import android.widget.TextView
 import com.mmy.charitablexi.R
 import com.mmy.charitablexi.model.commun.ui.window.CommunPopup
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.view.BaseFragment
+import com.mmy.frame.utils.UIUtil
 import kotlinx.android.synthetic.main.fragment_commun.*
 
 /**
@@ -27,8 +28,8 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
 
     }
 
-    val tabStr = arrayOf("公开课", "互动", "个人中心")
-    val tabFragment = arrayOf(OpenClassFragment(), InteractionFragment(), PersonalCenterFragment())
+    lateinit var tabStr:Array<String>
+    val tabFragment = arrayOf(OpenClassFragment(), InteractionFragment())
     lateinit var popup: CommunPopup
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -37,14 +38,19 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
     override fun getLayoutId(): Int = R.layout.fragment_commun
 
     override fun initView() {
-        tabStr.forEach {
-            v_tabs.addTab(v_tabs.newTab().setText(it))
+        tabStr = arrayOf(getString(R.string.open_class), getString(R.string.communicate))
+        tabStr?.forEach {
+            var tab =  v_tabs.newTab().setText(it)
+            var textView = tab.customView?.findViewById<TextView>(R.id.v_tv)
+            textView?.text = it
+            textView?.textSize = UIUtil.dp2px(getAc(),12).toFloat()
+            v_tabs.addTab(tab)
         }
         v_tabs.setupWithViewPager(v_pager)
-        v_pager.adapter = CommunAdapter(tabStr, tabFragment, childFragmentManager)
+        v_pager.adapter = CommunAdapter(tabStr!!, tabFragment, childFragmentManager)
         popup = CommunPopup(getAc())
-//        popup.showDel(false)
-//        popup.showEdit(false)
+        popup.showDel(false)
+        popup.showEdit(false)
     }
 
     override fun initData() {
@@ -57,34 +63,6 @@ class CommunFragment : BaseFragment<IPresenter<*>>(), View.OnClickListener {
             click.onMenuSelected(it)
             popup.dismiss()
         }
-        v_pager.addOnPageChangeListener( object :ViewPager.OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-                when(position){
-                    0->{
-                        popup.showDel(true)
-                        popup.showEdit(true)
-                    }
-                    1->{
-                        popup.showDel(false)
-                        popup.showEdit(false)
-                    }
-                    2->{
-                        popup.showDel(true)
-                        popup.showEdit(true)
-                    }
-                }
-            }
-
-        })
-
     }
 
     override fun onClick(v: View) {

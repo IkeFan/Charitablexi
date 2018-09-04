@@ -42,11 +42,10 @@ import java.util.*
  */
 class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickListener, ProjectInfoView {
     lateinit var mId: String
-    lateinit var currentType: Type
     val mVolunAdapter = ProVolunAdapter(R.layout.adapter_pro_volun)
     val mSponsorAdapter = SponsorAdapter(R.layout.adapter_sponsor)
     val mCommentAdapter = ProCommentAdapter(R.layout.adapter_comment)
-    val timeFormat = SimpleDateFormat("yyyy.MM.dd")
+    var timeFormat:SimpleDateFormat?=null
     var mCurPro: ProInfoBean.DataBean? = null
 
     override fun requestSuccess(data: Any) {
@@ -62,7 +61,7 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                 v_progress_text.text = "已有${data.data.nums}人次捐赠爱心，${data.data.yjlove}/${data.data.lovesum}"
                 v_volun_count.text = "${data.data.nowyg}/${data.data.volunteers}"
                 mVolunAdapter.setNewData(data.data.users)
-                v_time.text = timeFormat.format(Date(data.data.endtime.toLong() * 1000))
+                v_time.text = timeFormat?.format(Date(data.data.endtime.toLong() * 1000))
                 v_time_text.text = "剩余${Math.ceil((data.data.endtime.toLong() - System.currentTimeMillis() / 1000) / (3600 * 24f).toDouble()).toInt()}天"
 
                 data.data.zhfList.forEach {
@@ -95,12 +94,15 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                 v_comment_count.text = "${data.data.comments.size}条"
                 mCommentAdapter.setNewData(data.data.comments)
                 v_type.text = data.data.name
+                v_collection_cb.isChecked = data.data.is_collect==1
+                setUiStatus(getTypeByValue(data?.data?.status?.toInt()!!))
             }
             is IBean -> {
                 when (data.sub) {
                     "collection" -> {
-                        if (data.status == 1)
-                            v_collection.isChecked = !v_collection.isChecked
+                        if (data.status != 1) {
+                            v_collection_cb.isChecked = !v_collection_cb.isChecked
+                        }
                     }
                     "comment" -> {
                         if (data.status == 1) {
@@ -123,16 +125,17 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                 4 -> {
                     Type.Donation
                 }
-                else -> {
+                5 -> {
                     Type.Complete
                 }
+                else->Type.UnCheck
 
             }
         }
     }
 
     enum class Type(val value: Int) {
-        Raising(3), Donation(4), Complete(5)
+      UnCheck(0),UNPass(1), Raising(3), Donation(4), Complete(5)
     }
 
     override fun setupDagger(appComponent: AppComponent) {
@@ -143,21 +146,26 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
     }
 
     override fun initView() {
-//        when(mFrameApp?.userInfo?.type){
-//            0-> setToolbar(getResStr(R.string.project_project_info))
-//            1-> setToolbar(getString(R.string.project_project_info),true,getString(R.string.edit),getResColor(R.color.colorPrimaryDark),this)
-//            else -> setToolbar(getResStr(R.string.project_project_info))
-//        }
-        setToolbar(getString(R.string.project_project_info), true, getString(R.string.edit), getResColor(R.color.colorPrimaryDark), this)
         mId = intent.getStringExtra("id")
-        currentType = intent.getSerializableExtra("sBean") as Type
-        when (currentType) {
+        setUiStatus(intent.getSerializableExtra("sBean") as Type)
+    }
+
+    private fun setUiStatus(status:Type){
+        mToolBar?.removeAllViews()
+        when (status) {
             Type.Raising -> {
                 v_tag.visibility = View.GONE
                 v_view1.visibility = View.GONE
                 v_view2.visibility = View.GONE
 //                v_divide1.visibility = View.GONE
 //                v_hist_time.visibility = View.GONE
+                if(mCurPro?.is_yg == 1){
+                    v_request_volunteer.visibility = View.GONE
+                }
+                when(mFrameApp?.userInfo?.type){
+                    1-> setToolbar(getString(R.string.project_info),true,getString(R.string.edit),getResColor(R.color.colorPrimaryDark),this)
+                    else -> setToolbar(getResStr(R.string.project_info))
+                }
             }
             Type.Donation -> {
                 v_tag.visibility = View.GONE
@@ -167,6 +175,11 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                 v_give_love.visibility = View.GONE
                 v_notice.text = getString(R.string.executing)
                 v_notice.setTextColor(getResColor(R.color.colorPrimaryDark))
+                v_collection_pro.text = getString(R.string.collection_finish)
+                when(mFrameApp?.userInfo?.type == 1 || ( mCurPro !=null && mFrameApp?.userInfo?.id == mCurPro?.zxid?.toInt() )){
+                    true-> setToolbar(getString(R.string.project_info),true,getString(R.string.edit),getResColor(R.color.colorPrimaryDark),this)
+                    else -> setToolbar(getResStr(R.string.project_info))
+                }
             }
             Type.Complete -> {
                 v_tag.visibility = View.VISIBLE
@@ -176,8 +189,10 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                 v_be_sponsor.visibility = View.GONE
                 v_notice.text = getString(R.string.finish_already)
                 v_notice.setTextColor(getResColor(R.color.colorPrimaryDark))
+                v_collection_pro.text = getString(R.string.collection_finish)
 //                v_divide1.visibility = View.VISIBLE
 //                v_hist_time.visibility = View.VISIBLE
+                setToolbar(getString(R.string.project_info),true)
             }
         }
         v_love_sum.text = "${App.instance.userInfo.lovesum}爱心"
@@ -194,13 +209,14 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
 
     override fun initData() {
         mIPresenter.getProInfo(mId.toInt())
+        timeFormat = SimpleDateFormat(getString(R.string.date_format))
     }
 
     override fun initEvent() {
         super.initEvent()
         arrayOf(v_view2, v_request_support, v_request_volunteer,
                 v_give_love, v_volunteer_list, v_give, v_comment,
-                v_share, v_comment_bt, v_exe_detail, v_ad_info).setViewListener(this)
+                v_share, v_comment_bt, v_exe_detail, v_ad_info,v_collection).setViewListener(this)
         v_give_root.setOnClickListener { v_give_root.visibility = View.GONE }
         v_cb1.setOnCheckedChangeListener { compoundButton, b ->
             if (b) v_cb2.isChecked = false
@@ -208,10 +224,7 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
         v_cb2.setOnCheckedChangeListener { compoundButton, b ->
             if (b) v_cb1.isChecked = false
         }
-        v_collection.setOnCheckedChangeListener { compoundButton, b ->
-            //收藏
-            mIPresenter.collection(mId.toInt())
-        }
+
         v_comment_et.setOnFocusChangeListener { view, b ->
             if (!b) {
                 v_comment_view.visibility = View.GONE
@@ -247,7 +260,7 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
 
             R.id.v_request_volunteer -> {
                 //成为义工
-                openActivity(RequestVolunteerActivity::class.java, "id=${mId}")
+                openActivity(RequestVolunteerActivity::class.java, "xmid=${mId}")
             }
             R.id.v_give_love -> {
                 //送爱心
@@ -256,7 +269,7 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
             }
             R.id.v_volunteer_list -> {
                 //义工列表
-                openActivity(VolunteerListActivity::class.java, "id=${mId}")
+                openActivity(VolunteerListActivity::class.java, "xmid=${mId}")
             }
             R.id.v_give -> {
 //                val love: Int
@@ -276,7 +289,7 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
 //                v_comment_view.visibility = View.VISIBLE
 //                v_footer.visibility = View.GONE
 //                v_comment_et.requestFocus()
-                openActivity(CommonActivity::class.java, "", serializableBean = mCurPro)
+                openActivity(CommonActivity::class.java, "xmid="+mId, serializableBean = mCurPro?.comments)
             }
             R.id.v_share -> {
                 //分享
@@ -289,10 +302,15 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
                     "请输入评论内容".showToast(mFrameApp)
                     return
                 }
-                mIPresenter.comment(mId.toInt(), text)
+//                mIPresenter.comment(mId.toInt(), text)
             }
             R.id.v_ad_info -> {
                 openActivity(AdvDetailActivity::class.java, "", mCurPro?.adinfo)
+            }
+
+            R.id.v_collection->{
+                mIPresenter.collection(mId.toInt(), !v_collection_cb.isChecked)
+                v_collection_cb.isChecked = !v_collection_cb.isChecked
             }
         }
     }
@@ -306,5 +324,12 @@ class ProjectInfoActivity : BaseActivity<ProjectInfoPresenter>(), View.OnClickLi
     @Subscribe
     fun onLoveAdd(love: EvBusItemBean<Int>) {
         mIPresenter.getProInfo(mId.toInt())
+    }
+
+    @Subscribe
+    fun beVolunteer(result:EvBusItemBean<RequestVolunteerActivity.RqstVoltRst>){
+        if(result?.model.result){
+            v_request_volunteer.visibility = View.GONE
+        }
     }
 }

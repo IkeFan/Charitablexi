@@ -13,12 +13,14 @@
     <include layout="@layout/frame_toolbar"/>
 
     <ImageView
+        android:id="@+id/v_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:src="@mipmap/ic_launcher"/>
 
     <TextView
+        android:id="@+id/v_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -33,52 +35,74 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/v_attention"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="点击关注"
+            android:text="@string/click_attentions"
             android:textColor="@color/hint"/>
 
         <TextView
+            android:id="@+id/v_volunteer_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="关注数量 30"
+            android:text="@string/volunteer_count"
             android:textColor="@color/hint"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/v_send_msg"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@color/gray"
-            android:drawableLeft="@mipmap/ic_add_org"
+
+            android:gravity="center"
             android:drawablePadding="10dp"
             android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="2dp"
-            android:text="发起消息"
+            android:text="@string/send_massage"
             android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/v_request_volunteer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
             android:background="@color/gray"
-            android:drawableLeft="@mipmap/ic_add_org"
-            android:drawablePadding="10dp"
+            android:layout_marginLeft="20dp"
             android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:gravity="center"
             android:paddingTop="2dp"
-            android:text="申请义工"
+            android:text="@string/be_volunteer"
             android:textColor="@color/colorPrimaryDark"/>
+        <TextView
+            android:id="@+id/v_share"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/share"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/gray"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingTop="2dp"/>
     </LinearLayout>
 
     <View
@@ -92,7 +116,7 @@
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="公益招聘工作"
+        android:text="@string/volunteer_recruit"
         android:textColor="@color/colorPrimaryDark"/>
 
     <android.support.v7.widget.RecyclerView

@@ -14,7 +14,7 @@ import java.util.List;
 public class ProInfoBean extends IBean implements Serializable {
 
     /**
-     * data : {"id":"1","uid":"1","zxid":"3","zid":",1,2,3,","importid":"3","typeid":"2","name":"公益项目1",
+     * mData : {"id":"1","uid":"1","zxid":"3","zid":",1,2,3,","importid":"3","typeid":"2","name":"公益项目1",
      * "img":"/Uploads/2018-05-16/5afc291aa8dd9.jpg","addr":"西乡","title":"标题","lovesum":"2000","volunteers":"100",
      * "description":"描述此公益项目","xyid":"1","advsid":"2","status":"3","addtime":"1526475034","endtime":"1526474390",
      * "nums":"8","yjlove":"850","nowyg":"1","users":[{"id":"5","avatar":"/Uploads/2018-05-21/5b02632067c44.jpg"}],
@@ -93,7 +93,7 @@ public class ProInfoBean extends IBean implements Serializable {
         public String     xyid;
         public String     advsid;
         @SerializedName("status")
-        public String     statusX;
+        public String     status;
         public String     addtime;
         public String     endtime;
         public int        nums;
@@ -105,6 +105,8 @@ public class ProInfoBean extends IBean implements Serializable {
         public List<UsersBean>    users;
         public List<ZhfListBean>  zhfList;
         public List<CommentsBean> comments;
+        public int is_collect; //是否收藏
+        public int is_yg;
 
         public static class AdinfoBean implements Serializable {
             /**

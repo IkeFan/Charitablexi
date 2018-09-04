@@ -25,7 +25,6 @@ class LoginPresenter @Inject constructor():IPresenter<IView>() {
             call = mApi.login(phone,pwd)
             _success = {
                 if (it is LoginBean){
-                    it.info.showToast(mFrameApp)
                     if (it.status==1){
                         //缓存信息
                         SPUtils.getInstance().put("phone",phone)
@@ -36,12 +35,14 @@ class LoginPresenter @Inject constructor():IPresenter<IView>() {
                         App.instance.userInfo.token = it.data.token
                         App.instance.userInfo.lovesum = it.data.lovesum
                         App.instance.userInfo.email = it.data.email
-                        App.instance.userInfo.type = it.data.type
+                        App.instance.userInfo.type = 1
                         App.instance.userInfo.userLevel = it.data.level
                         //链接融云
                         App.instance.initRong()
                         mV.finishView()
                         mV.openActivity(MainActivity::class.java)
+                    }else{
+                        it.info.showToast(mFrameApp)
                     }
                 }
             }

@@ -152,7 +152,7 @@ class PhotoUploadActivity :BaseActivity<IPresenter<*>>(), BaseRecyclerViewAdapte
             return
         }
         val intent = Intent()
-        intent.putExtra("data", mData)
+        intent.putExtra("mData", mData)
         setResult(PIC_RESULT_CODE, intent)
         finish()
     }
@@ -184,7 +184,7 @@ class PhotoUploadActivity :BaseActivity<IPresenter<*>>(), BaseRecyclerViewAdapte
                 mData?.add(PhotoUploadAdapter.PhotoBean(path))
                 mAdapter?.setData(mData)
             }
-        }//                data = intent.getData();
+        }//                mData = intent.getMData();
         super.onActivityResult(requestCode, resultCode, intent)
     }
 

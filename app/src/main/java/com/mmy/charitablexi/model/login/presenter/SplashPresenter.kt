@@ -40,6 +40,8 @@ class SplashPresenter @Inject constructor() : IPresenter<IView>() {
                         App.instance.userInfo.token = it.data.token
                         App.instance.userInfo.lovesum = it.data.lovesum
                         App.instance.userInfo.email = it.data.email
+                        App.instance.userInfo.type = 1
+                        App.instance.userInfo.userLevel = it.data.level
                         App.instance.initRong()
                         mV.finishView()
                         mV.openActivity(MainActivity::class.java)
@@ -49,6 +51,9 @@ class SplashPresenter @Inject constructor() : IPresenter<IView>() {
                     }
                     mV.finishView()
                 }
+            }
+            _fail = {
+                it.message?.showToast(mFrameApp)
             }
         }
     }

@@ -47,6 +47,7 @@ public class PublishPicAdapter extends BaseRecyclerViewAdapter {
             return;
         }
         holder.setBitmap2IV(R.id.icon, BitmapFactory.decodeFile(mData.get(i).getPath()));
+
         deleteView.setVisibility(View.VISIBLE);
         deleteView.setOnClickListener(view -> {
             int position = holder.getAdapterPosition();
@@ -70,6 +71,10 @@ public class PublishPicAdapter extends BaseRecyclerViewAdapter {
     public void addData(ArrayList<PhotoBean> data) {
         mData.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public ArrayList<PhotoBean> getData(){
+        return mData;
     }
 
     @Override

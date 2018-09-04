@@ -9,7 +9,7 @@ package com.mmy.frame.data.bean;
 public class PersonalInfoBean extends IBean {
 
     /**
-     * data : {"id":"5","name":"张三","avatar":"/Uploads/2018-05-21/5b02632067c44.jpg","type":"0","lovesum":"2000",
+     * mData : {"id":"5","name":"张三","avatar":"/Uploads/2018-05-21/5b02632067c44.jpg","type":"0","lovesum":"2000",
      * "guanzhu":"2","gzz":"1","zhuzhi":"0","xiaoxi":"6","fqxm":"0","scxm":"0","yjxm":null,"ygxm":"1"}
      */
 

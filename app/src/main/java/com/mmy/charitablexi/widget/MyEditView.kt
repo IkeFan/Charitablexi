@@ -3,6 +3,7 @@ package com.mmy.charitablexi.widget
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,7 @@ class MyEditView(context: Context, attributes: AttributeSet) : FrameLayout(conte
     var nameStr = ""
     var hintStr = ""
     var enable = true
-
+    var input_type = 0
     var isShowDivide = true
     var type: Int = 1
     lateinit var rootView: ViewGroup
@@ -53,6 +54,7 @@ class MyEditView(context: Context, attributes: AttributeSet) : FrameLayout(conte
         enable = array.getBoolean(R.styleable.MyEditView_enable, true)
         type = array.getInt(R.styleable.MyEditView_type, 1)
         maxPic = (array.getString(R.styleable.MyEditView_maxPic) ?: "1").toInt()
+        input_type = (array.getInteger(R.styleable.MyEditView_input_type, InputType.TYPE_CLASS_TEXT))
         rootView = LayoutInflater.from(context).inflate(R.layout.my_edit_view, this) as ViewGroup
         setName(nameStr)
         setHint(hintStr)
@@ -104,6 +106,7 @@ class MyEditView(context: Context, attributes: AttributeSet) : FrameLayout(conte
                     val intent = Intent(context, EditActivity::class.java)
                     intent.putExtra("tag", tag)
                     intent.putExtra("title", nameStr)
+                    intent.putExtra("input_type", input_type)
                     intent.putExtra("hint", "请输入$nameStr")
                     context.startActivity(intent)
                 }

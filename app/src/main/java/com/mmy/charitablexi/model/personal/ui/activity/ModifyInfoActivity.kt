@@ -97,7 +97,7 @@ class ModifyInfoActivity : BaseActivity<ModifyInfoPresenter>(), View.OnClickList
         if (mNewName != null)
             builder.addFormDataPart("name", mNewName)
         if (mHeaderUrl != null) {
-            val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(mHeaderUrl))
+            val body = RequestBody.create(MediaType.parse("multipart/form-mData"), File(mHeaderUrl))
             builder.addFormDataPart("avatar", CommonUtil.getFileName(mHeaderUrl), body)
         }
         mIPresenter.submit(builder.build().parts())

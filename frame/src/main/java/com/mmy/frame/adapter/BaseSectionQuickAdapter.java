@@ -18,7 +18,7 @@ public abstract class BaseSectionQuickAdapter<T extends SectionEntity, K extends
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
-     * some initialization data.
+     * some initialization mData.
      *
      * @param sectionHeadResId The section head layout id for each item
      * @param layoutResId      The layout resource id of each item.

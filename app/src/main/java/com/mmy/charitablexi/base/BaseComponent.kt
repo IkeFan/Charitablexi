@@ -4,7 +4,11 @@ import com.mmy.charitablexi.model.commun.ui.activity.CardDetailActivity
 import com.mmy.charitablexi.model.commun.ui.activity.PublicCardActivity
 import com.mmy.charitablexi.model.commun.ui.activity.PublishArticleActivity
 import com.mmy.charitablexi.model.project.ui.activity.ProgressInfoActivity
+import com.mmy.charitablexi.model.project.ui.activity.PublishProgressActivity
 import com.mmy.charitablexi.model.project.ui.activity.SponsorActivity
+import com.mmy.charitablexi.model.volunteer.ui.activity.OrgInfoActivity
+import com.mmy.charitablexi.model.volunteer.ui.activity.PublishRecruitActivity
+import com.mmy.charitablexi.model.volunteer.ui.activity.RecruitInfoActivity
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.annotation.ActivityScope
 import dagger.Component
@@ -27,4 +31,8 @@ interface BaseComponent {
     fun inject( cardDetailActivity: CardDetailActivity)
     fun inject(progressInfoActivity: ProgressInfoActivity)
     fun inject(sponsorActivity: SponsorActivity)
+    fun inject(publishProgressActivity: PublishProgressActivity)
+    fun inject(orgInfoActivity: OrgInfoActivity)
+    fun inject(publishRecruitActivity: PublishRecruitActivity)
+    fun inject(recruitInfoActivity: RecruitInfoActivity)
 }

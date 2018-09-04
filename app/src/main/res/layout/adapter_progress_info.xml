@@ -37,7 +37,7 @@
                 android:id="@+id/v_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="衡阳乡村发展协会"
+                android:text="title"
                 android:textSize="16sp"/>
 
             <TextView
@@ -54,9 +54,32 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="50%"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"/>
+            <LinearLayout
+                android:id="@+id/v_edit_opt"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                >
+                <TextView
+                    android:id="@+id/v_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:padding="5dp"
+                    android:text="@string/edit"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/v_delete"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"
+                    android:text="@string/delete"/>
+            </LinearLayout>
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -70,6 +93,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="10dp"
-            android:text="进度描述"/>
+            android:text="description"/>
     </LinearLayout>
 </LinearLayout>

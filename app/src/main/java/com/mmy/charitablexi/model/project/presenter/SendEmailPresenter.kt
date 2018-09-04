@@ -3,6 +3,7 @@ package com.mmy.charitablexi.model.project.presenter
 import com.mmy.charitablexi.bean.VolunteerData
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
+import com.mmy.frame.data.bean.IBean
 import javax.inject.Inject
 
 /**
@@ -20,16 +21,36 @@ class SendEmailPresenter @Inject constructor() : IPresenter<IView>() {
         mM.request {
             call = mApi.sendCode(phone)
             _success = {
-                mV.requestSuccess(it)
+                if(it is IBean){
+                    it.sub = "sendCode"
+                    if(it.status == 1){
+                        mV.requestSuccess(it)
+                    }else{
+                        it.info.showToast(mFrameApp)
+                    }
+                }
+            }
+            _fail = {
+                it.message?.showToast(mFrameApp)
             }
         }
     }
 
     fun submit(volunteerData: VolunteerData,code:String) {
         mM.request {
-            call = mApi.requestVolunteer(volunteerData.v_email, volunteerData.sex, volunteerData.v_age, xmid = volunteerData.xmid,code = code)
+            call = mApi.requestVolunteer(mFrameApp.userInfo.id!!, volunteerData.v_email, volunteerData.sex, volunteerData.v_age, xmid = volunteerData.xmid, oid = volunteerData.oid, code = code)
             _success = {
-                mV.requestSuccess(it)
+                if(it is IBean){
+                    it.sub = "submit"
+                    if(it.status == 1){
+                        mV.requestSuccess(it)
+                    }else{
+                        it.info.showToast(mFrameApp)
+                    }
+                }
+            }
+            _fail = {
+                it.message?.showToast(mFrameApp)
             }
         }
     }

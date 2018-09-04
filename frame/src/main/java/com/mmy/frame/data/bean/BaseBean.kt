@@ -11,5 +11,5 @@ import com.google.gson.annotations.SerializedName
 data class BaseBean<D> constructor(
         @SerializedName("status") var status: Int = -1,
         @SerializedName("info") var msg: String,
-        @SerializedName("data") var data:D
+        @SerializedName("mData") var data:D
 )

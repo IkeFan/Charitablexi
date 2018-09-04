@@ -8,6 +8,7 @@ import com.mmy.charitablexi.model.project.module.SendEmailModule
 import com.mmy.charitablexi.model.project.presenter.SendEmailPresenter
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
+import com.mmy.frame.data.bean.IBean
 import kotlinx.android.synthetic.main.activity_send_email.*
 
 /**
@@ -23,9 +24,23 @@ import kotlinx.android.synthetic.main.activity_send_email.*
 class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListener {
     lateinit var title: String
     override fun requestSuccess(any: Any) {
+        when(any){
+            is IBean->{
+                when(any.sub){
+                    "sendCode"->{
+                        "Verify code sent".showToast(mFrameApp)
+                    }
+                    "submit" ->{
+                        mBus.post(CheckedCode(v_code.text.toString().trim()))
+                        finish()
+                    }
+                }
+            }
+        }
 
     }
 
+    class CheckedCode(var code:String)
     override fun setupDagger(appComponent: AppComponent) {
         DaggerSendEmailComponent.builder()
                 .appComponent(appComponent)
@@ -35,23 +50,19 @@ class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListen
 
     override fun initView() {
         title = intent.getStringExtra("title")
-        setToolbar("${title}验证")
+        setToolbar("${title}Verify")
         v_name.text = title
-        v_et.hint = "请输入${title}"
+        v_et.hint = "Pls input${title}"
     }
 
     override fun initData() {
-        arrayOf(v_send, v_submit).setViewListener(this)
         if(intent.hasExtra("mobile")){
-            v_et.setText(intent.getStringExtra("moblie"))
+            v_et.setText(intent.getStringExtra("mobile"))
         }
     }
 
     override fun initEvent() {
-        v_submit.setOnClickListener {
-            openActivity(ThankActivity::class.java)
-            finish()
-        }
+        arrayOf(v_send, v_submit).setViewListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -59,7 +70,7 @@ class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListen
             v_send -> {
                 val trim = v_et.text.toString().trim()
                 if (trim.isNullOrEmpty()){
-                    "请输入${title}".showToast(mFrameApp)
+                    "Pls input${title}".showToast(mFrameApp)
                     return
                 }
                 mIPresenter.sendCode(trim)
@@ -68,7 +79,7 @@ class SendEmailActivity : BaseActivity<SendEmailPresenter>(), View.OnClickListen
                 val da: VolunteerData = intent.getSerializableExtra("sBean") as VolunteerData
                 val code = v_code.text.toString().trim()
                 if (code.isNullOrEmpty()){
-                    "请输入验证码".showToast(mFrameApp)
+                    "Pls input verify code".showToast(mFrameApp)
                     return
                 }
                 mIPresenter.submit(da,code)

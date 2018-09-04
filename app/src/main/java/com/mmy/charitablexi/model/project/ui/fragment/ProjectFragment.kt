@@ -42,7 +42,7 @@ class ProjectFragment : BaseFragment<IPresenter<*>>() {
             tab.setCustomView(R.layout.view_textview)
             var textView = tab.customView?.findViewById<TextView>(R.id.v_tv)
             textView?.text = it
-//            textView?.textSize = UIUtil.dp2px(getAc(),6).toFloat()
+            textView?.textSize = UIUtil.dp2px(getAc(),12).toFloat()
             tl_tabs.addTab(tab)
         }
     }
@@ -69,7 +69,7 @@ class ProjectFragment : BaseFragment<IPresenter<*>>() {
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 var textView = tab?.customView?.findViewById<TextView>(R.id.v_tv)
-                textView?.textSize = UIUtil.dp2px(getAc(),6).toFloat()
+                textView?.textSize = UIUtil.dp2px(getAc(),11).toFloat()
                 textView?.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
             }
 
@@ -78,7 +78,7 @@ class ProjectFragment : BaseFragment<IPresenter<*>>() {
 
                 Log.d("lucas","position:${tab.position}")
                 var textView = tab.customView?.findViewById<TextView>(R.id.v_tv)
-                textView?.textSize = UIUtil.dp2px(getAc(),7).toFloat()
+                textView?.textSize = UIUtil.dp2px(getAc(),12).toFloat()
                 textView?.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
             }
 

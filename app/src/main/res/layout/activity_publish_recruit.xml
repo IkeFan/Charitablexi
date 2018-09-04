@@ -1,80 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray"
     tools:context=".model.volunteer.ui.activity.PublishRecruitActivity">
 
     <include layout="@layout/frame_toolbar"/>
-
-    <com.mmy.charitablexi.widget.MyEditView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:hint="填写"
-        app:name="招聘工作名称"/>
+        android:layout_above="@+id/v_publish"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:hint="*"
+                app:name="@string/recruit_title"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="上传"
-        app:name="图片"
-        app:type="upload"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="*"
+                app:name="@string/photos"
+                app:type="upload"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="招聘工作名称"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_protocol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:input_type="@integer/input_type_number"
+                app:hint="*"
+                app:name="@string/protocol"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="招聘人数"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_need_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:input_type="@integer/input_type_number"
+                app:hint="*"
+                app:name="@string/recruit_num"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="工作类型"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="工作地点"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="*"
+                app:name="@string/work_place"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="工作时间"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_marginBottom="2dp"
+                android:layout_gravity="center_vertical">
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/work_time"/>
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    >
+                    <EditText
+                        android:id="@+id/v_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="Start at date *"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        />
+                    <EditText
+                        android:id="@+id/v_end_time1"
+                        android:editable="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="End at date *"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="工作内容"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_work_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="*"
+                app:name="工作内容"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:name="联系方式"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:input_type="@integer/input_type_phone"
+                app:hint="*"
+                app:name="@string/phone"/>
 
-    <com.mmy.charitablexi.widget.MyEditView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:hint="填写"
-        app:isShowDivide="false"
-        app:name="Email"/>
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="*"
+                app:isShowDivide="false"
+                app:name="@string/email"/>
 
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hint="@string/always"
+                app:isShowDivide="false"
+                app:name="@string/end_time"/>
+
+            <com.mmy.charitablexi.widget.MyEditView
+                android:id="@+id/v_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isShowDivide="false"
+                app:name="@string/other"/>
+
+        </LinearLayout>
+    </ScrollView>
     <TextView
+        android:id="@+id/v_publish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -82,5 +151,6 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="发起"
+        android:layout_alignParentBottom="true"
         android:textColor="@android:color/holo_green_dark"/>
-</LinearLayout>
+</RelativeLayout>

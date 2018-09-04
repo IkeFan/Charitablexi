@@ -43,5 +43,16 @@ class OrganizationBean :IBean(){
         var shtime: Int = 0
         var ygs: Int = 0
         var zps: Int = 0
+        var zplist:List<Recruit>?=null
     }
+
+//    "id": "1",
+//    "oid": "2",
+//    "name": "远程教育走进农村课堂",
+//    "photo": "/Uploads/2018-05-18/5afe6cf633d85.jpg",
+//    "status": "1",
+//    "endtime": "1526633801"
+
+    class Recruit(var id:Int, var oid:Int, var name:String,
+                  var photo:String, var status:Int, var endTime: String)
 }

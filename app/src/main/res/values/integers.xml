@@ -3,5 +3,6 @@
 
     <integer name="heart_anim_bezier_factor">6</integer>
     <integer name="anim_duration">3000</integer>
-
+    <integer name="input_type_number">2</integer>
+    <integer name="input_type_phone">3</integer>
 </resources>

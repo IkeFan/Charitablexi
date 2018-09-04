@@ -33,4 +33,23 @@ class ProgressPresenter @Inject constructor(): IPresenter<IView>() {
             }
         }
     }
+
+    fun delProcess(id:Int){
+        mV.showLoading()
+        mM.request {
+            call = mApi.delProcess(mFrameApp.userInfo.id!!, id)
+            _success = {
+                mV.hidLoading()
+                if(it is IBean && it.status!=1){
+                    it.info.showToast(mFrameApp)
+                }else{
+                    mV.requestSuccess(it)
+                }
+            }
+            _fail = {
+                mV.hidLoading()
+                it.message?.showToast(mFrameApp)
+            }
+        }
+    }
 }

@@ -209,7 +209,7 @@ class EditProjectActivity : BaseActivity<EditProjectPresenter>(), View.OnClickLi
 
                 imgPaths?.split(",")?.forEach {
                     var file = File(it)
-                    val body = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                    val body = RequestBody.create(MediaType.parse("multipart/form-mData"), file)
                     builder.addFormDataPart("img", file.name, body)
                 }
 

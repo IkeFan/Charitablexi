@@ -105,7 +105,7 @@ class PublicCardActivity : BaseActivity<AddOrEdCardPresenter>(), BaseRecyclerVie
             v_edit_content.setText(mCard?.content)
             var photos: LinkedList<PhotoBean> = LinkedList()
             if (mCard?.imgs != null) {
-                mCard?.imgs?.split(",")?.forEach {
+                mCard?.imgs?.forEach {
                     photos.add(PhotoBean(it))
                 }
                 mAdapter.setData(photos)

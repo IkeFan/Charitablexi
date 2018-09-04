@@ -42,7 +42,7 @@ class SendLoveActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, 
     }
 
     override fun initView() {
-        setToolbar(getString(R.string.send_love))
+        setToolbar(getString(R.string.send_love),true)
     }
 
     override fun initData() {
@@ -59,11 +59,13 @@ class SendLoveActivity : BaseActivity<ProjectInfoPresenter>(), ProjectInfoView, 
 
         v_love_et.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
-
+               if(!s.isNullOrEmpty() && s.toString().toInt() != mFrameApp?.userInfo?.lovesum){
+                   v_check_all.isChecked = false
+               }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                v_check_all.isChecked = false
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

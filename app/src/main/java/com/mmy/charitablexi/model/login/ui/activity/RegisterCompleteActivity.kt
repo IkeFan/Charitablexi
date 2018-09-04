@@ -31,6 +31,7 @@ import java.io.File
 class RegisterCompleteActivity : BaseActivity<RegisterCompletePresenter>(), View.OnClickListener {
     var mPath: String? = null
     override fun requestSuccess(any: Any) {
+
     }
 
     lateinit var mPopup: PicSelectHelper
@@ -43,7 +44,7 @@ class RegisterCompleteActivity : BaseActivity<RegisterCompletePresenter>(), View
     }
 
     override fun initView() {
-        setToolbar("完成注册")
+        setToolbar("Finish register")
         mPopup = PicSelectHelper()
     }
 
@@ -75,7 +76,7 @@ class RegisterCompleteActivity : BaseActivity<RegisterCompletePresenter>(), View
                         .addFormDataPart("conpassword", intent.getStringExtra("pwd"))
                         .addFormDataPart("name", v_nickname.text.toString().trim())
 
-                val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(mPath))
+                val body = RequestBody.create(MediaType.parse("multipart/form-mData"), File(mPath))
                 builder.addFormDataPart("avatar", CommonUtil.getFileName(mPath), body)
                 mIPresenter.register(builder.build().parts())
             }

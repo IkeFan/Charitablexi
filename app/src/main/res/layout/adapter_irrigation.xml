@@ -1,51 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mmy.charitablexi.widget.SwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center_vertical"
               android:orientation="horizontal"
+              android:id="@+id/v_swipe"
               android:background="@color/white"
               android:layout_marginBottom="1dp"
               android:padding="10dp">
-
-    <TextView
-        android:id="@+id/v_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:drawableTop="@mipmap/ic_message"
-        android:gravity="center"
-        android:text="3"/>
-
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/v_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
+        android:orientation="horizontal"
+        >
         <TextView
-            android:id="@+id/v_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="由爱公益平台成立一周年，支持1700名贫困生实现求学梦"/>
-
-        <TextView
-            android:id="@+id/v_author"
+            android:id="@+id/v_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@mipmap/ic_personal"
-            android:drawablePadding="10dp"
-            android:text="发起人"/>
+            android:layout_margin="10dp"
+            android:drawableTop="@mipmap/ic_message"
+            android:gravity="center"
+            android:text="3"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/v_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="由爱公益平台成立一周年，支持1700名贫困生实现求学梦"/>
+
+            <TextView
+                android:id="@+id/v_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@mipmap/ic_personal"
+                android:drawablePadding="10dp"
+                android:text="发起人"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/v_img"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/v_img"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"/>
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/v_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/green"
+                android:text="@string/mow_cancel"
+                android:textColor="@color/white"/>
+            <Button
+                android:id="@+id/v_del"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:text="删除"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </FrameLayout>
+</com.mmy.charitablexi.widget.SwipeItemLayout>

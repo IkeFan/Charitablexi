@@ -12,5 +12,5 @@ import java.io.Serializable
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerData (val v_email: String?,val  sex: Int,val  v_age: Int,val  xmid: Int):Serializable {
+class VolunteerData (val v_email: String?,val  sex: Int,val  v_age: Int,var  xmid: Int?=null, var oid:Int?=null):Serializable {
 }

@@ -29,9 +29,11 @@ class ClassBean :IBean(){
         var id:Int? = 0
         var uid:Int? =0
         var title:String? = null
-        var imgs:String?=null
+        var imgs:List<String>?=null
         var content:String? = null
+        var type:Int?=null
         var is_free:Int?=null
+        var speaker:String?=null
         var addtime:String?=null
     }
 }

@@ -1,5 +1,7 @@
 package com.mmy.frame.data.bean
 
+import java.io.Serializable
+
 /**
  * @file       ProjectProgressBean.ktt
  * @brief      描述
@@ -22,7 +24,16 @@ package com.mmy.frame.data.bean
 //}
 
 class ProjectProgressBean :IBean(){
-    var data:List<ProjectPrgress>? = null
-    class ProjectPrgress(var name:String, var avatar:String, var id:Int,
-                         var uid:Int, var title:String, var uptime:Long, var photos:List<String>)
+    var data:List<ProjectProgress>? = null
+    class ProjectProgress : Serializable{
+        var name:String?= null
+        var avatar:String? = null
+        var id:Int?=null
+        var uid:Int? = null
+        var title:String? = null
+        var uptime:Long?= null
+        var photos:List<String>? = null
+        var desc:String?= null
+    }
+
 }

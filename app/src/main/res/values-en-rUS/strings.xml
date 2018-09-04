@@ -4,7 +4,7 @@
     <string name="title_volunteer">Volunteer</string>
     <string name="title_commun">Communicate</string>
     <string name="title_personal">Mine</string>
-    <string name="project_project_info">Project Details</string>
+    <string name="project_info">Project Details</string>
     <string name="donate_count">Donate count</string>
     <string name="love_count">Love count</string>
     <string name="love_progress">Love progress</string>

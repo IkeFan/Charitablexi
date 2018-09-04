@@ -26,8 +26,9 @@ class AddOrEdClassPresenter @Inject constructor() : IPresenter<IView>() {
                 if (it is IBean) {
                     if (it.status != 1) {
                         it.info.showToast(mFrameApp)
+                    }else{
+                        mV.requestSuccess(it)
                     }
-                    mV.requestSuccess(it)
                 }
                 mV.hidLoading()
             }

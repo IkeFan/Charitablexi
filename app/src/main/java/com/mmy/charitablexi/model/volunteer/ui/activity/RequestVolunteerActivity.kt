@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.TextView
 import com.mmy.charitablexi.App
 import com.mmy.charitablexi.R
+import com.mmy.charitablexi.bean.EvBusItemBean
 import com.mmy.charitablexi.bean.VolunteerData
 import com.mmy.charitablexi.model.project.ui.activity.SendEmailActivity
 import com.mmy.charitablexi.model.project.ui.activity.ThankActivity
@@ -14,6 +15,7 @@ import com.mmy.charitablexi.model.volunteer.presenter.RequestVolunteerPresenter
 import com.mmy.charitablexi.widget.MyEditView
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
+import com.squareup.otto.Subscribe
 import kotlinx.android.synthetic.main.activity_request_volunteer.*
 
 /**
@@ -28,10 +30,14 @@ import kotlinx.android.synthetic.main.activity_request_volunteer.*
  */
 class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View.OnClickListener {
     var xmId:Int? = null
+    var oid:Int? = null
     override fun requestSuccess(data: Any) {
         openActivity(ThankActivity::class.java)
+        mBus.post(EvBusItemBean(-1, RqstVoltRst(true)))
         finish()
     }
+
+    class RqstVoltRst(var result: Boolean)
 
     override fun setupDagger(appComponent: AppComponent) {
         DaggerRequestVolunteerComponent.builder()
@@ -41,7 +47,7 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
     }
 
     override fun initView() {
-        setToolbar("申请义工")
+        setToolbar("Apply Volunteer")
         if(!App.instance.userInfo.name.isNullOrEmpty()){
             v_name.setHintName(App.instance.userInfo.name!!)
         }
@@ -57,7 +63,11 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
     }
 
     override fun initData() {
-        xmId = intent.getStringExtra("id").toInt()
+        if(intent!=null && intent.hasExtra("xmid"))
+            xmId = intent.getStringExtra("xmid").toInt()
+        if(intent!=null && intent.hasExtra("oid")){
+            oid = intent.getStringExtra("oid").toInt()
+        }
     }
 
     var sex = -1
@@ -65,19 +75,19 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
         arrayOf(v_submit).setViewListener(this)
         v_sex.setOnClickListener {
             val popup = SelectPopup(this)
-            popup.setNewData(arrayOf("男", "女").toList())
-            popup.setTitle("选择性别")
+            popup.setNewData(arrayOf("Man", "Woman").toList())
+            popup.setTitle("Chose sex*")
             popup.showCardFloatAnim(it)
             popup.itemOnClick = {
                 if (it is TextView)
                     when (it.text) {
-                        "男" -> {
+                        "Man" -> {
                             sex = 1
-                            v_sex.setHintName("男")
+                            v_sex.setHintName("Man")
                         }
-                        "女" -> {
+                        "Woman" -> {
                             sex = 2
-                            v_sex.setHintName("女")
+                            v_sex.setHintName("Woman")
                         }
                     }
                 popup.dismiss()
@@ -101,30 +111,34 @@ class RequestVolunteerActivity : BaseActivity<RequestVolunteerPresenter>(), View
                     list.add(v_phone)
                 list.forEach {
                     if (it.hintStr.isEmpty()) {
-                        "请输入${it.nameStr}".showToast(mFrameApp)
+                        "Please Input${it.nameStr}".showToast(mFrameApp)
                         return@onClick
                     }
                 }
                 if (sex == -1) {
-                    "请选择性别".showToast(mFrameApp)
+                    "Please chose sex".showToast(mFrameApp)
                     return
                 }
                 if (!App.instance.userInfo.email.isNullOrEmpty())
                     email = v_email.hintStr
                 if (!App.instance.userInfo.mobile.isNullOrEmpty())
                     phone = v_phone.hintStr
-                val data = VolunteerData(email ?: (phone ?: null), sex, v_age.hintStr.toInt(), intent.getStringExtra("id").toInt())
+                val data = VolunteerData(email ?: (phone ?: null), sex, v_age.hintStr.toInt(), xmId, oid)
                 if (!App.instance.userInfo.email.isNullOrEmpty())
-                    openActivity(SendEmailActivity::class.java, "title=邮箱,mobile="+App.instance.userInfo.email, data)
+                    openActivity(SendEmailActivity::class.java, "title=Email,mobile="+App.instance.userInfo.email, data)
                 else if (!App.instance.userInfo.mobile.isNullOrEmpty())
-                    openActivity(SendEmailActivity::class.java, "title=手机, mobile="+App.instance.userInfo.mobile, data)
-                else
-                    mIPresenter.submit(mFrameApp?.userInfo?.id.toString(), App.instance.userInfo.email, App.instance.userInfo.mobile
-                    ,v_age.hintStr, sex)
+                    openActivity(SendEmailActivity::class.java, "title=Mobile, mobile="+App.instance.userInfo.mobile, data)
             }
             else -> {
             }
         }
     }
 
+    override fun registerBus(): Boolean = true
+
+    @Subscribe
+    fun onCodeCheck(code: SendEmailActivity.CheckedCode){
+        mIPresenter.submit(xmId,oid, App.instance.userInfo.email, App.instance.userInfo.mobile
+                ,v_age.hintStr, sex, code.code)
+    }
 }

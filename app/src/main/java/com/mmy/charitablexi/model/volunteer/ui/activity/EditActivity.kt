@@ -1,5 +1,6 @@
 package com.mmy.charitablexi.model.volunteer.ui.activity
 
+import android.text.InputType
 import android.text.TextUtils
 import android.view.View
 import com.mmy.charitablexi.R
@@ -33,6 +34,10 @@ class EditActivity : BaseActivity<IPresenter<*>>() {
             currentType = s.toInt()
         val title = intent.getStringExtra("title")
         val hint = intent.getStringExtra("hint")
+        val input_type = intent.getIntExtra("input_type", InputType.TYPE_CLASS_TEXT)
+        v_text.inputType = input_type
+        v_text2.inputType = input_type
+
         when (currentType) {
             edit -> {
                 v_text.hint = hint

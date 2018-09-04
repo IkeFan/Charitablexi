@@ -28,6 +28,6 @@ class PersonalCenterBean {
         var id: Int? = null
         var title:String? = null
         var content: String? = null
-        var imgs: String? = null
+        var imgs:List<String>? = null
     }
 }

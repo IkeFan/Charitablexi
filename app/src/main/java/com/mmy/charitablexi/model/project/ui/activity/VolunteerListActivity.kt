@@ -16,6 +16,7 @@ import com.mmy.charitablexi.model.volunteer.presenter.VolunteerListPresenter
 import com.mmy.charitablexi.widget.SwipeItemLayout
 import com.mmy.frame.AppComponent
 import com.mmy.frame.base.view.BaseActivity
+import com.mmy.frame.data.bean.IBean
 import com.mmy.frame.data.bean.VolunteersBean
 import io.rong.imkit.RongIM
 import io.rong.imkit.fragment.ConversationFragment
@@ -35,11 +36,21 @@ import kotlinx.android.synthetic.main.activity_volunteer_list.*
  *             version: zsr, 2017-09-23
  */
 class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnClickListener {
+    var xmid: String? = null
+    var oid: String? = null
+    var mDeletePosition: Int = -1
+
     override fun requestSuccess(data: Any) {
-        if (data is VolunteersBean) {
-            mAdapter.userType = mFrameApp?.userInfo?.userLevel!!
-            mAdapter.setNewData(data.data)
+        when (data) {
+            is VolunteersBean -> {
+                mAdapter.setNewData(data.data)
+            }
+            is IBean -> {
+                mAdapter.remove(mDeletePosition)
+                mDeletePosition = -1
+            }
         }
+
     }
 
     val mAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
@@ -57,24 +68,34 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
     override fun initView() {
         var rigthTitle = ""
         //判断用户身份
-        when (App.instance.userInfo.userLevel) {
-            0 -> {
-                v_select_all.visibility = View.GONE
-            }
-            1, 2 -> {
-                v_select_all.visibility = View.VISIBLE
-                rigthTitle = "发送消息"
-            }
+        if(mFrameApp?.userInfo?.type == 1 || (oid!=null && mFrameApp?.userInfo?.id == oid?.toInt())){
+            setToolbar("Volunteers", true, getString(R.string.send_massage), R.color.colorPrimary, this)
+            v_select_all.visibility = View.VISIBLE
+        }else{
+            v_select_all.visibility = View.GONE
+            setToolbar("Volunteers", true)
         }
-        setToolbar("义工列表", true, rigthTitle, R.color.colorPrimary, this)
+
         v_list.layoutManager = LinearLayoutManager(this)
         v_list.adapter = mAdapter
-        mIPresenter.getVorlist(App.instance.userInfo.id!!)
+
+        if (intent.hasExtra("xmid")) {
+            xmid = intent.getStringExtra("xmid")
+            mIPresenter.getVorlist(xmid = xmid!!.toInt())
+        } else {
+            oid = intent.getStringExtra("oid")
+            mIPresenter.getVorlist(oid = oid!!.toInt())
+        }
     }
 
     override fun initData() {
         //加入聊天室，使用项目的id作为聊天室的id
-        val roomID = intent.getStringExtra("id")
+        val roomID = if (intent.hasExtra("xmid")) {
+            intent.getStringExtra("xmid")
+        } else {
+            //加入聊天室，使用机构的id作为聊天室的id
+            intent.getStringExtra("oid")
+        }
         RongIM.connect(App.instance.userInfo.rongToken, object : RongIMClient.ConnectCallback() {
             override fun onSuccess(p0: String?) {
                 /* 新建 ConversationFragment 实例，通过 setUri() 设置相关属性*/
@@ -100,14 +121,16 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
     }
 
     override fun initEvent() {
-        v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(this))
-        mAdapter.delete = { view, position ->
-            //更新ui
-            v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-            mAdapter.remove(position)
+        if(mFrameApp?.userInfo?.type == 1 || (oid!=null && mFrameApp?.userInfo?.id == oid?.toInt())){
+            v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(this))
+            mAdapter.delete = { view, position ->
+                v_select_all_cb.isChecked = !v_select_all_cb.isChecked
+                mDeletePosition = position
+                mIPresenter.delVolunteer(mAdapter.getItem(position)?.id!!)
+            }
         }
-        arrayOf(v_select_all, v_open).setViewListener(this)
 
+        arrayOf(v_select_all, v_open).setViewListener(this)
     }
 
     override fun getLayoutID(): Any = R.layout.activity_volunteer_list
@@ -115,11 +138,20 @@ class VolunteerListActivity : BaseActivity<VolunteerListPresenter>(), View.OnCli
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.v_select_all -> {
-                mAdapter.selectAll()
+                v_select_all_cb.isChecked = !v_select_all_cb.isChecked
+                mAdapter.setSelectAll(v_select_all_cb.isChecked)
             }
             R.id.toolbar_right -> {
                 //群发消息
-                openActivity(MassMsgActivity::class.java)
+                var idList =  ArrayList<Int>()
+                if(mAdapter.mChoseCache.size == 0){
+                    "Chose a member at least ".showToast(mFrameApp)
+                    return
+                }
+                mAdapter.mChoseCache.forEach {
+                    idList.add(it.id!!)
+                }
+                openActivity(MassMsgActivity::class.java, "title = " + getString(R.string.organization),idList)
             }
             R.id.v_open -> {
                 //展开聊天

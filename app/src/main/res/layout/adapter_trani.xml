@@ -13,16 +13,42 @@
         android:layout_height="100dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"/>
-
-    <CheckBox
-        android:id="@+id/class_cb"
-        android:clickable="false"
-        android:visibility="gone"
-        android:button="@drawable/check_vol"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+    <LinearLayout
+        android:id="@+id/class_edit_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+
+        <TextView
+            android:id="@+id/class_undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="@color/green"
+            android:text="@string/mow_cancel"/>
+        <TextView
+            android:id="@+id/class_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:padding="8dp"
+            android:background="@color/mow_text_yellow_color"
+            />
+
+        <TextView
+            android:id="@+id/class_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:padding="8dp"
+            android:background="@color/red"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/class_name"

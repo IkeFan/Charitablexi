@@ -3,6 +3,7 @@ package com.mmy.charitablexi.model.commun.presenter
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.base.mvp.IView
 import com.mmy.frame.data.bean.ClassBean
+import com.mmy.frame.data.bean.IBean
 import javax.inject.Inject
 
 /**
@@ -21,11 +22,37 @@ class PublicClassPresenter @Inject constructor ():IPresenter<IView>(){
             call =  mApi.getClassList(type)
             _success ={
                 if(it is ClassBean){
-                    mV.requestSuccess(it)
+                    if(it.status ==1)
+                        mV.requestSuccess(it)
+                    else
+                        it.info.showToast(mFrameApp)
                 }
 
             }
         }
+    }
 
+    fun delClass(id:Int){
+        mV.showLoading()
+        mM.request {
+            call = mApi.delClass(mFrameApp.userInfo.id!!, id)
+            _success = {
+                mV.hidLoading()
+                if(it is IBean){
+                    if(it.status == 1){
+                        it.sub = "del"
+                        mV.requestSuccess(it)
+                    }else{
+                        it.info.showToast(mFrameApp)
+                    }
+                }
+
+
+            }
+            _fail = {
+                mV.hidLoading()
+                it.message?.showToast(mFrameApp)
+            }
+        }
     }
 }

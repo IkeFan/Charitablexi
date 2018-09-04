@@ -1,5 +1,7 @@
 package com.mmy.frame.data.bean
 
+import java.io.Serializable
+
 /**
  * @file       InteractBean.kt
  * @brief      描述
@@ -21,12 +23,12 @@ package com.mmy.frame.data.bean
 }*/
 class InteractBean: IBean() {
     var data: List<Interact>?=null
-    class Interact{
+    class Interact :Serializable{
         var name: String? = null
         var avatar: String?=null
         var id: Int?=0
         var title: String?=null
-        var imgs: String?=null
+        var imgs: List<String>?=null
         var type:Int?=null
         var cardsCounts: Int?=0
     }

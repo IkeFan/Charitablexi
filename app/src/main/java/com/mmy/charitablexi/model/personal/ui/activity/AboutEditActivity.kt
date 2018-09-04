@@ -89,7 +89,7 @@ class AboutEditActivity : BaseActivity<AboutEditPresenter>(){
             "请输入简介".showToast(mFrameApp)
             return
         }
-        val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(imgUrl))
+        val body = RequestBody.create(MediaType.parse("multipart/form-mData"), File(imgUrl))
         val builder = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("uid", App.instance.userInfo.id.toString())

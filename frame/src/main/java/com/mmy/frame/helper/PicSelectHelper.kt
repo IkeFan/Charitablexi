@@ -106,7 +106,7 @@ class PicSelectHelper {
                 result(mData)
                 mData.clear()
             }
-        }//                data = intent.getData();
+        }//                mData = intent.getMData();
     }
 
     /**

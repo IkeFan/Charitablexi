@@ -20,8 +20,8 @@ import java.util.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class ProgressInfoAdapter(val id:Int):BaseQuickAdapter<ProjectProgressBean.ProjectPrgress,BaseViewHolder>(id) {
-    override fun convert(helper: BaseViewHolder?, item: ProjectProgressBean.ProjectPrgress?) {
+class ProgressInfoAdapter(val id:Int):BaseQuickAdapter<ProjectProgressBean.ProjectProgress,BaseViewHolder>(id) {
+    override fun convert(helper: BaseViewHolder?, item: ProjectProgressBean.ProjectProgress?) {
         val recyclerView = helper?.getView<RecyclerView>(R.id.rv_list)
         val adapter = ProgressInfoImgAdapter(R.layout.adapter_progress_info_img)
         recyclerView?.adapter = adapter
@@ -36,5 +36,8 @@ class ProgressInfoAdapter(val id:Int):BaseQuickAdapter<ProjectProgressBean.Proje
         if(item.photos!=null){
             adapter.setNewData(item.photos)
         }
+
+        helper?.addOnClickListener(R.id.v_edit)
+        helper?.addOnClickListener(R.id.v_delete)
     }
 }

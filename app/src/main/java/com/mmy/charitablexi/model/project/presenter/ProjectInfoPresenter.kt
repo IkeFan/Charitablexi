@@ -1,8 +1,6 @@
 package com.mmy.charitablexi.model.project.presenter
 
 import com.blankj.utilcode.util.ToastUtils
-import com.mmy.charitablexi.App
-import com.mmy.charitablexi.model.project.ui.activity.ProjectInfoActivity
 import com.mmy.charitablexi.model.project.view.ProjectInfoView
 import com.mmy.frame.base.mvp.IPresenter
 import com.mmy.frame.data.bean.IBean
@@ -28,10 +26,8 @@ class ProjectInfoPresenter @Inject constructor() : IPresenter<ProjectInfoView>()
             call = mApi.sendLove(mApp.userInfo.id!!, pid, count)
             _success = {
                 if (it is IBean) {
-                    if (it.status == 1) {
-                      mV.requestSuccess(it)
-                    }
-                    else {
+                    mV.requestSuccess(it)
+                    if (it.status != 1) {
                         it.info.showToast(mFrameApp)
                     }
                 }
@@ -53,15 +49,26 @@ class ProjectInfoPresenter @Inject constructor() : IPresenter<ProjectInfoView>()
     }
 
     //收藏
-    fun collection(id: Int) {
+    fun collection(id: Int, collect: Boolean) {
         mV.showLoading()
         mM.request {
-            call = mApi.collectPro(id, ProjectInfoActivity.Type.Raising.value)
+            var statue = 0
+            if(collect){
+                statue =1
+            }
+            call = mApi.collectPro(mApp.userInfo.id!!,id, statue)
             _success = {
                 mV.hidLoading()
-                if (it is IBean)
+                if (it is IBean){
                     it.sub = "collection"
-                mV.requestSuccess(it)
+                    mV.requestSuccess(it)
+                    if(it.status ==1){
+
+                    }else{
+                        it.info.showToast(mFrameApp)
+                    }
+                }
+
             }
             _fail={
                 ToastUtils.showShort(it.message)
@@ -71,10 +78,11 @@ class ProjectInfoPresenter @Inject constructor() : IPresenter<ProjectInfoView>()
     }
 
     //评论
-    fun comment(id: Int, text: String) {
+    fun comment(xmid:Int? = null, cid: Int? = null,classId: Int? = null, text: String) {
         mV.showLoading()
         mM.request {
-            call = mApi.comment(id, text, App.instance.userInfo.id!!)
+            call = mApi.comment(mFrameApp.userInfo.id!!,xmid, cid,
+                    classId, text)
             _success = {
                 mV.hidLoading()
                 (it as IBean).sub = "comment"

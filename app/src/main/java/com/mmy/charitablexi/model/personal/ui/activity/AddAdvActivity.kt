@@ -87,7 +87,7 @@ class AddAdvActivity : BaseActivity<AddAdvPresenter>(), BaseRecyclerViewAdapter.
                     .addFormDataPart("content", content)
             var index = 0
             pic.forEach {
-                val body = RequestBody.create(MediaType.parse("multipart/form-data"), File(it.path))
+                val body = RequestBody.create(MediaType.parse("multipart/form-mData"), File(it.path))
                 builder.addFormDataPart("imgs[${index++}]", CommonUtil.getFileName(it.path), body)
                 Log.e("xxxbc", "xxxbc:"+CommonUtil.getFileName(it.path))
             }

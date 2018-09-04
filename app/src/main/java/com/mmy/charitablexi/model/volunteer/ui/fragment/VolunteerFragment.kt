@@ -1,7 +1,6 @@
 package com.mmy.charitablexi.model.volunteer.ui.fragment
 
 import android.net.Uri
-import android.support.design.widget.TabLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -17,21 +16,19 @@ import com.mmy.charitablexi.model.volunteer.component.DaggerVolunteerListCompone
 import com.mmy.charitablexi.model.volunteer.module.VolunteerListModule
 import com.mmy.charitablexi.model.volunteer.presenter.VolunteerListPresenter
 import com.mmy.charitablexi.model.volunteer.ui.activity.OrgInfoActivity
-import com.mmy.charitablexi.model.volunteer.ui.activity.RequestMechActivity
 import com.mmy.charitablexi.model.volunteer.ui.adapter.VolunteerAdapter
 import com.mmy.charitablexi.model.volunteer.ui.window.VolunteerMenuPopup
 import com.mmy.charitablexi.widget.SwipeItemLayout
 import com.mmy.frame.AppComponent
-import com.mmy.frame.adapter.BaseQuickAdapter
-import com.mmy.frame.adapter.BaseViewHolder
 import com.mmy.frame.base.view.BaseFragment
+import com.mmy.frame.data.bean.IBean
 import com.mmy.frame.data.bean.OrganizationBean
-import com.mmy.frame.data.bean.VolunteersBean
 import io.rong.imkit.RongIM
 import io.rong.imkit.fragment.ConversationFragment
 import io.rong.imlib.RongIMClient
 import io.rong.imlib.model.Conversation
 import kotlinx.android.synthetic.main.fragment_volunteer.*
+import java.util.*
 
 /**
  * @file       ProjectFragment.kt
@@ -43,17 +40,22 @@ import kotlinx.android.synthetic.main.fragment_volunteer.*
  * @par History:
  *             version: zsr, 2017-09-23
  */
-class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickListener, BaseQuickAdapter.OnItemClickListener {
+class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickListener {
+    var mDelOrgProsion = -1
+
     override fun requestSuccess(data: Any) {
-        mPersonalAdapter.userType = mFramApp?.userInfo?.userLevel!!
-        if (data is OrganizationBean) {
-            mAdapter.setNewData(data.data)
-        } else if (data is VolunteersBean) {
-            mPersonalAdapter.setNewData(data.data)
+        when(data){
+            is OrganizationBean-> mAdapter.setNewData(data.data)
+            is IBean ->{
+                if(mDelOrgProsion!=-1){
+                    mAdapter.remove(mDelOrgProsion)
+                    mDelOrgProsion = -1
+                }
+            }
         }
     }
 
-    val mPersonalAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
+//    val mPersonalAdapter = VolunteerListAdapter(R.layout.adapter_volunteer_list)
     val mAdapter = VolunteerAdapter(R.layout.adapter_volunteer2)
     lateinit var mWindow: VolunteerMenuPopup
     var isOpenConver = false
@@ -72,11 +74,12 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
         mWindow = VolunteerMenuPopup(getAc())
         v_list.layoutManager = LinearLayoutManager(getAc())
         v_list.adapter = mAdapter
-        v_tabs.addTab(v_tabs.newTab().setText("义工组织"))
-        v_tabs.addTab(v_tabs.newTab().setText("个人义工列表"))
-        when (mFramApp.userInfo.userLevel) {
-            0 -> v_select_all.visibility = View.GONE
-            1 -> v_select_all.visibility = View.VISIBLE
+        when (mFramApp.userInfo.type) {
+            0 -> {
+            }
+            1 ->{
+                v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(getAc()))
+            }
         }
     }
 
@@ -105,45 +108,24 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
             override fun onTokenIncorrect() {
             }
         })
-        mAdapter.isSelectALL = v_select_all_cb.isChecked
-        mPersonalAdapter.isSelectALL = v_select_all_cb.isChecked
+
         mIPresenter.getOrgList(App.instance.userInfo.id!!)
-        mIPresenter.getVorlist(App.instance.userInfo.id!!)
+//        mIPresenter.getVorlist(App.instance.userInfo.id!!)
     }
 
     override fun initEvent() {
         super.initEvent()
-        arrayOf(v_add, v_request, v_select_all, v_open, v_send_msg).setViewListener(this)
-        mPersonalAdapter.onItemClickListener = this
-        mAdapter.onItemClickListener = this
-        v_list.addOnItemTouchListener(SwipeItemLayout.OnSwipeItemTouchListener(getAc()))
-        mPersonalAdapter.delete = { view, position ->
-            //更新ui
-            v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-            mPersonalAdapter.remove(position)
+        arrayOf(v_open).setViewListener(this)
+
+        mAdapter.selected = {_,position->
+            openActivity(OrgInfoActivity::class.java,"id="+mAdapter.getItem(position)?.id)
         }
-        v_tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+        mAdapter.delete = {_,position->
+            mDelOrgProsion = position
+            mIPresenter.delOrg(mAdapter.getItem(position)?.id!!)
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
+        }
 
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab?.position == 0) {
-                    v_list.adapter = mAdapter
-                    v_add.visibility = View.VISIBLE
-                    v_send_msg.visibility = View.GONE
-                    v_view_search.visibility = View.VISIBLE
-                } else {
-                    v_add.visibility = View.GONE
-                    v_send_msg.visibility = View.VISIBLE
-                    v_view_search.visibility = View.GONE
-                    v_list.adapter = mPersonalAdapter
-                }
-                v_list.adapter.notifyDataSetChanged()
-            }
-        })
         mWindow.lisenter = {
             when (it.id) {
                 R.id.v_menu1 -> {
@@ -158,20 +140,36 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
             R.id.v_add -> {
                 mWindow.showAsDropDown(p0)
             }
-            R.id.v_request -> {
-                openActivity(RequestMechActivity::class.java)
-            }
-            R.id.v_select_all -> {
-                mPersonalAdapter.selectAll()
-                mAdapter.selectAll()
-                v_select_all_cb.isChecked = !v_select_all_cb.isChecked
-            }
+
             R.id.v_open -> {
                 //展开聊天
                 openConversation()
             }
             R.id.v_send_msg -> {
-                openActivity(MassMsgActivity::class.java)
+                var idList =  ArrayList<Int>()
+                when(v_list.adapter){
+                    is VolunteerListAdapter->{
+
+//                        mPersonalAdapter.mChoseCache.forEach {
+//                            idList.add(it.id!!)
+//                        }
+                        if(idList.size==0){
+                            "Chose a member at least ".showToast(mFramApp)
+                            return
+                        }
+                        openActivity(MassMsgActivity::class.java,"title = "+getString(R.string.platform_manager), idList)
+                    }
+                    is VolunteerAdapter->{
+                        mAdapter.mChoseCache.forEach {
+                            idList.add(it.id!!)
+                        }
+                        if(idList.size==0){
+                            "Chose a member at least ".showToast(mFramApp)
+                            return
+                        }
+                        openActivity(MassMsgActivity::class.java,"title = "+getString(R.string.platform_manager), idList)
+                    }
+                }
             }
         }
     }
@@ -198,10 +196,5 @@ class VolunteerFragment : BaseFragment<VolunteerListPresenter>(), View.OnClickLi
         anim.duration = 200 // 设置动画时间
         anim.interpolator = AccelerateInterpolator() // 设置插入器
         v_open.startAnimation(anim)
-    }
-
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, baseViewHolder: BaseViewHolder?, position: Int) {
-        if (adapter == mAdapter)
-            openActivity(OrgInfoActivity::class.java)
     }
 }

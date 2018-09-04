@@ -9,7 +9,7 @@ package com.mmy.frame.data.bean;
 public class RegisterBean extends IBean {
 
     /**
-     * data : {"id":"2","name":"11","type":"0","mobile":"18825204201","password":"83a5dbb2792903d5f951857153271e30",
+     * mData : {"id":"2","name":"11","type":"0","mobile":"18825204201","password":"83a5dbb2792903d5f951857153271e30",
      * "salt":"5adfe9c3103f5","invite_code":"5xb1r","login_time":"1524623811","create_time":"1524623811","is_audit":"0"}
      */
 

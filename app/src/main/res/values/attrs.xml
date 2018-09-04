@@ -5,6 +5,7 @@
         <attr name="hint" format="string"/>
         <attr name="enable" format="boolean"/>
         <attr name="maxPic" format="string"/>
+        <attr name="input_type" format="integer"/>
         <attr name="isShowDivide" format="boolean"/>
         <attr name="type" format="enum">
             <enum name="text" value="1"/>
